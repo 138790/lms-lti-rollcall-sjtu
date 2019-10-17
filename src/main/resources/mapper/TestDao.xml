@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmsauthsjtu.common.dao.TestDao">
+
+    <!--根据ID主键查询院系信息-->
+    <select id="findAccount" parameterType="java.lang.Long">
+        select
+            id,
+            name,
+            parent_account_id,
+            workflow_state,
+            created_at,
+            updated_at,
+            deleted_at
+        from accounts
+        where id=#{id}
+    </select>
+
+<!--    &lt;!&ndash;修改用户信息&ndash;&gt;-->
+<!--    <update id="updateUser" parameterType="com.example.demo.common.bean.dto.UserDto" >-->
+<!--        <selectKey keyProperty="id" resultType="java.lang.String" order="AFTER">-->
+<!--            select id from user where id = #{id}-->
+<!--        </selectKey>-->
+<!--        update user-->
+<!--        <set>-->
+<!--            <if test = "userName != null and userName != ''">-->
+<!--                user_name = #{userName},-->
+<!--            </if>-->
+<!--            <if test = "nickName != null and nickName != ''">-->
+<!--                nick_name = #{nickName},-->
+<!--            </if>-->
+<!--            <if test = "password != null and password != ''">-->
+<!--                password = #{password},-->
+<!--            </if>-->
+<!--            <if test = "isValid != null and isValid != ''">-->
+<!--                is_valid = #{isValid},-->
+<!--            </if>-->
+<!--            <if test = "updatedBy != null and updatedBy != ''">-->
+<!--                updated_by = #{updatedBy},-->
+<!--            </if>-->
+<!--            <if test = "updatedDate != null">-->
+<!--                updated_date = #{updatedDate},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;查询用户信息&ndash;&gt;-->
+<!--    <select id="queryUser" parameterType="com.example.demo.common.bean.param.QueryUserDetailParam" resultType="com.example.demo.common.bean.dto.UserDto">-->
+<!--        select-->
+<!--        id,-->
+<!--        user_no,-->
+<!--        user_name,-->
+<!--        nick_name,-->
+<!--        password,-->
+<!--        is_valid,-->
+<!--        created_by,-->
+<!--        created_date,-->
+<!--        updated_by,-->
+<!--        updated_date-->
+<!--        from user-->
+<!--        where 1=1-->
+<!--        <if test = "id != null and id != ''">-->
+<!--            and id= #{id}-->
+<!--        </if>-->
+<!--        <if test = "userName != null and userName != ''">-->
+<!--            and user_name = #{userName}-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;查询用户信息列表&ndash;&gt;-->
+<!--    <select id="queryUserPagedList" parameterType="com.example.demo.common.bean.param.QueryUserPagedListParam" resultType="com.example.demo.common.bean.dto.UserDto">-->
+<!--        select-->
+<!--        id,-->
+<!--        user_no,-->
+<!--        user_name,-->
+<!--        nick_name,-->
+<!--        password,-->
+<!--        is_valid,-->
+<!--        created_by,-->
+<!--        created_date,-->
+<!--        updated_by,-->
+<!--        updated_date-->
+<!--        from user-->
+<!--        where 1=1-->
+<!--        <if test = "id != null and id != ''">-->
+<!--            and id= #{id}-->
+<!--        </if>-->
+<!--        <if test = "userName != null and userName != ''">-->
+<!--            and user_name = #{userName}-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;删除用户信息&ndash;&gt;-->
+<!--    <delete id="deleteUser">-->
+<!--        delete-->
+<!--        from user-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+
+</mapper>
