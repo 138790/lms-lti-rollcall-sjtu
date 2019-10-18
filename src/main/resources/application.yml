@@ -36,6 +36,26 @@ spring:
    #空闲连接实例的最小数目
   min-idle: 5
 
+  #redis配置
+  redis:
+    #好像是库的标号，通过标号可以切换redis缓存
+    database: 1
+    host: 172.168.70.90
+    port: 6379
+    #password: 900412
+    timeout: 20000
+    #是否启用SSL协议支持
+    ssl: false
+    jedis:
+      pool:
+        #持在给定时间可以分配的最大连接数。使用负值表示无限制
+        max-active: 8
+        #池中“空闲”连接的最大数量。使用负值表示无限制
+        max-idle: 8
+        #目标是池中维护的最小空闲连接数。此设置仅在期为正数时才有效
+        min-idle: 0
+        #当池耗尽时，在抛出异常之前连接分配应该阻塞的最长时间。使用负值表示无限期阻止
+        max-wait: -1
 
   #文件上传
   servlet:
@@ -43,7 +63,6 @@ spring:
       enabled: true
       max-file-size: 30MB
       max-request-size: 30MB
-
 
 
 #mybatis配置
@@ -76,104 +95,3 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-
-#  #redis配置
-#  redis:
-#    #好像是库的标号，通过标号可以切换redis缓存
-#    database: 0
-#    host: 127.0.0.1
-#    port: 6380
-#    #password: 900412
-#    timeout: 20000
-#    #集群配置信息
-#    cluster:
-#      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385
-#      #默认值是5 一般当此值设置过大时，容易报：Too many Cluster redirections
-#      maxRedirects: 3
-#    #是否启用SSL协议支持
-#    ssl: false
-#    jedis:
-#      pool:
-#        #持在给定时间可以分配的最大连接数。使用负值表示无限制
-#        max-active: 8
-#        #池中“空闲”连接的最大数量。使用负值表示无限制
-#        max-idle: 8
-#        #目标是池中维护的最小空闲连接数。此设置仅在期为正数时才有效
-#        min-idle: 0
-#        #当池耗尽时，在抛出异常之前连接分配应该阻塞的最长时间。使用负值表示无限期阻止
-#        max-wait: -1
-
-
-  #session配置
-#  session:
-#    #选择使用redis作为session存储
-#    store-type: redis
-#    hazelcast:
-#      #设置存储格式
-#      map-name: spring:session:demo
-#    redis:
-#      #设置session刷新ON_SAVE（表示在response commit前刷新缓存），IMMEDIATE（表示只要有更新，便刷新缓存）
-#      flush-mode: on_save
-
-
-  #RabbitMQ配置
-  # 描述：有了此配置后spring boot会自动创建ConnectionFactory以及RabbitTemplate对应的Bean。
-  #      而我这里采用了非自动配置，即手动将这些参数引入到自定义ConnectionFactory的java配置类中。而使用@RabbitListener注解的监听器则会默认使用下面的yml监听配置，
-  #      如果想重新定义监听器配置，则需要使用java配置bean方式自定义一个监听器SimpleMessageListenerContainer或者统一自定义监听器工厂SimpleRabbitListenerContainerFactory。
-  # 注意：重新自定义的监听器工厂SimpleRabbitListenerContainerFactory配置会覆盖yml监听配置，直接改变@RabbitListener注解监听策略；
-  #      而自定义一个监听器SimpleMessageListenerContainer不会覆盖yml配置，不影响@RabbitListener注解监听策略。
-#  rabbitmq:
-#    host: 127.0.0.1
-#    port: 5672
-#    username: guest
-#    password: guest
-#    virtual-host: /
-#    #发布者开启消息确认机制（即消息回调）
-#    publisher-confirms: true
-#    publisher-returns: true
-#    #设置监听器
-#    listener:
-#      simple:
-#        #重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）
-#        default-requeue-rejected: false
-#        retry:
-#          #监听器开启手动ack（手动签收），rabbitMQ默认模式是自动应答
-#          acknowledge-mode: manual
-#          #开启消费者进行重试（程序出现异常的情况下才会），这种间隔是单线程的，不存在并发问题。默认是无限循环重试模式。
-#          enabled: true
-#          #最大重试次数
-#          max-attempts: 5
-#          #重试间隔时间5秒
-#          initial-interval: 5000
-#          #重试最大时间间隔（单位毫秒）
-#          max-interval: 1200000
-#          #应用于前一重试间隔的乘法器
-#          multiplier: 5
-
-
-#eureka配置
-#eureka:
-#  instance:
-#    hostname: localhost
-#  #Not a client，don't register with yourself
-#  client:
-#    register-with-eureka: false
-#    fetch-registry: false
-
-
-
-
-#Apache的HttpClient配置参数（非自动配置，需手动将参数配到HttpClientConfig配置类中）
-#http:
-#  #最大连接数
-#  maxTotal: 100
-#  #并发数
-#  defaultMaxPerRoute: 20
-#  #创建连接的最长时间
-#  connectTimeout: 1000
-#  #从连接池中获取到连接的最长时间
-#  connectionRequestTimeout: 500
-#  #数据传输的最长时间
-#  socketTimeout: 10000
-#  #提交请求前测试连接是否可用
-#  staleConnectionCheckEnabled: true

@@ -5,12 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "spring.test")
+@ConfigurationProperties(prefix = "spring.redis")
 @Data
-public class TestProperties {
+public class RedisProperties {
 
-    private Boolean enabled;
-    private Integer maxAttempts;
-    private Integer initialInterval;
-    private String acknowledgeMode;
+    private String host;
+    private String port;
+    private Integer database;
 }
