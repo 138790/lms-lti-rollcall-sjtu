@@ -28,19 +28,36 @@ spring:
       force: true
       enabled: true
 
+
   #数据源配置
   datasource:
-    driver-class-name: org.postgresql.Driver
-    username: dbuser
-    password: 1q2w3e4r5t
-    url: jdbc:postgresql://172.168.70.12:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
-  druid:
-   #连接池最大空间
-  initial-size: 10
-   #可用连接实例的最大数目
-  max-active: 10
-   #空闲连接实例的最小数目
-  min-idle: 5
+    #alibaba连接池配置
+    druid:
+      #jdbc配置
+      url: jdbc:postgresql://172.168.70.12:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: dbuser
+      password: 1q2w3e4r5t
+      driver-class-name: org.postgresql.Driver
+      #连接池配置
+      #连接池最大空间
+      initial-size: 5
+      #可用连接实例的最大数目
+      max-active:  100
+      #空闲连接实例的最小数目
+      min-idle: 5
+      #最大等待时间
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+#      #验证连接有效性
+#      validation-query: SELECT 1 FROM DUAL
+#      #验证有效性的超时时间
+#      validation-query-timeout: 60000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 100000
 
   #redis配置
   redis:
