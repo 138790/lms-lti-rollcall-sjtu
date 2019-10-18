@@ -1,4 +1,4 @@
-#tomcatÅäÖÃ
+#tomcaté…ç½®
 server:
   port: 8081
   servlet:
@@ -6,38 +6,38 @@ server:
 
 
 spring:
-  #Ó¦ÓÃÃû³Æ
+   #åº”ç”¨åç§°
   application:
     name: lms-lti-rollcall-sjtu
 
   main:
-    #µ±Óöµ½Í¬ÑùÃû×ÖµÄÒÀÀµÊ±£¬ÊÇ·ñÔÊĞí¸²¸Ç×¢²á£¨Ä¬ÈÏÊÇfalse£¬Óöµ½³åÍ»Æô¶¯±¨´í£©
+     #å½“é‡åˆ°åŒæ ·åå­—çš„ä¾èµ–æ—¶ï¼Œæ˜¯å¦å…è®¸è¦†ç›–æ³¨å†Œï¼ˆé»˜è®¤æ˜¯falseï¼Œé‡åˆ°å†²çªå¯åŠ¨æŠ¥é”™ï¼‰
     allow-bean-definition-overriding: false
 
 
-  #httpÅäÖÃ
+ #httpé…ç½®
   http:
     encoding:
       charset: utf-8
       force: true
       enabled: true
 
-  #Êı¾İÔ´ÅäÖÃ
+  #æ•°æ®æºé…ç½®
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: canvas
-    password: abc123456
-    url: jdbc:postgresql://172.168.70.12:5432/canvas_production?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: dbuser
+    password: 1q2w3e4r5t
+    url: jdbc:postgresql://172.168.70.12:5432/dbuser?useUnicode=true&characterEncoding=utf8&useSSL=false
   druid:
-  #Á¬½Ó³Ø×î´ó¿Õ¼ä
+   #è¿æ¥æ± æœ€å¤§ç©ºé—´
   initial-size: 10
-  #¿ÉÓÃÁ¬½ÓÊµÀıµÄ×î´óÊıÄ¿
+   #å¯ç”¨è¿æ¥å®ä¾‹çš„æœ€å¤§æ•°ç›®
   max-active: 10
-  #¿ÕÏĞÁ¬½ÓÊµÀıµÄ×îĞ¡ÊıÄ¿
+   #ç©ºé—²è¿æ¥å®ä¾‹çš„æœ€å°æ•°ç›®
   min-idle: 5
 
 
-  #ÎÄ¼şÉÏ´«
+  #æ–‡ä»¶ä¸Šä¼ 
   servlet:
     multipart:
       enabled: true
@@ -46,116 +46,116 @@ spring:
 
 
 
-#mybatisÅäÖÃ
+#mybatisé…ç½®
 mybatis:
-  #Ö¸¶¨Dao²ã³öÈë²ÎËùÔÚµÄ°ü½øĞĞ×Ô¶¯É¨Ãè£¬ÊµÏÖmapper.xmlÀàÃû¼òĞ´
+  #æŒ‡å®šDaoå±‚å‡ºå…¥å‚æ‰€åœ¨çš„åŒ…è¿›è¡Œè‡ªåŠ¨æ‰«æï¼Œå®ç°mapper.xmlç±»åç®€å†™
   type-aliases-package: com.example.demo.common
   configuration:
-    #ÍÕ·åĞ´·¨¶ÔÓ¦Êı¾İ¿â×Ö¶ÎµÄÏÂ»®Ïß
+     #é©¼å³°å†™æ³•å¯¹åº”æ•°æ®åº“å­—æ®µçš„ä¸‹åˆ’çº¿
     map-underscore-to-camel-case: true
-    #Êı¾İ´óĞ¡
+    #æ•°æ®å¤§å°
     default-fetch-size: 100
-    #³¬Ê±Ê±¼ä
+    #è¶…æ—¶æ—¶é—´
     default-statement-timeout: 30
-  #Ö¸¶¨mapper.xml×ÊÔ´Â·¾¶
+    #æŒ‡å®šmapper.xmlèµ„æºè·¯å¾„
   mapper-locations: classpath:mapper/*.xml
 
 
-#pagehelper·ÖÒ³²å¼şÅäÖÃ
+#pagehelperåˆ†é¡µæ’ä»¶é…ç½®
 pagehelper:
-  #Á¬½ÓµÄÊı¾İ¿âÀàĞÍ
+   #è¿æ¥çš„æ•°æ®åº“ç±»å‹
   helper-dialect: postgresql
-  #ÉèÖÃÎªtrueÊ±£¬Èç¹ûpageSize=0»òÕßRowBounds.limit = 0¾Í»á²éÑ¯³öÈ«²¿µÄ½á¹û£¨Ïàµ±ÓÚÃ»ÓĞÖ´ĞĞ·ÖÒ³²éÑ¯£¬µ«ÊÇ·µ»Ø½á¹ûÈÔÈ»ÊÇPageÀàĞÍ£©
+   #è®¾ç½®ä¸ºtrueæ—¶ï¼Œå¦‚æœpageSize=0æˆ–è€…RowBounds.limit = 0å°±ä¼šæŸ¥è¯¢å‡ºå…¨éƒ¨çš„ç»“æœï¼ˆç›¸å½“äºæ²¡æœ‰æ‰§è¡Œåˆ†é¡µæŸ¥è¯¢ï¼Œä½†æ˜¯è¿”å›ç»“æœä»ç„¶æ˜¯Pageç±»å‹ï¼‰
   page-size-zero: true
-  #ÉèÖÃÎªtrueÊ±£¬»á½«RowBoundsµÚÒ»¸ö²ÎÊıoffsetµ±³ÉpageNumÒ³ÂëÊ¹ÓÃ£¬ºÍstartPageÖĞµÄpageNumĞ§¹ûÒ»Ñù
+  #è®¾ç½®ä¸ºtrueæ—¶ï¼Œä¼šå°†RowBoundsç¬¬ä¸€ä¸ªå‚æ•°offsetå½“æˆpageNumé¡µç ä½¿ç”¨ï¼Œå’ŒstartPageä¸­çš„pageNumæ•ˆæœä¸€æ ·
   offset-as-page-num: true
-  #ÉèÖÃÎªtrueÊ±£¬Ê¹ÓÃRowBounds·ÖÒ³»á½øĞĞcount²éÑ¯
+ #è®¾ç½®ä¸ºtrueæ—¶ï¼Œä½¿ç”¨RowBoundsåˆ†é¡µä¼šè¿›è¡ŒcountæŸ¥è¯¢
   row-bounds-with-count: true
-  #ÆôÓÃºÏÀí»¯Ê±£¬Èç¹ûpageNum<1»á²éÑ¯µÚÒ»Ò³£¬Èç¹ûpageNum>pages»á²éÑ¯×îºóÒ»Ò³
+   #å¯ç”¨åˆç†åŒ–æ—¶ï¼Œå¦‚æœpageNum<1ä¼šæŸ¥è¯¢ç¬¬ä¸€é¡µï¼Œå¦‚æœpageNum>pagesä¼šæŸ¥è¯¢æœ€åä¸€é¡µ
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
 
 
-  #  #redisÅäÖÃ
-  #  redis:
-  #    #ºÃÏñÊÇ¿âµÄ±êºÅ£¬Í¨¹ı±êºÅ¿ÉÒÔÇĞ»»redis»º´æ
-  #    database: 0
-  #    host: 127.0.0.1
-  #    port: 6380
-  #    #password: 900412
-  #    timeout: 20000
-  #    #¼¯ÈºÅäÖÃĞÅÏ¢
-  #    cluster:
-  #      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385
-  #      #Ä¬ÈÏÖµÊÇ5 Ò»°ãµ±´ËÖµÉèÖÃ¹ı´óÊ±£¬ÈİÒ×±¨£ºToo many Cluster redirections
-  #      maxRedirects: 3
-  #    #ÊÇ·ñÆôÓÃSSLĞ­ÒéÖ§³Ö
-  #    ssl: false
-  #    jedis:
-  #      pool:
-  #        #³ÖÔÚ¸ø¶¨Ê±¼ä¿ÉÒÔ·ÖÅäµÄ×î´óÁ¬½ÓÊı¡£Ê¹ÓÃ¸ºÖµ±íÊ¾ÎŞÏŞÖÆ
-  #        max-active: 8
-  #        #³ØÖĞ¡°¿ÕÏĞ¡±Á¬½ÓµÄ×î´óÊıÁ¿¡£Ê¹ÓÃ¸ºÖµ±íÊ¾ÎŞÏŞÖÆ
-  #        max-idle: 8
-  #        #Ä¿±êÊÇ³ØÖĞÎ¬»¤µÄ×îĞ¡¿ÕÏĞÁ¬½ÓÊı¡£´ËÉèÖÃ½öÔÚÆÚÎªÕıÊıÊ±²ÅÓĞĞ§
-  #        min-idle: 0
-  #        #µ±³ØºÄ¾¡Ê±£¬ÔÚÅ×³öÒì³£Ö®Ç°Á¬½Ó·ÖÅäÓ¦¸Ã×èÈûµÄ×î³¤Ê±¼ä¡£Ê¹ÓÃ¸ºÖµ±íÊ¾ÎŞÏŞÆÚ×èÖ¹
-  #        max-wait: -1
+#  #redisé…ç½®
+#  redis:
+#    #å¥½åƒæ˜¯åº“çš„æ ‡å·ï¼Œé€šè¿‡æ ‡å·å¯ä»¥åˆ‡æ¢redisç¼“å­˜
+#    database: 0
+#    host: 127.0.0.1
+#    port: 6380
+#    #password: 900412
+#    timeout: 20000
+#    #é›†ç¾¤é…ç½®ä¿¡æ¯
+#    cluster:
+#      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385
+#      #é»˜è®¤å€¼æ˜¯5 ä¸€èˆ¬å½“æ­¤å€¼è®¾ç½®è¿‡å¤§æ—¶ï¼Œå®¹æ˜“æŠ¥ï¼šToo many Cluster redirections
+#      maxRedirects: 3
+#    #æ˜¯å¦å¯ç”¨SSLåè®®æ”¯æŒ
+#    ssl: false
+#    jedis:
+#      pool:
+#        #æŒåœ¨ç»™å®šæ—¶é—´å¯ä»¥åˆ†é…çš„æœ€å¤§è¿æ¥æ•°ã€‚ä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ— é™åˆ¶
+#        max-active: 8
+#        #æ± ä¸­â€œç©ºé—²â€è¿æ¥çš„æœ€å¤§æ•°é‡ã€‚ä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ— é™åˆ¶
+#        max-idle: 8
+#        #ç›®æ ‡æ˜¯æ± ä¸­ç»´æŠ¤çš„æœ€å°ç©ºé—²è¿æ¥æ•°ã€‚æ­¤è®¾ç½®ä»…åœ¨æœŸä¸ºæ­£æ•°æ—¶æ‰æœ‰æ•ˆ
+#        min-idle: 0
+#        #å½“æ± è€—å°½æ—¶ï¼Œåœ¨æŠ›å‡ºå¼‚å¸¸ä¹‹å‰è¿æ¥åˆ†é…åº”è¯¥é˜»å¡çš„æœ€é•¿æ—¶é—´ã€‚ä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ— é™æœŸé˜»æ­¢
+#        max-wait: -1
 
 
-  #sessionÅäÖÃ
-  #  session:
-  #    #Ñ¡ÔñÊ¹ÓÃredis×÷Îªsession´æ´¢
-  #    store-type: redis
-  #    hazelcast:
-  #      #ÉèÖÃ´æ´¢¸ñÊ½
-  #      map-name: spring:session:demo
-  #    redis:
-  #      #ÉèÖÃsessionË¢ĞÂON_SAVE£¨±íÊ¾ÔÚresponse commitÇ°Ë¢ĞÂ»º´æ£©£¬IMMEDIATE£¨±íÊ¾Ö»ÒªÓĞ¸üĞÂ£¬±ãË¢ĞÂ»º´æ£©
-  #      flush-mode: on_save
+  #sessioné…ç½®
+#  session:
+#    #é€‰æ‹©ä½¿ç”¨redisä½œä¸ºsessionå­˜å‚¨
+#    store-type: redis
+#    hazelcast:
+#      #è®¾ç½®å­˜å‚¨æ ¼å¼
+#      map-name: spring:session:demo
+#    redis:
+#      #è®¾ç½®sessionåˆ·æ–°ON_SAVEï¼ˆè¡¨ç¤ºåœ¨response commitå‰åˆ·æ–°ç¼“å­˜ï¼‰ï¼ŒIMMEDIATEï¼ˆè¡¨ç¤ºåªè¦æœ‰æ›´æ–°ï¼Œä¾¿åˆ·æ–°ç¼“å­˜ï¼‰
+#      flush-mode: on_save
 
 
-  #RabbitMQÅäÖÃ
-  # ÃèÊö£ºÓĞÁË´ËÅäÖÃºóspring boot»á×Ô¶¯´´½¨ConnectionFactoryÒÔ¼°RabbitTemplate¶ÔÓ¦µÄBean¡£
-  #      ¶øÎÒÕâÀï²ÉÓÃÁË·Ç×Ô¶¯ÅäÖÃ£¬¼´ÊÖ¶¯½«ÕâĞ©²ÎÊıÒıÈëµ½×Ô¶¨ÒåConnectionFactoryµÄjavaÅäÖÃÀàÖĞ¡£¶øÊ¹ÓÃ@RabbitListener×¢½âµÄ¼àÌıÆ÷Ôò»áÄ¬ÈÏÊ¹ÓÃÏÂÃæµÄyml¼àÌıÅäÖÃ£¬
-  #      Èç¹ûÏëÖØĞÂ¶¨Òå¼àÌıÆ÷ÅäÖÃ£¬ÔòĞèÒªÊ¹ÓÃjavaÅäÖÃbean·½Ê½×Ô¶¨ÒåÒ»¸ö¼àÌıÆ÷SimpleMessageListenerContainer»òÕßÍ³Ò»×Ô¶¨Òå¼àÌıÆ÷¹¤³§SimpleRabbitListenerContainerFactory¡£
-  # ×¢Òâ£ºÖØĞÂ×Ô¶¨ÒåµÄ¼àÌıÆ÷¹¤³§SimpleRabbitListenerContainerFactoryÅäÖÃ»á¸²¸Çyml¼àÌıÅäÖÃ£¬Ö±½Ó¸Ä±ä@RabbitListener×¢½â¼àÌı²ßÂÔ£»
-  #      ¶ø×Ô¶¨ÒåÒ»¸ö¼àÌıÆ÷SimpleMessageListenerContainer²»»á¸²¸ÇymlÅäÖÃ£¬²»Ó°Ïì@RabbitListener×¢½â¼àÌı²ßÂÔ¡£
+  #RabbitMQé…ç½®
+  # æè¿°ï¼šæœ‰äº†æ­¤é…ç½®åspring bootä¼šè‡ªåŠ¨åˆ›å»ºConnectionFactoryä»¥åŠRabbitTemplateå¯¹åº”çš„Beanã€‚
+  #      è€Œæˆ‘è¿™é‡Œé‡‡ç”¨äº†éè‡ªåŠ¨é…ç½®ï¼Œå³æ‰‹åŠ¨å°†è¿™äº›å‚æ•°å¼•å…¥åˆ°è‡ªå®šä¹‰ConnectionFactoryçš„javaé…ç½®ç±»ä¸­ã€‚è€Œä½¿ç”¨@RabbitListeneræ³¨è§£çš„ç›‘å¬å™¨åˆ™ä¼šé»˜è®¤ä½¿ç”¨ä¸‹é¢çš„ymlç›‘å¬é…ç½®ï¼Œ
+  #      å¦‚æœæƒ³é‡æ–°å®šä¹‰ç›‘å¬å™¨é…ç½®ï¼Œåˆ™éœ€è¦ä½¿ç”¨javaé…ç½®beanæ–¹å¼è‡ªå®šä¹‰ä¸€ä¸ªç›‘å¬å™¨SimpleMessageListenerContaineræˆ–è€…ç»Ÿä¸€è‡ªå®šä¹‰ç›‘å¬å™¨å·¥å‚SimpleRabbitListenerContainerFactoryã€‚
+  # æ³¨æ„ï¼šé‡æ–°è‡ªå®šä¹‰çš„ç›‘å¬å™¨å·¥å‚SimpleRabbitListenerContainerFactoryé…ç½®ä¼šè¦†ç›–ymlç›‘å¬é…ç½®ï¼Œç›´æ¥æ”¹å˜@RabbitListeneræ³¨è§£ç›‘å¬ç­–ç•¥ï¼›
+  #      è€Œè‡ªå®šä¹‰ä¸€ä¸ªç›‘å¬å™¨SimpleMessageListenerContainerä¸ä¼šè¦†ç›–ymlé…ç½®ï¼Œä¸å½±å“@RabbitListeneræ³¨è§£ç›‘å¬ç­–ç•¥ã€‚
 #  rabbitmq:
 #    host: 127.0.0.1
 #    port: 5672
 #    username: guest
 #    password: guest
 #    virtual-host: /
-#    #·¢²¼Õß¿ªÆôÏûÏ¢È·ÈÏ»úÖÆ£¨¼´ÏûÏ¢»Øµ÷£©
+#    #å‘å¸ƒè€…å¼€å¯æ¶ˆæ¯ç¡®è®¤æœºåˆ¶ï¼ˆå³æ¶ˆæ¯å›è°ƒï¼‰
 #    publisher-confirms: true
 #    publisher-returns: true
-#    #ÉèÖÃ¼àÌıÆ÷
+#    #è®¾ç½®ç›‘å¬å™¨
 #    listener:
 #      simple:
-#        #ÖØÊÔ´ÎÊı³¬¹ıÉÏÃæµÄÉèÖÃÖ®ºóÊÇ·ñ¶ªÆú£¨false²»¶ªÆúÊ±ĞèÒªĞ´ÏàÓ¦´úÂë½«¸ÃÏûÏ¢¼ÓÈëËÀĞÅ¶ÓÁĞ£©
+#        #é‡è¯•æ¬¡æ•°è¶…è¿‡ä¸Šé¢çš„è®¾ç½®ä¹‹åæ˜¯å¦ä¸¢å¼ƒï¼ˆfalseä¸ä¸¢å¼ƒæ—¶éœ€è¦å†™ç›¸åº”ä»£ç å°†è¯¥æ¶ˆæ¯åŠ å…¥æ­»ä¿¡é˜Ÿåˆ—ï¼‰
 #        default-requeue-rejected: false
 #        retry:
-#          #¼àÌıÆ÷¿ªÆôÊÖ¶¯ack£¨ÊÖ¶¯Ç©ÊÕ£©£¬rabbitMQÄ¬ÈÏÄ£Ê½ÊÇ×Ô¶¯Ó¦´ğ
+#          #ç›‘å¬å™¨å¼€å¯æ‰‹åŠ¨ackï¼ˆæ‰‹åŠ¨ç­¾æ”¶ï¼‰ï¼ŒrabbitMQé»˜è®¤æ¨¡å¼æ˜¯è‡ªåŠ¨åº”ç­”
 #          acknowledge-mode: manual
-#          #¿ªÆôÏû·ÑÕß½øĞĞÖØÊÔ£¨³ÌĞò³öÏÖÒì³£µÄÇé¿öÏÂ²Å»á£©£¬ÕâÖÖ¼ä¸ôÊÇµ¥Ïß³ÌµÄ£¬²»´æÔÚ²¢·¢ÎÊÌâ¡£Ä¬ÈÏÊÇÎŞÏŞÑ­»·ÖØÊÔÄ£Ê½¡£
+#          #å¼€å¯æ¶ˆè´¹è€…è¿›è¡Œé‡è¯•ï¼ˆç¨‹åºå‡ºç°å¼‚å¸¸çš„æƒ…å†µä¸‹æ‰ä¼šï¼‰ï¼Œè¿™ç§é—´éš”æ˜¯å•çº¿ç¨‹çš„ï¼Œä¸å­˜åœ¨å¹¶å‘é—®é¢˜ã€‚é»˜è®¤æ˜¯æ— é™å¾ªç¯é‡è¯•æ¨¡å¼ã€‚
 #          enabled: true
-#          #×î´óÖØÊÔ´ÎÊı
+#          #æœ€å¤§é‡è¯•æ¬¡æ•°
 #          max-attempts: 5
-#          #ÖØÊÔ¼ä¸ôÊ±¼ä5Ãë
+#          #é‡è¯•é—´éš”æ—¶é—´5ç§’
 #          initial-interval: 5000
-#          #ÖØÊÔ×î´óÊ±¼ä¼ä¸ô£¨µ¥Î»ºÁÃë£©
+#          #é‡è¯•æœ€å¤§æ—¶é—´é—´éš”ï¼ˆå•ä½æ¯«ç§’ï¼‰
 #          max-interval: 1200000
-#          #Ó¦ÓÃÓÚÇ°Ò»ÖØÊÔ¼ä¸ôµÄ³Ë·¨Æ÷
+#          #åº”ç”¨äºå‰ä¸€é‡è¯•é—´éš”çš„ä¹˜æ³•å™¨
 #          multiplier: 5
 
 
-#eurekaÅäÖÃ
+#eurekaé…ç½®
 #eureka:
 #  instance:
 #    hostname: localhost
-#  #Not a client£¬don't register with yourself
+#  #Not a clientï¼Œdon't register with yourself
 #  client:
 #    register-with-eureka: false
 #    fetch-registry: false
@@ -163,19 +163,17 @@ pagehelper:
 
 
 
-#ApacheµÄHttpClientÅäÖÃ²ÎÊı£¨·Ç×Ô¶¯ÅäÖÃ£¬ĞèÊÖ¶¯½«²ÎÊıÅäµ½HttpClientConfigÅäÖÃÀàÖĞ£©
+#Apacheçš„HttpClienté…ç½®å‚æ•°ï¼ˆéè‡ªåŠ¨é…ç½®ï¼Œéœ€æ‰‹åŠ¨å°†å‚æ•°é…åˆ°HttpClientConfigé…ç½®ç±»ä¸­ï¼‰
 #http:
-#  #×î´óÁ¬½ÓÊı
+#  #æœ€å¤§è¿æ¥æ•°
 #  maxTotal: 100
-#  #²¢·¢Êı
+#  #å¹¶å‘æ•°
 #  defaultMaxPerRoute: 20
-#  #´´½¨Á¬½ÓµÄ×î³¤Ê±¼ä
+#  #åˆ›å»ºè¿æ¥çš„æœ€é•¿æ—¶é—´
 #  connectTimeout: 1000
-#  #´ÓÁ¬½Ó³ØÖĞ»ñÈ¡µ½Á¬½ÓµÄ×î³¤Ê±¼ä
+#  #ä»è¿æ¥æ± ä¸­è·å–åˆ°è¿æ¥çš„æœ€é•¿æ—¶é—´
 #  connectionRequestTimeout: 500
-#  #Êı¾İ´«ÊäµÄ×î³¤Ê±¼ä
+#  #æ•°æ®ä¼ è¾“çš„æœ€é•¿æ—¶é—´
 #  socketTimeout: 10000
-#  #Ìá½»ÇëÇóÇ°²âÊÔÁ¬½ÓÊÇ·ñ¿ÉÓÃ
+#  #æäº¤è¯·æ±‚å‰æµ‹è¯•è¿æ¥æ˜¯å¦å¯ç”¨
 #  staleConnectionCheckEnabled: true
-
-
