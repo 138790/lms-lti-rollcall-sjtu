@@ -7,7 +7,7 @@ server:
 #日志配置
 logging:
   file:
-    name: C:\Users\admin\IdeaProjects\log\lms-lti-rollcall-sjtu-dev.log
+    name: C:\log\lms-lti-rollcall-sjtu-dev.log
   pattern:
     level: DEBUG
 
