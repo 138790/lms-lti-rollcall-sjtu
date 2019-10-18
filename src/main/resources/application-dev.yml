@@ -1,0 +1,104 @@
+#tomcat配置
+server:
+  port: 8081
+  servlet:
+    context-path: /lms-lti-rollcall-sjtu-dev
+
+#日志配置
+logging:
+  file:
+    name: C:\Users\admin\IdeaProjects\log\lms-lti-rollcall-sjtu-dev.log
+  pattern:
+    level: DEBUG
+
+
+spring:
+   #应用名称
+  application:
+    name: lms-lti-rollcall-sjtu-dev
+
+  main:
+     #当遇到同样名字的依赖时，是否允许覆盖注册（默认是false，遇到冲突启动报错）
+    allow-bean-definition-overriding: false
+
+
+ #http配置
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+  #数据源配置
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: dbuser
+    password: 1q2w3e4r5t
+    url: jdbc:postgresql://172.168.70.12:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
+  druid:
+   #连接池最大空间
+  initial-size: 10
+   #可用连接实例的最大数目
+  max-active: 10
+   #空闲连接实例的最小数目
+  min-idle: 5
+
+  #redis配置
+  redis:
+    #好像是库的标号，通过标号可以切换redis缓存
+    database: 1
+    host: 172.168.70.90
+    port: 6379
+    #password: 900412
+    timeout: 20000
+    #是否启用SSL协议支持
+    ssl: false
+    jedis:
+      pool:
+        #持在给定时间可以分配的最大连接数。使用负值表示无限制
+        max-active: 8
+        #池中“空闲”连接的最大数量。使用负值表示无限制
+        max-idle: 8
+        #目标是池中维护的最小空闲连接数。此设置仅在期为正数时才有效
+        min-idle: 0
+        #当池耗尽时，在抛出异常之前连接分配应该阻塞的最长时间。使用负值表示无限期阻止
+        max-wait: -1
+
+  #文件上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+
+#mybatis配置
+mybatis:
+  #指定Dao层出入参所在的包进行自动扫描，实现mapper.xml类名简写
+  type-aliases-package: com.example.demo.common
+  configuration:
+     #驼峰写法对应数据库字段的下划线
+    map-underscore-to-camel-case: true
+    #数据大小
+    default-fetch-size: 100
+    #超时时间
+    default-statement-timeout: 30
+    #指定mapper.xml资源路径
+  mapper-locations: classpath:mapper/*.xml
+
+
+#pagehelper分页插件配置
+pagehelper:
+   #连接的数据库类型
+  helper-dialect: postgresql
+   #设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是Page类型）
+  page-size-zero: true
+  #设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用，和startPage中的pageNum效果一样
+  offset-as-page-num: true
+ #设置为true时，使用RowBounds分页会进行count查询
+  row-bounds-with-count: true
+   #启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+

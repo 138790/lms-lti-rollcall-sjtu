@@ -23,7 +23,8 @@ public class TestController {
      * @return ResultInfo<AccountsPo>
      */
     @GetMapping("/account/{id}")
-    public ResultInfo account(@PathVariable Long id){
+    public ResultInfo account(@PathVariable Long id) {
+
         return null;
     }
 
