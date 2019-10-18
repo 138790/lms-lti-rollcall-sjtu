@@ -27,7 +27,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: dbuser
     password: 1q2w3e4r5t
-    url: jdbc:postgresql://172.168.70.12:5432/dbuser?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:postgresql://172.168.70.12:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
   druid:
    #连接池最大空间
   initial-size: 10
