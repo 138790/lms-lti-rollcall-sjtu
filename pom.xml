@@ -68,6 +68,20 @@
             <version>3.6.5</version>
         </dependency>
 
+        <!-- FeignClient远程接口调用 -->
+        <!--注意此处的依赖是SpringBoot2.0以后专用的，如果您使用的SpringBoot版本低于2.0请使用spring-cloud-starter-feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+        <!-- 新的CloudFinchley.RC2版中这不需要这个包了。FeignClient缺乏连接池的支持，在达到一定流量的后服务肯定出问题，所以用Apach的httpclient替换掉了jdk中HttpURLConnection原生的UrlConnection -->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.openfeign</groupId>-->
+        <!--            <artifactId>feign-httpclient</artifactId>-->
+        <!--                <version>10.2.3</version>-->
+        <!--        </dependency>-->
+
         <!--webSocket包-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

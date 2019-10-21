@@ -118,3 +118,13 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+
+#canvas系统地址
+feign:
+  #是否用Apach的httpclient替换掉了jdk原生的UrlConnection
+  #  httpclient:
+  #    enabled: true
+  #自定义canvas远程服务属性
+  client:
+    application-name: canvas
+    url: http://172.168.70.12:80
