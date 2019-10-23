@@ -6,7 +6,8 @@ server:
 
 #日志配置
 logging:
-  file: C:\log\lms-lti-rollcall-sjtu-dev.log
+  file:
+    name: C:\log\lms-lti-rollcall-sjtu-dev.log
   pattern:
     level: DEBUG
 
