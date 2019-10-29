@@ -130,7 +130,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!--JWT Token验证依赖包-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.8.2</version>
+        </dependency>
     </dependencies>
 
     <build>
