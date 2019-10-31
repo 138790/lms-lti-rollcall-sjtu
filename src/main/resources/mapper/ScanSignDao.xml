@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmsltirollcallsjtu.common.dao.ScanSignDao">
+    <!--学生签到插入学生信息-->
+    <!-- useGeneratedKeys表示应用自增主键值
+         keyProperty 表示把自增主键值赋值给参数对象的id属性-->
+    <insert id="insertObject"
+            parameterType="com.lmsltirollcallsjtu.common.bean.po.SignRecords">
+		insert into sign_records
+		(id,user_id,rollcall_id,open_id,inserted_at,updated_at,
+		state,user_name)
+		values
+		(#{id},#{userId},#{rollcallId},#{openId},now(),now(),
+		#{state},#{userName})
+	</insert>
+</mapper>

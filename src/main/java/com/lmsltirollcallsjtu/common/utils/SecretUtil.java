@@ -31,19 +31,19 @@ public class SecretUtil {
      * @return secret字符串
      **/
    // @Scheduled(cron="0/2 * *  * * ? ")
-    public static String generateToken(UserInfo userInfo) {
+    public static String generateSecret(UserInfo userInfo) {
 
         Calendar c = new GregorianCalendar();
         Date date = new Date();
         c.setTime(date);//设置参数时间
-        c.add(Calendar.SECOND,+2);//把日期往后增加SECOND 秒.整数往后推,负数往前移动
+        c.add(Calendar.SECOND,+2);//把日期往后增加2秒.整数往后推,负数往前移动
         date=c.getTime(); //这个时间就是日期往后推两秒的结果
         String secret="";
            secret= JWT
                    .create()
-                   .withClaim(userInfo.getRollcallId().toString(),userInfo.getDate())
+                   .withAudience(userInfo.getLoginName())
                    .withExpiresAt(date)
-                   .sign(Algorithm.HMAC256(userInfo.getRollcallId().toString()));
+                   .sign(Algorithm.HMAC256(userInfo.getSign()));
 
         return secret;
     }
