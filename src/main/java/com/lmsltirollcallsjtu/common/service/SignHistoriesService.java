@@ -6,5 +6,5 @@ import feign.Param;
 import java.util.List;
 
 public interface SignHistoriesService {
-    SignHistories selectSignHistoryBySectionIds( List<String> sectionIds);
+    SignHistories selectSignHistoryByRollcallId( Long id);
 }

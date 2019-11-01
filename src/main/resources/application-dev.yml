@@ -129,3 +129,4 @@ feign:
   client:
     application-name: canvas
     url: http://172.168.70.12:80
+    supper-admin-token: Bearer bEfZ4PnUBOUizzUYYj0bVYhuxHuBx1cKwnQx2w2ffXzMPmzgSsVaaUVRQcOhFEN0

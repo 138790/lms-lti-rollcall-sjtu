@@ -17,7 +17,6 @@ public class SignHistories {
     private Long id;//表记录编号
     private Long courseId;//课程编号
     private Long userId;//学生编号
-    private String user_name;//学生姓名
     private Date insertedAt;//插入时间
     private Date updatedAt;//修改时间
     private List<Integer> sectionIds;//班级编号

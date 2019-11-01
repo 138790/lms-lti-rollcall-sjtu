@@ -1,5 +1,6 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
+import com.lmsltirollcallsjtu.common.base.service.SignHistoriesBasicService;
 import com.lmsltirollcallsjtu.common.bean.po.SignHistories;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,10 @@ import java.util.List;
 @Service
 public class SignHistoriesServiceImpl implements SignHistoriesService {
     @Autowired
-    private SignHistoriesService signHistoriesService;
+    private SignHistoriesBasicService signHistoriesBasicService;
 
     @Override
-    public SignHistories selectSignHistoryBySectionIds(List<String> sectionIds) {
-        return signHistoriesService.selectSignHistoryBySectionIds(sectionIds);
+    public SignHistories selectSignHistoryByRollcallId(Long id) {
+        return signHistoriesBasicService.selectSignHistoryByRollcallId(id);
     }
 }

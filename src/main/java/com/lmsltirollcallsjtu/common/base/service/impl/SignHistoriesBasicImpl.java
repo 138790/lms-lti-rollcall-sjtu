@@ -14,8 +14,8 @@ public class SignHistoriesBasicImpl implements SignHistoriesBasicService {
     private SignHistoriesDao signHistoriesDao;
 
     @Override
-    public SignHistories selectSignHistoryBySectionIds(List<String> sectionIds) {
+    public SignHistories selectSignHistoryByRollcallId(Long id) {
 
-        return signHistoriesDao.selectSignHistoryBySectionIds(sectionIds);
+        return signHistoriesDao.selectSignHistoryByRollcallId(id);
     }
 }

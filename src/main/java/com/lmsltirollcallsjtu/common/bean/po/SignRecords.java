@@ -20,6 +20,4 @@ public class SignRecords {
     private Date updatedAt;//修改时间
     @NotBlank(message = "签到状态不能为空")
     private String state;//签到状态
-    @NotBlank(message = "学生姓名不能为空")
-    private String userName;//学生姓名
 }

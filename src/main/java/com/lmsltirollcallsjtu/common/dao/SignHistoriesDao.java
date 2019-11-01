@@ -6,5 +6,5 @@ import feign.Param;
 import java.util.List;
 
 public interface SignHistoriesDao {
-    SignHistories selectSignHistoryBySectionIds(@Param("sectionId") List<String> sectionIds);
+    SignHistories selectSignHistoryByRollcallId(@Param("id") Long id);
 }
