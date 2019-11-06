@@ -1,7 +1,7 @@
 package com.lmsltirollcallsjtu.common.service;
 
-import com.lmsltirollcallsjtu.common.bean.po.SignRecords;
+import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 
 public interface ScanSignServcie {
-    void insertObject(SignRecords signRecords);
+    void insertObject(SignRecordsDto signRecordsDto);
 }

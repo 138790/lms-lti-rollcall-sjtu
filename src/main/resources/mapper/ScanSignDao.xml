@@ -5,12 +5,12 @@
     <!-- useGeneratedKeys表示应用自增主键值
          keyProperty 表示把自增主键值赋值给参数对象的id属性-->
     <insert id="insertObject"
-            parameterType="com.lmsltirollcallsjtu.common.bean.po.SignRecords">
-		insert into rollcall_sign_records
-		(id,user_id,rollcall_id,open_id,inserted_at,updated_at,
+            parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
+		insert into sign_records
+		(id,user_code,rollcall_code,open_id,
 		state)
 		values
-		(#{id},#{userId},#{rollcallId},#{openId},now(),now(),
+		(#{id},#{userCode},#{rollcallCode},#{openId},
 		#{state})
 	</insert>
 </mapper>

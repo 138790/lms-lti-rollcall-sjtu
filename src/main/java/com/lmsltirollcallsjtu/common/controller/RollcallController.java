@@ -22,7 +22,7 @@ public class RollcallController {
     @MessageMapping("/welcome")
     //当服务器有消息会对订阅了@SendTo中的路径的浏览器发送消息
     @SendTo("/topic/getResponse")
-    public String sendToSecret(@PathVariable Long courseId){
+    public String sendToSecret(@PathVariable Long courseCode){
         String secret = SecretUtil.generateSecret(userInfo);
         return secret;
     }

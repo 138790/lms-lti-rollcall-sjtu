@@ -92,7 +92,6 @@ spring:
 #mybatis配置
 mybatis:
   #指定Dao层出入参所在的包进行自动扫描，实现mapper.xml类名简写
-  type-aliases-package: com.example.demo.common
   configuration:
      #驼峰写法对应数据库字段的下划线
     map-underscore-to-camel-case: true
@@ -101,6 +100,7 @@ mybatis:
     #超时时间
     default-statement-timeout: 30
     #指定mapper.xml资源路径
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
 
 

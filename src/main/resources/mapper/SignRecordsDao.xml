@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmsltirollcallsjtu.common.dao.SignRecordsDao">
+    <!--学生查询签到历史列表-->
+    <select id="findSignHistoryByUserCode"
+            parameterType="java.lang.Long"
+			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
+		select id,rollcall_code,open_id,created_date,updated_by,updated_date,state
+		  from sign_records
+		where user_code=#{userCode}
+	</select>
+	<!--学生查询某一次签到详情-->
+	<select id="fingSignConditionByRollcallCode"
+			parameterType="java.lang.String"
+			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
+		select id,user_code,open_id,created_by,created_date,updated_by,updated_date,state
+		 from  sign_records
+		 where rollcall_code=#{rollcallCode}
+	</select>
+</mapper>

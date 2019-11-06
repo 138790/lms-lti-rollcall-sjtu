@@ -2,9 +2,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.UserInfo;
-import com.lmsltirollcallsjtu.common.bean.po.SignRecords;
-import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
-import com.lmsltirollcallsjtu.common.exception.BusinessException;
+import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
 import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import com.lmsltirollcallsjtu.common.utils.SecretUtil;
@@ -18,10 +16,10 @@ public class ScanSignSercieImpl implements ScanSignServcie {
     @Autowired
     private UserInfo userInfo;
     @Override
-    public void insertObject(SignRecords signRecords) {
-
+    public void insertObject(SignRecordsDto signRecordsDto) {
+        //判断学生传进来的token与系统生成的token是否一致
         if(SecretUtil.generateSecret(userInfo)== RedisUtil.getValueFromMap("userInfos",userInfo.getLoginName())){
-            scanSignBasicService.insertObject(signRecords);
+            scanSignBasicService.insertObject(signRecordsDto);
         }
     }
 }

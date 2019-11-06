@@ -11,7 +11,8 @@ public enum BusinessExceptionEnum {
     DATA_ERROR("400","数据异常！"),
     NO_DATA_FOUND("400","数据不存在！"),
     REDIS_ERROR("400","Redis异常！"),
-    INVENTORY_SHORTAGE("400","库存不足！");
+    INVENTORY_SHORTAGE("400","库存不足！"),
+    ARGS_ERROR("400","非法参数异常！");
 
     @Getter
     private String errorCode;
