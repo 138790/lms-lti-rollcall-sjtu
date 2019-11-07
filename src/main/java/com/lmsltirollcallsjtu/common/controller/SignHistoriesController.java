@@ -1,18 +1,17 @@
 package com.lmsltirollcallsjtu.common.controller;
 
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo;
-import com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo;
+import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
+import com.lmsltirollcallsjtu.common.service.CanvasService;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 /**
@@ -25,6 +24,8 @@ import java.util.List;
 public class SignHistoriesController {
     @Autowired
     private SignHistoriesService signHistoriesService;
+    @Autowired
+    private CanvasService canvasService;
     //查询一次点名的签到详情
     @RequestMapping("/{id}")
     public ResultInfo<SignHistoryInfo> doFindSignHistories(@PathVariable("id") String id) throws BusinessException {
@@ -40,12 +41,16 @@ public class SignHistoriesController {
         ResultInfo<List<SignHistoryDto>> resultInfo = ResultInfo.success(signHistoryInfo);
         return resultInfo;
     }
-
-  /*  //学生查询签到历史
-    @RequestMapping("/{userId}")
-    public ResultInfo<List<SignRecordsDto>> doFindSignHistoryLists(@PathVariable Long userId){
-        List<SignRecordsDto> signRecords = signHistoriesService.findSignHistoryByUserId(userId);
-        ResultInfo<List<SignRecordsDto>> resultInfo = ResultInfo.success(signRecords);
+    @RequestMapping("/sections/{courseId}")
+    public ResultInfo<ResponseEntity<List<Sections>>> doFindSections(@RequestHeader("Authorization")String bearerToken,@PathVariable  Long courseId){
+        ResponseEntity<List<Sections>> sections = canvasService.getSections(bearerToken,courseId);
+        ResultInfo<ResponseEntity<List<Sections>>> resultInfo = ResultInfo.success(sections);
         return resultInfo;
-    }*/
+    }
+    @RequestMapping("/sections/{courseId}/{sectionId}")
+    public ResultInfo<ResponseEntity<List<Sections>>> doFindTotalStudents(@RequestHeader("Authorization")String bearerToken,@PathVariable Long courseId,@PathVariable Long sectionId ){
+        ResponseEntity<List<Sections>> sections = canvasService.getSectionDetail(bearerToken,courseId,sectionId);
+        ResultInfo<ResponseEntity<List<Sections>>> resultInfo = ResultInfo.success(sections);
+        return resultInfo;
+    }
 }

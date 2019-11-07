@@ -17,7 +17,7 @@ public class TimeTask
     private static Logger logger = LoggerFactory.getLogger(TimeTask.class);
     @Scheduled(cron = "0/2 * * * * ?")   //每两秒执行一次
     public void test(){
-        System.err.println("*********   定时任务执行   **************");
+        //System.err.println("*********   定时任务执行   **************");
         CopyOnWriteArraySet<MyWebSocket> webSocketSet =
                 MyWebSocket.getWebSocketSet();
         int i = 0 ;
@@ -29,7 +29,6 @@ public class TimeTask
             }
         });
 
-        System.err.println("/n 定时任务完成.......");
+        //System.err.println("/n 定时任务完成.......");
     }
-
 }
