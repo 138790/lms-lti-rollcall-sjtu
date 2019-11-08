@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,19 +26,25 @@ public interface CanvasFeignClient {
 
     /**
      * @descritpion 调用远程接口 ${feign.client.url}/api/v1/courses/{courseId}/sections
-     * @param id
+     * @param
      * @return
      */
     //列出某一课程下的班级
     //GET /api/v1/courses/:course_id/sections
     @GetMapping(value = "/api/v1/courses/{courseId}/sections")
-   ResponseEntity<List<Sections>> getSections(@RequestHeader("Authorization") String bearerToken, @PathVariable Long courseId);
+   ResponseEntity<List<Sections>> getSections(@RequestHeader(name="Authorization",required = true) String bearerToken,
+                                              @PathVariable("courseId") Long courseId);
+
 
     //获取某一课程下某一个班级的信息
-    @GetMapping(value="/api/v1/courses/{courseId}/sections/{sectionId}")
-    ResponseEntity<Sections> getSectionDetail(@RequestHeader("Authorization") String bearerToken,@PathVariable Long courseId, @PathVariable Long id);
+    @GetMapping(value="/api/v1/courses/{courseId}/sections/{id}")
+    ResponseEntity<Sections> getSectionDetail(@RequestHeader("Authorization") String bearerToken,
+                                              @PathVariable("courseId") Long courseId,
+                                              @PathVariable("id") Long id,
+                                              @RequestParam("include") List<String> includeList);
 
     //GET/api/v1/sections/:section_id/enrollments
     @GetMapping(value = "/api/v1/sections/{sectionId}/enrollments")
-    ResponseEntity<List<Enrollments>> getEnrollmentsCount(@RequestHeader ("Authorization") String bearerToken, @PathVariable Long sectionId);
+    ResponseEntity<List<Enrollments>> getEnrollmentsCount(@RequestHeader (name="Authorization",required = true) String bearerToken,
+                                                          @PathVariable("sectionId") Long sectionId);
 }

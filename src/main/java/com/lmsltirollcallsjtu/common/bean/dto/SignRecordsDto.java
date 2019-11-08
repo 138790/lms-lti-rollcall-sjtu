@@ -1,5 +1,6 @@
 package com.lmsltirollcallsjtu.common.bean.dto;
 
+import com.lmsltirollcallsjtu.common.bean.bo.Students;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 /*
   *@author huyong
@@ -27,4 +29,6 @@ public class SignRecordsDto {
     private String updatedBy;//修改者
     private Date updatedDate;//修改者
     private String state;//签到状态
+    private String name;//班级名称
+    private List<Students> students;
 }

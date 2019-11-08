@@ -24,8 +24,8 @@ import java.util.List;
 public class SignHistoriesController {
     @Autowired
     private SignHistoriesService signHistoriesService;
-    @Autowired
-    private CanvasService canvasService;
+    /*@Autowired
+    private CanvasService canvasService;*/
     //查询一次点名的签到详情
     @RequestMapping("/{id}")
     public ResultInfo<SignHistoryInfo> doFindSignHistories(@PathVariable("id") String id) throws BusinessException {
@@ -41,16 +41,21 @@ public class SignHistoriesController {
         ResultInfo<List<SignHistoryDto>> resultInfo = ResultInfo.success(signHistoryInfo);
         return resultInfo;
     }
-    @RequestMapping("/sections/{courseId}")
-    public ResultInfo<ResponseEntity<List<Sections>>> doFindSections(@RequestHeader("Authorization")String bearerToken,@PathVariable  Long courseId){
-        ResponseEntity<List<Sections>> sections = canvasService.getSections(bearerToken,courseId);
-        ResultInfo<ResponseEntity<List<Sections>>> resultInfo = ResultInfo.success(sections);
+   /* @RequestMapping("/sections/{courseId}")
+    public ResultInfo<List<Sections>> doFindSections(@RequestHeader("Authorization")String bearerToken,
+                                                                     @PathVariable  Long courseId){
+        List<Sections> sections =  canvasService.getSections(bearerToken,courseId);
+        ResultInfo<List<Sections>> resultInfo = ResultInfo.success(sections);
         return resultInfo;
     }
     @RequestMapping("/sections/{courseId}/{sectionId}")
-    public ResultInfo<ResponseEntity<List<Sections>>> doFindTotalStudents(@RequestHeader("Authorization")String bearerToken,@PathVariable Long courseId,@PathVariable Long sectionId ){
-        ResponseEntity<List<Sections>> sections = canvasService.getSectionDetail(bearerToken,courseId,sectionId);
-        ResultInfo<ResponseEntity<List<Sections>>> resultInfo = ResultInfo.success(sections);
+    public ResultInfo<List<Sections>> doFindTotalStudents(@RequestHeader(name = "Authorization",required = true)String bearerToken,
+                                                                          @PathVariable("courseId") Long courseId,
+                                                                          @PathVariable("id") Long id,
+                                                                          @RequestParam("include") Long includeTotalStudents,
+                                                                          @RequestParam("include") String includeStringName){
+        List<Sections> sections = canvasService.getSectionDetail(bearerToken,courseId,id,includeTotalStudents,includeStringName);
+        ResultInfo<List<Sections>> resultInfo = ResultInfo.success(sections);
         return resultInfo;
-    }
+    }*/
 }

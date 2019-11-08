@@ -15,4 +15,5 @@ public class SignHistoryDto {
     private List<Long> sectionCodes;//班级编号集
     private Integer attendancesCount;//签到总人数
     private Date createdDate;//创建时间
+    private Long totalStudents;//班级总人数
 }

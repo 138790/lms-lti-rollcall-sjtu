@@ -10,25 +10,26 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+
 @Component
 @EnableScheduling
-public class TimeTask
-{
-    private static Logger logger = LoggerFactory.getLogger(TimeTask.class);
-    @Scheduled(cron = "0/2 * * * * ?")   //每两秒执行一次
-    public void test(){
-        //System.err.println("*********   定时任务执行   **************");
-        CopyOnWriteArraySet<MyWebSocket> webSocketSet =
-                MyWebSocket.getWebSocketSet();
-        int i = 0 ;
-        webSocketSet.forEach(c->{
-            try {
-                c.sendMessage("  定时发送  " + new Date().toLocaleString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+public class TimeTask{
+    private static Logger logger=LoggerFactory.getLogger(TimeTask.class);
 
-        //System.err.println("/n 定时任务完成.......");
+    @Scheduled(cron="0/2 * * * * ?")//每两秒执行一次
+    public void test(){
+        //System.err.println("*********  定时任务执行  *********");
+        CopyOnWriteArraySet<MyWebSocket> webSocketSet = MyWebSocket.getWebSocketSet();
+        int i=0;
+        webSocketSet.forEach(c->{
+            try{
+                c.sendMessage("定时发送" + new Date().toLocaleString());
+            }catch(IOException e){
+                e.printStackTrace();
+                }
+
+        });
+        //System.err.println("/n 定时任务完成。。。。。。。。。。。");
     }
+
 }

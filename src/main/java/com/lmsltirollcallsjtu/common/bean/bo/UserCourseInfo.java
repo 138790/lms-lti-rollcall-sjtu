@@ -9,6 +9,6 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 public class UserCourseInfo {
-    private Long userId;
-    private Long courseId;
+    private Long userCode;
+    private Long courseCode;
 }

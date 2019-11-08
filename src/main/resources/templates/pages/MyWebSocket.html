@@ -16,7 +16,7 @@ Welcome<br/>
 
     //判断当前浏览器是否支持WebSocket  ,主要此处要更换为自己的地址
     if('WebSocket' in window){
-        websocket = new WebSocket("ws://localhost:8081/wsdemo");
+        websocket = new WebSocket("ws://localhost:8081/lms-lti-rollcall-sjtu-dev/wsdemo");
     }
     else{
         alert('Not support websocket')

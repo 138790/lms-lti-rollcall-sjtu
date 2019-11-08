@@ -39,9 +39,10 @@ public class WebSocketConfig  {
          *//*
         registry.addEndpoint("websocket/socketServer.action").withSockJS();
     } */
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
-    }
+ @Bean
+    public ServerEndpointExporter serverEndpointExporter(){
+     return  new ServerEndpointExporter();
+ }
+
 
 }

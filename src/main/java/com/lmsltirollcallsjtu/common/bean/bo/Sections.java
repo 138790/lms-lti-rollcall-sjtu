@@ -2,14 +2,21 @@ package com.lmsltirollcallsjtu.common.bean.bo;
 
 import lombok.Builder;
 import lombok.Data;
-
+import lombok.experimental.Tolerate;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
 public class Sections {
+
     private Long id;//表的主键
-    private Long courseId;//课程编号
+    private Long course_id;//课程编号
     private String name;//班级名称
-    private Date createdAt;//创建日期
+    private List<Students> students;//学生信息
+    private Long total_students;//学生总数
+    @Tolerate
+    public Sections(){
+
+    }
 }

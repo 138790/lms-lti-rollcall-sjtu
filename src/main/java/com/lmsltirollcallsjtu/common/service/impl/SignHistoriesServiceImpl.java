@@ -14,6 +14,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -43,16 +44,23 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
     public List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(UserCourseInfo userCourseInfo) throws BusinessException {
 
 
-        if(userCourseInfo.getUserId()==null||userCourseInfo.getUserId()<1){
+        if(userCourseInfo.getUserCode()==null||userCourseInfo.getUserCode()<1){
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
-        if (userCourseInfo.getCourseId()==null||userCourseInfo.getCourseId()<1){
+        if (userCourseInfo.getCourseCode()==null||userCourseInfo.getCourseCode()<1){
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
-
         List<SignHistoryDto> signHistoryDtoList = signHistoriesBasicService.findSignHistoryListByCourseIdAndUserId(userCourseInfo);
+        ResponseEntity<List<Sections>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540L);
+        List<Sections> sectionsBody = sections.getBody();
+        HttpHeaders headers = sections.getHeaders();
+        signHistoryDtoList.get(0).setSectionName(sectionsBody.get(0).getName());
+        signHistoryDtoList.get(0).setTotalStudents(sectionsBody.get(0).getTotal_students());
+
         signHistoryDtoList.stream().forEach(item -> item.setSectionCodes(JSON.parseArray(item.getSectionCodesJsonStr(),Long.class)));
-        //ResponseEntity<List<Sections>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), userCourseInfo.getCourseId());
+//        List<String> sectionNameList = sectionsBody.stream().map(item -> item.getName()).collect(Collectors.toList());
+        Object[] objects = sectionsBody.stream().map(item -> item.getName()).toArray();
+
 
         return signHistoryDtoList;
     }
