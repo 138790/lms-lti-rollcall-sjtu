@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 public class ScanSignSercieImpl implements ScanSignServcie {
     @Autowired
     private ScanSignBasicService scanSignBasicService;
-    @Autowired
-    private UserInfo userInfo;
     @Override
     public void insertObject(SignRecordsDto signRecordsDto) {
         //判断学生传进来的token与系统生成的token是否一致
+        UserInfo userInfo = new UserInfo();
         if(SecretUtil.generateSecret(userInfo)== RedisUtil.getValueFromMap("userInfos",userInfo.getLoginName())){
             scanSignBasicService.insertObject(signRecordsDto);
         }

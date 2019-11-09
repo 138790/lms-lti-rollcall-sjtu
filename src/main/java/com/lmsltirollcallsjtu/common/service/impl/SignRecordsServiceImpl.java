@@ -1,7 +1,7 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignRecordsBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.Sections;
+import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.config.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
@@ -35,11 +35,11 @@ public class SignRecordsServiceImpl implements SignRecordsService {
         includeList.add("students");
 
         List<SignRecordsDto> signRecordsDto = signRecordsBasicService.findSignHistoryByUserCode(userCode);
-        ResponseEntity<Sections> sectionDetail = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
+        ResponseEntity<SectionsOfCanvas> sectionDetail = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
                 540L,
                 2041L,
                 includeList);
-        Sections sectionDetailBody = sectionDetail.getBody();
+        SectionsOfCanvas sectionDetailBody = sectionDetail.getBody();
         HttpHeaders headers = sectionDetail.getHeaders();
         signRecordsDto.get(0).setName(sectionDetailBody.getName());
         signRecordsDto.get(0).setStudents(sectionDetailBody.getStudents());

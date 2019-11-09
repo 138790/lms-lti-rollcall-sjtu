@@ -21,7 +21,7 @@ import java.util.List;
 public class SignRecordsDto {
 
     private String id;//表记录id
-    private Long userCode;//学生编号
+    private Long userCode;//学生学号
     private String rollcallCode;//点名编号
     private Long openId;//绑定微信编号
     private String createdBy;//创建者

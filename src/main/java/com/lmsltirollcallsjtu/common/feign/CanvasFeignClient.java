@@ -1,7 +1,7 @@
 package com.lmsltirollcallsjtu.common.feign;
 
 import com.lmsltirollcallsjtu.common.bean.bo.Enrollments;
-import com.lmsltirollcallsjtu.common.bean.bo.Sections;
+import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +32,14 @@ public interface CanvasFeignClient {
     //列出某一课程下的班级
     //GET /api/v1/courses/:course_id/sections
     @GetMapping(value = "/api/v1/courses/{courseId}/sections")
-   ResponseEntity<List<Sections>> getSections(@RequestHeader(name="Authorization",required = true) String bearerToken,
-                                              @PathVariable("courseId") Long courseId);
+   ResponseEntity<List<SectionsOfCanvas>> getSections(@RequestHeader(name="Authorization",required = true) String bearerToken,
+                                                      @PathVariable("courseId") Long courseId,
+                                                      @RequestParam("include") String includeTotalStudents);
 
 
     //获取某一课程下某一个班级的信息
     @GetMapping(value="/api/v1/courses/{courseId}/sections/{id}")
-    ResponseEntity<Sections> getSectionDetail(@RequestHeader("Authorization") String bearerToken,
+    ResponseEntity<SectionsOfCanvas> getSectionDetail(@RequestHeader("Authorization") String bearerToken,
                                               @PathVariable("courseId") Long courseId,
                                               @PathVariable("id") Long id,
                                               @RequestParam("include") List<String> includeList);

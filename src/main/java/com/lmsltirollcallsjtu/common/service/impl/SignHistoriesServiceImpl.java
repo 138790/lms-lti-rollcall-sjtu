@@ -3,7 +3,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.lmsltirollcallsjtu.common.base.service.SignHistoriesBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.Sections;
+import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo;
 import com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
@@ -51,15 +51,23 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
         List<SignHistoryDto> signHistoryDtoList = signHistoriesBasicService.findSignHistoryListByCourseIdAndUserId(userCourseInfo);
-        ResponseEntity<List<Sections>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540L);
-        List<Sections> sectionsBody = sections.getBody();
+        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540L,"total_students");
+        List<SectionsOfCanvas> sectionsBody = sections.getBody();
         HttpHeaders headers = sections.getHeaders();
         signHistoryDtoList.get(0).setSectionName(sectionsBody.get(0).getName());
         signHistoryDtoList.get(0).setTotalStudents(sectionsBody.get(0).getTotal_students());
+//        Long items=0L;
+//        for (Sections section :sectionsBody) {
+//          items+=section.getTotal_students();
+//        }
+//        signHistoryDtoList.get(0).setTotalStudents(items);
+
+
+//        signHistoryDtoList.stream().forEach(item ->item.setSectionName(item.getSectionName()));
 
         signHistoryDtoList.stream().forEach(item -> item.setSectionCodes(JSON.parseArray(item.getSectionCodesJsonStr(),Long.class)));
 //        List<String> sectionNameList = sectionsBody.stream().map(item -> item.getName()).collect(Collectors.toList());
-        Object[] objects = sectionsBody.stream().map(item -> item.getName()).toArray();
+//        Object[] objects = sectionsBody.stream().map(item -> item.getName()).toArray();
 
 
         return signHistoryDtoList;

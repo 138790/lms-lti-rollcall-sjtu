@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmsltirollcallsjtu.common.dao.RollcallDao">
+    <!--老师发起点名插入点名信息-->
+
+    <insert id="insertSignHistories"
+            parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistory">
+		insert into sign_histories
+		(id,course_code,user_code,section_codes,attendances_count)
+		values
+		(#{id},#{courseCode},#{userCode},#{sectionCodes},#{attendancesCount}
+		)
+	</insert>
+</mapper>

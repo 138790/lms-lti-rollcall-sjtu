@@ -4,17 +4,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Builder
-public class UserCourseInfo {
-    private Long userCode;
+public class SignHistory {
+    private Long id;
     private Long courseCode;
-
+    private Long userCode;
+    private Long attendancesCount;
+    private String sectionCodes;
     @Tolerate
-    public UserCourseInfo(){
+    public SignHistory(){
 
     }
 }

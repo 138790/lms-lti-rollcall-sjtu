@@ -2,16 +2,12 @@ package com.lmsltirollcallsjtu.common.controller;
 
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
-import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.service.CanvasService;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
 import java.util.List;
 
 /**
