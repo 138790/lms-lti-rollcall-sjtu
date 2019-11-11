@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Builder
 public class SignHistory {
-    private Long id;
+    private String id;
     private Long courseCode;
     private Long userCode;
     private Long attendancesCount;

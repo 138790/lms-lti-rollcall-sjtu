@@ -5,16 +5,16 @@
     <select id="findSignHistoryByUserCode"
             parameterType="java.lang.Long"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
-		select id,rollcall_code,open_id,created_date,updated_by,updated_date,state
+		select id,user_code,open_id,rollcall_code,state,created_date
 		  from sign_records
 		where user_code=#{userCode}
 	</select>
 	<!--学生查询某一次签到详情-->
-	<select id="fingSignConditionByRollcallCode"
-			parameterType="java.lang.String"
+	<select id="findSignConditionByRollcallCode"
+			parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
-		select id,user_code,open_id,created_by,created_date,updated_by,updated_date,state
+		 select id,user_code,open_id,rollcall_code,state,created_date
 		 from  sign_records
-		 where rollcall_code=#{rollcallCode}
+		 where rollcall_code=#{rollcallCode} and user_code=#{userCode}
 	</select>
 </mapper>

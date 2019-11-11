@@ -2,6 +2,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignRecordsBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
+import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.config.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
@@ -41,17 +42,17 @@ public class SignRecordsServiceImpl implements SignRecordsService {
                 includeList);
         SectionsOfCanvas sectionDetailBody = sectionDetail.getBody();
         HttpHeaders headers = sectionDetail.getHeaders();
-        signRecordsDto.get(0).setName(sectionDetailBody.getName());
-        signRecordsDto.get(0).setStudents(sectionDetailBody.getStudents());
+//        signRecordsDto.get(0).setName(sectionDetailBody.getName());
+//        signRecordsDto.get(0).setStudents(sectionDetailBody.getStudents());
         return signRecordsDto;
     }
 
     @Override
-    public SignRecordsDto findSignConditionByRollcallCode(String rollcallCode) throws BusinessException {
-        if(StringUtils.isEmpty(rollcallCode)){
+    public List<SignRecordsDto> findSignConditionByRollcallCode(SignRecordInfo signRecordInfo) throws BusinessException {
+        if(StringUtils.isEmpty(signRecordInfo)){
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
 
-        return signRecordsBasicService.findSignConditionByRollcallCode(rollcallCode);
+        return signRecordsBasicService.findSignConditionByRollcallCode(signRecordInfo);
     }
 }

@@ -1,13 +1,12 @@
 package com.lmsltirollcallsjtu.common.controller;
 
+import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.SignRecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,10 +22,11 @@ public class SignRecordsController {
         ResultInfo<List<SignRecordsDto>> resultInfo = ResultInfo.success(signRecordsDto);
         return resultInfo;
     }
-    @RequestMapping("condition/{rollcallCode}")
-    public ResultInfo<SignRecordsDto> doFindSignCondition(@PathVariable String rollcallCode) throws BusinessException {
-        SignRecordsDto signRecordsDto = signRecordsService.findSignConditionByRollcallCode(rollcallCode);
-        ResultInfo<SignRecordsDto> resultInfo = ResultInfo.success(signRecordsDto);
+    //学生查询一次点名的签到详情
+    @RequestMapping("/condition")
+    public ResultInfo<List<SignRecordsDto>> doFindSignCondition(@RequestBody SignRecordInfo signRecordInfo) throws BusinessException {
+        List<SignRecordsDto> signRecordsDto = signRecordsService.findSignConditionByRollcallCode(signRecordInfo);
+        ResultInfo<List<SignRecordsDto>> resultInfo = ResultInfo.success(signRecordsDto);
         return resultInfo;
     }
 }

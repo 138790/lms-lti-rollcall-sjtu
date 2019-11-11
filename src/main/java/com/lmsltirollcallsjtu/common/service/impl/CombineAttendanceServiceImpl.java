@@ -47,8 +47,8 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         Section sectionTemp;
         for(SectionsOfCanvas item:sectionsBody){
             sectionTemp = new Section();
-            sectionTemp.setId(item.getId());
-            sectionTemp.setName(item.getName());
+            sectionTemp.setSectionCode(item.getId());
+            sectionTemp.setSectionName(item.getName());
             sectionList.add(sectionTemp);
             totalStudents+=item.getTotal_students();
         }

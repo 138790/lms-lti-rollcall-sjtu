@@ -3,18 +3,26 @@
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.SignHistoriesDao">
 
 
-	<!--<resultMap id="maps" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
-		        <result property="userId" column="user_id" jdbcType="INTEGER" javaType="java.lang.Long"></result>
-		     </resultMap>-->
+	<resultMap id="signHistoryInfo" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
+		<id column="id" property="id"/>
+		<result column="section_codes" property="sectionCodes"/>
+		<result column="attendances_count" property="attendancesCount"/>
+		<result column="created_date" property="createdDate"/>
+		<collection property="userState" ofType="com.lmsltirollcallsjtu.common.bean.bo.UserState">
+			<id column="id" property="id"/>
+			<result column="state" property="state"/>
+		</collection>
+	</resultMap>
 
     <!--根据点名id查询签到历史-->
 
-    <select id="findSignHistoryByRollcallId" resultType="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
-		select section_ids sectionCodesJsonStr,
-	           attendances_count,
-	           created_date
-		from   sign_histories
-		where id=#{id}
+    <select id="findSignHistoryByRollcallId" resultMap="signHistoryInfo">
+		select h.section_codes ,
+	           h.attendances_count,
+	           h.created_date,
+	           r.state
+		from   sign_histories h,sign_records r
+		where  h.id=r.rollcall_code and h.id=#{id}
 	</select>
 	<!--老师查询签到历史列表-->
 	<!--<resultMap id="findSignHistory" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
@@ -24,14 +32,13 @@
 		<collection property=""
 	</resultMap>-->
 	<select id="findSignHistoryListByCourseIdAndUserId"
-			parameterType="com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
-		select section_codes sectionCodesJsonStr,
+		select
 			   attendances_count,
 			   created_date
 		  from sign_histories
-		 where course_code=#{courseCode}
-		  and  user_code=#{userCode}
+		 where user_code=#{userCode}
+		 order by created_date desc;
 	</select>
 
 </mapper>

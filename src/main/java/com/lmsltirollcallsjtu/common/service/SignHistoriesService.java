@@ -9,7 +9,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import java.util.List;
 
 public interface SignHistoriesService {
-    SignHistoryInfo findSignHistoryByRollcallId(String id) throws BusinessException;
+    List<SignHistoryInfo> findSignHistoryByRollcallId(String id) throws BusinessException;
 
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(UserCourseInfo userCourseInfo) throws BusinessException;
+    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode) throws BusinessException;
 }

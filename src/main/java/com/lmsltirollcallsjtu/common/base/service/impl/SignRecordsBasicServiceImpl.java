@@ -1,6 +1,7 @@
 package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignRecordsBasicService;
+import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.dao.SignRecordsDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class SignRecordsBasicServiceImpl implements SignRecordsBasicService {
     }
 
     @Override
-    public SignRecordsDto findSignConditionByRollcallCode(String rollcallCode) {
-        return signRecordsDao.findSignConditionByRollcallCode(rollcallCode);
+    public List<SignRecordsDto> findSignConditionByRollcallCode(SignRecordInfo signRecordInfo) {
+        return signRecordsDao.findSignConditionByRollcallCode(signRecordInfo);
     }
 }

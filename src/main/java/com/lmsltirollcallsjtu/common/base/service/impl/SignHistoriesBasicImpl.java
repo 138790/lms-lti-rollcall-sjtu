@@ -16,14 +16,14 @@ public class SignHistoriesBasicImpl implements SignHistoriesBasicService {
     private SignHistoriesDao signHistoriesDao;
 
     @Override
-    public SignHistoryInfo findSignHistoryByRollcallId(String id) {
+    public List<SignHistoryInfo> findSignHistoryByRollcallId(String id) {
 
         return signHistoriesDao.findSignHistoryByRollcallId(id);
     }
 
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(UserCourseInfo userCourseInfo) {
-        return signHistoriesDao.findSignHistoryListByCourseIdAndUserId(userCourseInfo);
+    public List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode) {
+        return signHistoriesDao.findSignHistoryListByCourseIdAndUserId(userCode,courseCode);
     }
 
 

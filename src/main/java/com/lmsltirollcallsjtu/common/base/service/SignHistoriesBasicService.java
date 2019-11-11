@@ -8,8 +8,8 @@ import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import java.util.List;
 
 public interface SignHistoriesBasicService {
-    SignHistoryInfo findSignHistoryByRollcallId(String id);
+    List<SignHistoryInfo> findSignHistoryByRollcallId(String id);
 
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(UserCourseInfo userCourseInfo);
+    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode);
 
 }

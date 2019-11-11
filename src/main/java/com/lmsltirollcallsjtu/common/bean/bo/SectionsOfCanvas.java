@@ -15,7 +15,7 @@ public class SectionsOfCanvas {
     private String name;//班级名称
     private List<Students> students;//学生信息
     private Long total_students;//学生总数
-
+    private Date created_at;
 
     @Tolerate
     public SectionsOfCanvas(){

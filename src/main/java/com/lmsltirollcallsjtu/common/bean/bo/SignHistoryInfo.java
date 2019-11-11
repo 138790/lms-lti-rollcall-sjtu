@@ -5,14 +5,17 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
 public class SignHistoryInfo {
-  /*  private Long id;*/
-    private String sectionCodesJsonStr;//班级编号集（json字符串格式）
-    private Integer attendancesCount;//签到总人数
+    private String id;//
+    private String studentsName;//学生姓名
+    private String sectionCodes;//班级编号集（json字符串格式）
+    private Long attendancesCount;//签到总人数
     private Date createdDate;//创建时间
+    List<UserState> userState;//学生状态
   @Tolerate
   public SignHistoryInfo(){
 

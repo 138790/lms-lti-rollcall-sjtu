@@ -20,7 +20,7 @@ public class RollcallServiceImpl implements RollcallService {
         SignHistory signHistory = new SignHistory();
         String section= JSON.toJSONString(rollcallHistory.getSectionCodes());
         signHistory.setSectionCodes(section);
-        signHistory.setId(rollcallHistory.getId());
+        signHistory.setId(rollcallHistory.getId().toString());
         signHistory.setCourseCode(rollcallHistory.getCourseCode());
         signHistory.setUserCode(rollcallHistory.getUserCode());
         signHistory.setAttendancesCount(rollcallHistory.getAttendancesCount());

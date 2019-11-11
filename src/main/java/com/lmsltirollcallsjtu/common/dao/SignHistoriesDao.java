@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface SignHistoriesDao {
      //老师查询一次的点名的签到情况
-     SignHistoryInfo findSignHistoryByRollcallId(@Param("id") String id);
+     List<SignHistoryInfo> findSignHistoryByRollcallId(@Param("id") String id);
 
      //老师查询签到历史列表
     /* @Select("select inserted_at,section_ids,attendances_count from rollcall_sign_histories where course_id=#{courseId} and user_id=#{userId}")*/
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(UserCourseInfo userCourseInfo);
+    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(@Param("userCode") Long userCode,@Param("coourseCode") Long courseCode);
 
 }
