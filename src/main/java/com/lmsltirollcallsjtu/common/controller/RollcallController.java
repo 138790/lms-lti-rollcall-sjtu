@@ -1,6 +1,5 @@
 package com.lmsltirollcallsjtu.common.controller;
 
-import com.lmsltirollcallsjtu.common.bean.bo.RollcallHistory;
 import com.lmsltirollcallsjtu.common.bean.bo.SignHistory;
 import com.lmsltirollcallsjtu.common.bean.bo.UserInfo;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
@@ -26,9 +25,10 @@ public class RollcallController {
     @Autowired
     private RollcallService rollcallService;
     @RequestMapping("/insert")
-    public ResultInfo<String> doInsertSignHistories(@RequestBody RollcallHistory rollcallHistory){
-        rollcallService.insertSignHistories(rollcallHistory);
+    public ResultInfo<String> doInsertSignHistories(@RequestBody SignHistory signHistory){
+        rollcallService.insertSignHistories(signHistory);
         ResultInfo<String> resultInfo = ResultInfo.success("发起点名成功");
         return resultInfo;
     }
+
 }

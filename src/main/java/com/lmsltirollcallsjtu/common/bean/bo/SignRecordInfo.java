@@ -8,7 +8,7 @@ import lombok.experimental.Tolerate;
 @Builder
 public class SignRecordInfo {
     private String rollcallCode;
-    private Long userCode;
+    private Integer userCode;
     @Tolerate
     public SignRecordInfo(){
 

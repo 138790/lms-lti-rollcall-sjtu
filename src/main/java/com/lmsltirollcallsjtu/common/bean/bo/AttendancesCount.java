@@ -10,8 +10,8 @@ import java.util.List;
 @Builder
 public class AttendancesCount {
     private List<Section> section;//班级名称
-    private Long attendancesCount;//签到总数
-    private Long totalStudents;
+    private Integer attendancesCount;//签到总数
+    private Integer totalStudents;
 
     @Tolerate
     public AttendancesCount(){

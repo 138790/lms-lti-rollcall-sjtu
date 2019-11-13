@@ -31,13 +31,13 @@
 		<result property="insertedAt" column="inserted_at"/>
 		<collection property=""
 	</resultMap>-->
-	<select id="findSignHistoryListByCourseIdAndUserId"
+	<select id="findSignHistoryListByCourseCode"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
-		select
+		select section_list sectionListJsonStr,
 			   attendances_count,
 			   created_date
 		  from sign_histories
-		 where user_code=#{userCode}
+		 where course_code=#{courseCode}
 		 order by created_date desc;
 	</select>
 

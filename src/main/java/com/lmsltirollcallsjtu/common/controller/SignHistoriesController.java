@@ -32,8 +32,8 @@ public class SignHistoriesController {
 
     //查询学生签到历史列表
     @RequestMapping("/sign")
-    public ResultInfo<List<SignHistoryDto>> doFindSignHistoryList(@RequestParam("userCode") Long userCode,@RequestParam("courseCode") Long courseCode) throws BusinessException {
-        List<SignHistoryDto> signHistoryInfo = signHistoriesService.findSignHistoryListByCourseIdAndUserId(userCode,courseCode);
+    public ResultInfo<List<SignHistoryDto>> doFindSignHistoryList(@RequestParam("courseCode") Integer courseCode) throws BusinessException {
+        List<SignHistoryDto> signHistoryInfo = signHistoriesService.findSignHistoryListByCourseCode(courseCode);
         ResultInfo<List<SignHistoryDto>> resultInfo = ResultInfo.success(signHistoryInfo);
         return resultInfo;
     }

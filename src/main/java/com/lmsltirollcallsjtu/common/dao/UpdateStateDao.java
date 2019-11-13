@@ -10,4 +10,5 @@ public interface UpdateStateDao {
 
    /* //讲修改后的状态插入数据库中
     void insertUserNewStateUserId(@Param("userId") Long userId);*/
+   
 }

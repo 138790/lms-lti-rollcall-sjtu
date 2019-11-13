@@ -10,6 +10,6 @@ import java.util.List;
 public interface SignHistoriesBasicService {
     List<SignHistoryInfo> findSignHistoryByRollcallId(String id);
 
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode);
+    List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode);
 
 }

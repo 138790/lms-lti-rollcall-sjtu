@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 public class UserCourseInfo {
-    private Long userCode;
-    private Long courseCode;
+    private Integer userCode;
+    private Integer courseCode;
 
     @Tolerate
     public UserCourseInfo(){

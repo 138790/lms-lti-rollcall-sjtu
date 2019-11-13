@@ -37,12 +37,12 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         String sCodes = JSON.toJSONString(sectionCodes);
         AttendancesCount attendancesCount = combineAttendanceBasicService.CombineAttendancesCountBySectionCodes(sCodes);
 
-        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540L,"total_students");
+        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540,"total_students");
         List<SectionsOfCanvas> sectionsBody = sections.getBody();
         HttpHeaders headers = sections.getHeaders();
 
 //        attendancesCount.setAttendancesCount(sectionsBody.get(0).getTotal_students());
-        Long totalStudents=0L;
+        Integer totalStudents=0;
         ArrayList<Section> sectionList = new ArrayList<>();
         Section sectionTemp;
         for(SectionsOfCanvas item:sectionsBody){

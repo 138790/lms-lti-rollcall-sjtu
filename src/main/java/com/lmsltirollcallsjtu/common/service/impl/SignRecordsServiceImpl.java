@@ -37,8 +37,8 @@ public class SignRecordsServiceImpl implements SignRecordsService {
 
         List<SignRecordsDto> signRecordsDto = signRecordsBasicService.findSignHistoryByUserCode(userCode);
         ResponseEntity<SectionsOfCanvas> sectionDetail = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
-                540L,
-                2041L,
+                540,
+                2041,
                 includeList);
         SectionsOfCanvas sectionDetailBody = sectionDetail.getBody();
         HttpHeaders headers = sectionDetail.getHeaders();

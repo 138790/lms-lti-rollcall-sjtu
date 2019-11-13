@@ -22,8 +22,8 @@ public class SignHistoriesBasicImpl implements SignHistoriesBasicService {
     }
 
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode) {
-        return signHistoriesDao.findSignHistoryListByCourseIdAndUserId(userCode,courseCode);
+    public List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode) {
+        return signHistoriesDao.findSignHistoryListByCourseCode(courseCode);
     }
 
 

@@ -6,9 +6,18 @@
     <insert id="insertSignHistories"
             parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistory">
 		insert into sign_histories
-		(id,course_code,user_code,section_codes,attendances_count)
+		(id,course_code,user_code,section_list,attendances_count)
 		values
-		(#{id},#{courseCode},#{userCode},#{sectionCodes},#{attendancesCount}
+		(#{id},#{courseCode},#{userCode},#{sectionListJsonStr},#{attendancesCount}
 		)
+
+	</insert>
+	<insert id="insertStudnetsDetail" parameterType="java.util.List">
+		insert into sign_records
+		(id, user_code,rollcall_code,open_id,state,user_name)
+		values
+		<foreach collection="signRecordsBo" item="item" separator=",">
+		(#{item.id},#{item.userCode},#{item.rollcallCode},#{item.openId},#{item.state},#{item.userName})
+		</foreach>
 	</insert>
 </mapper>

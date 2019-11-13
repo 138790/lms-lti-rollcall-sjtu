@@ -11,5 +11,5 @@ import java.util.List;
 public interface SignHistoriesService {
     List<SignHistoryInfo> findSignHistoryByRollcallId(String id) throws BusinessException;
 
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode) throws BusinessException;
+    List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode) throws BusinessException;
 }

@@ -15,6 +15,6 @@ public interface SignHistoriesDao {
 
      //老师查询签到历史列表
     /* @Select("select inserted_at,section_ids,attendances_count from rollcall_sign_histories where course_id=#{courseId} and user_id=#{userId}")*/
-    List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(@Param("userCode") Long userCode,@Param("coourseCode") Long courseCode);
+    List<SignHistoryDto> findSignHistoryListByCourseCode(@Param("courseCode") Integer courseCode);
 
 }

@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.lmsltirollcallsjtu.common.base.service.SignHistoriesBasicService;
+import com.lmsltirollcallsjtu.common.bean.bo.Section;
 import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo;
 import com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,41 +33,57 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
     private CanvasFeignClient canvasFeignClient;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
+
     @Override
     public List<SignHistoryInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
-        if(StringUtils.isEmpty(id)){
+        if (StringUtils.isEmpty(id)) {
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
         List<SignHistoryInfo> signHistoryInfo = signHistoriesBasicService.findSignHistoryByRollcallId(id);
-//        canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),)
+        SignHistoryInfo signHistory = new SignHistoryInfo();
+        List<String> includeList = new ArrayList<>();
+        includeList.add("students");
+        ResponseEntity<SectionsOfCanvas> sectionOfCanvas = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
+                signHistory.getCourseCode(),
+                Integer.valueOf(signHistory.getSectionCodes()),
+                includeList);
+        SectionsOfCanvas sectionCanvas = sectionOfCanvas.getBody();
+        HttpHeaders headers = sectionOfCanvas.getHeaders();
 
         return signHistoryInfo;
     }
 
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseIdAndUserId(Long userCode,Long courseCode) throws BusinessException {
+    public List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode) throws BusinessException {
 
 
-        if(userCode==null||userCode<1){
+//        if(userCode==null||userCode<1){
+//            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
+//        }
+        if (courseCode == null || courseCode < 1) {
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
-        if (courseCode==null||courseCode<1){
-            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
+        List<SignHistoryDto> signHistoryDtoList = signHistoriesBasicService.findSignHistoryListByCourseCode(courseCode);
+//        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(),courseCode,"total_students");
+//        List<SectionsOfCanvas> sectionsOfCanvas = sections.getBody();
+//        HttpHeaders headers = sections.getHeaders();
+//        SignHistoryDto signHistoryDto = new SignHistoryDto();
+//        SignHistoryDto signHistoryDto = SignHistoryDto.builder().build();
+        List<Section> sectionList;
+        for (SignHistoryDto item:signHistoryDtoList) {
+            sectionList = JSON.parseArray(item.getSectionListJsonStr(), Section.class);
+            item.setSectionList(sectionList);
+        Integer totalOfCourseStudentTemp = 0;
+            for (Section section : sectionList) {
+                totalOfCourseStudentTemp += section.getStudenttotal();
+            }
+            item.setTotalStudents(totalOfCourseStudentTemp);
         }
-        List<SignHistoryDto> signHistoryDtoList = signHistoriesBasicService.findSignHistoryListByCourseIdAndUserId(userCode,courseCode);
-        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(),courseCode,"total_students");
-        List<SectionsOfCanvas> sectionsOfCanvas = sections.getBody();
-        HttpHeaders headers = sections.getHeaders();
+//            SignHistoryDto signHistoryDto = SignHistoryDto.builder().totalStudents(totalOfCourseStudentTemp).sectionCodes(sectionList).build();
+//            signHistoryDtoList.add(signHistoryDto);
 
-        sectionsOfCanvas.stream().forEach(item->{
-           SignHistoryDto signHistoryDto = SignHistoryDto.builder()
-                   .sectionCodes(item.getId().toString())
-                   .sectionName(item.getName())
-                   .totalStudents(item.getTotal_students())
-                   .createdDate(item.getCreated_at())
-                   .build();
-           signHistoryDtoList.add(signHistoryDto);
-       });
+
+
 
 //        Long items=0L;
 //        for (Sections section :sectionsBody) {
@@ -79,7 +97,6 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
 //        signHistoryDtoList.stream().forEach(item -> item.setSectionCodes(JSON.parseArray(item.getSectionCodesJsonStr(),Long.class)));
 //        List<String> sectionNameList = sectionsBody.stream().map(item -> item.getName()).collect(Collectors.toList());
 //        Object[] objects = sectionsBody.stream().map(item -> item.getName()).toArray();
-
 
         return signHistoryDtoList;
     }

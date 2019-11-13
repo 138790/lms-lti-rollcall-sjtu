@@ -7,8 +7,8 @@ import lombok.experimental.Tolerate;
 @Data
 @Builder
 public class Enrollments {
-    private Long id;
-    private Long courseId;
+    private Integer id;
+    private Integer courseId;
     @Tolerate
     public Enrollments(){
 
