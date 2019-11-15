@@ -5,24 +5,26 @@
 
 	<resultMap id="signHistoryInfo" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
 		<id column="id" property="id"/>
-		<result column="section_codes" property="sectionCodes"/>
-		<result column="attendances_count" property="attendancesCount"/>
+		<result column="section_list" property="sectionListJsonStr"/>
 		<result column="created_date" property="createdDate"/>
 		<collection property="userState" ofType="com.lmsltirollcallsjtu.common.bean.bo.UserState">
 			<id column="id" property="id"/>
 			<result column="state" property="state"/>
+			<result column="user_name" property="userName"/>
 		</collection>
 	</resultMap>
 
-    <!--根据点名id查询签到历史-->
+    <!--根据点名id查询某一次点名签到详情-->
 
     <select id="findSignHistoryByRollcallId" resultMap="signHistoryInfo">
-		select h.section_codes ,
-	           h.attendances_count,
-	           h.created_date,
-	           r.state
-		from   sign_histories h,sign_records r
-		where  h.id=r.rollcall_code and h.id=#{id}
+		select
+			  h.section_list,
+	          h.created_date,
+	          r.state,
+	          r.user_name
+		from  sign_histories h
+		inner join sign_records r on h.id=r.rollcall_code
+		where  h.id=#{id}
 	</select>
 	<!--老师查询签到历史列表-->
 	<!--<resultMap id="findSignHistory" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
@@ -33,11 +35,14 @@
 	</resultMap>-->
 	<select id="findSignHistoryListByCourseCode"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
-		select section_list sectionListJsonStr,
+		select
+		       section_list sectionListJsonStr,
 			   attendances_count,
 			   created_date
-		  from sign_histories
-		 where course_code=#{courseCode}
+		  from
+		  	   sign_histories
+		 where
+		 	   course_code=#{courseCode}
 		 order by created_date desc;
 	</select>
 

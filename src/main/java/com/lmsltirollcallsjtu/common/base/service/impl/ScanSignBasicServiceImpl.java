@@ -12,7 +12,7 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     private ScanSignDao scanSignDao;
 
     @Override
-    public void insertObject(SignRecordsDto signRecordsDto) {
-        scanSignDao.insertObject(signRecordsDto);
+    public void scanUpdateState(SignRecordsDto signRecordsDto) {
+        scanSignDao.scanUpdateState(signRecordsDto);
     }
 }

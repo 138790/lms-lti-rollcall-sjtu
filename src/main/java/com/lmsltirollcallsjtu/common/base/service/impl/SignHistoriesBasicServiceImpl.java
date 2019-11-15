@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SignHistoriesBasicImpl implements SignHistoriesBasicService {
+public class SignHistoriesBasicServiceImpl implements SignHistoriesBasicService {
     @Autowired
     private SignHistoriesDao signHistoriesDao;
 
@@ -22,7 +22,7 @@ public class SignHistoriesBasicImpl implements SignHistoriesBasicService {
     }
 
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode) {
+    public List<SignHistoryDto> findSignHistoryListByCourseCode(Long courseCode) {
         return signHistoriesDao.findSignHistoryListByCourseCode(courseCode);
     }
 

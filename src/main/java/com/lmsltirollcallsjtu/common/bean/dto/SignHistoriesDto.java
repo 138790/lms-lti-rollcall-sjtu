@@ -21,5 +21,5 @@ public class SignHistoriesDto {
     private Long courseCode;//课程编号
     private Long userCode;//老师工号
     private String sectionCodes;//班级编号
-    private Long attendancesCount;//签到总数
+    private Integer attendancesCount;//签到总数
 }

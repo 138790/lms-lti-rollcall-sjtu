@@ -20,9 +20,9 @@ public class ScanSignController {
     private ScanSignServcie scanSignServcie;
 
     @RequestMapping("/sign")
-    public ResultInfo<String> doFindScanSign( @RequestBody @Validated SignRecordsDto signRecordsDto){
-        scanSignServcie.insertObject(signRecordsDto);
-        ResultInfo<String> success = ResultInfo.success("签到成功");
-        return success;
+    public ResultInfo<String> doFindScanSign( @RequestBody  SignRecordsDto signRecordsDto){
+        scanSignServcie.scanUpdateState(signRecordsDto);
+        ResultInfo<String> resultInfo = ResultInfo.success("签到正常");
+        return resultInfo;
     }
 }

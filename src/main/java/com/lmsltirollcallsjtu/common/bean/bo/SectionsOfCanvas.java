@@ -10,11 +10,11 @@ import java.util.List;
 @Builder
 public class SectionsOfCanvas {
 
-    private Integer id;//班级id
-    private Integer course_id;//课程编号
+    private Long id;//班级id
+    private Long course_id;//课程编号
     private String name;//班级名称
     private List<Students> students;//学生列表
-    private Integer total_students;//班级的学生总数
+    private Long total_students;//班级的学生总数
     private Date created_at;//创建时间
 
     @Tolerate

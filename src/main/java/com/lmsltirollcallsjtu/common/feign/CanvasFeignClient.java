@@ -33,19 +33,19 @@ public interface CanvasFeignClient {
     //GET /api/v1/courses/:course_id/sections
     @GetMapping(value = "/api/v1/courses/{courseId}/sections")
    ResponseEntity<List<SectionsOfCanvas>> getSections(@RequestHeader(name="Authorization",required = true) String bearerToken,
-                                                      @PathVariable("courseId") Integer courseId,
+                                                      @PathVariable("courseId") Long courseId,
                                                       @RequestParam("include") String includeTotalStudents);
 
 
     //获取某一课程下某一个班级的信息
     @GetMapping(value="/api/v1/courses/{courseId}/sections/{id}")
     ResponseEntity<SectionsOfCanvas> getSectionDetail(@RequestHeader("Authorization") String bearerToken,
-                                              @PathVariable("courseId") Integer courseId,
-                                              @PathVariable("id") Integer id,
+                                              @PathVariable("courseId") Long courseId,
+                                              @PathVariable("id") Long id,
                                               @RequestParam("include") List<String> includeList);
 
     //GET/api/v1/sections/:section_id/enrollments
     @GetMapping(value = "/api/v1/sections/{sectionId}/enrollments")
     ResponseEntity<List<Enrollments>> getEnrollmentsCount(@RequestHeader (name="Authorization",required = true) String bearerToken,
-                                                          @PathVariable("sectionId") Integer sectionId);
+                                                          @PathVariable("sectionId") Long sectionId);
 }

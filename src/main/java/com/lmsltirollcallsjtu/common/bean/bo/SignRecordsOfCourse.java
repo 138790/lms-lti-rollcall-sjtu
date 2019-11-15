@@ -6,12 +6,11 @@ import lombok.experimental.Tolerate;
 
 @Data
 @Builder
-public class Students {
-    private Long id;    //学生编号
-    private String name;//学生姓名
-
+public class SignRecordsOfCourse {
+    private Long courseCode;
+    private Long userCode;
     @Tolerate
-    public Students(){
+    public SignRecordsOfCourse(){
 
     }
 }

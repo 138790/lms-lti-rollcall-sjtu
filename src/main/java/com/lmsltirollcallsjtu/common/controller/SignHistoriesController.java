@@ -23,7 +23,7 @@ public class SignHistoriesController {
     /*@Autowired
     private CanvasService canvasService;*/
     //查询一次点名的签到详情
-    @RequestMapping("/{id}")
+    @RequestMapping("scan/{id}")
     public ResultInfo<List<SignHistoryInfo>> doFindSignHistories(@PathVariable("id") String id) throws BusinessException {
         List<SignHistoryInfo>  signHistoryInfo = signHistoriesService.findSignHistoryByRollcallId(id);
         ResultInfo<List<SignHistoryInfo>> resultInfo = ResultInfo.success(signHistoryInfo);
@@ -32,7 +32,7 @@ public class SignHistoriesController {
 
     //查询学生签到历史列表
     @RequestMapping("/sign")
-    public ResultInfo<List<SignHistoryDto>> doFindSignHistoryList(@RequestParam("courseCode") Integer courseCode) throws BusinessException {
+    public ResultInfo<List<SignHistoryDto>> doFindSignHistoryList(@RequestParam("courseCode") Long courseCode) throws BusinessException {
         List<SignHistoryDto> signHistoryInfo = signHistoriesService.findSignHistoryListByCourseCode(courseCode);
         ResultInfo<List<SignHistoryDto>> resultInfo = ResultInfo.success(signHistoryInfo);
         return resultInfo;

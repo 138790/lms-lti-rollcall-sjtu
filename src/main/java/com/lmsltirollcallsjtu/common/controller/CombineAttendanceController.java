@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/**
+ * @author huyong
+ * @createdDate 2019.11.14
+ * @Description 合并签到
+ * @param List<Long> sectionCodes
+ * @return ResultInfo<AttendancesCount>
+ */
 @RestController
 @RequestMapping("/combine")
 public class CombineAttendanceController {

@@ -10,9 +10,12 @@
     <!--根据点名id查询签到历史-->
 
     <select id="CombineAttendancesCountBySectionCodes" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.bo.AttendancesCount">
-		select attendances_count
-		from   sign_histories
-		where  section_codes=#{sectionCodes}
+		select
+		attendances_count
+		from
+		sign_histories
+		where
+		section_codes=#{sectionCodes}
 	</select>
 
 </mapper>

@@ -11,7 +11,7 @@ import java.util.List;
 public class AttendancesCount {
     private List<Section> section;//班级名称
     private Integer attendancesCount;//签到总数
-    private Integer totalStudents;
+    private Long totalStudents;//应到总人数
 
     @Tolerate
     public AttendancesCount(){

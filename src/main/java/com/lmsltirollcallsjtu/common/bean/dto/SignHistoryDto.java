@@ -22,7 +22,7 @@ public class SignHistoryDto {
     private String sectionListJsonStr; //班级列表JsonStr格式
     private Integer attendancesCount;//签到总人数
     private Date createdDate;//创建时间
-    private Integer totalStudents;//点名所选班级的总人数
+    private Long totalStudents;//点名所选班级的总人数
   @Tolerate
   public SignHistoryDto(){
 

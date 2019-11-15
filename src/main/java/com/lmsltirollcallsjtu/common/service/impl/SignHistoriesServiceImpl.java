@@ -25,6 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * @author huyong
+ * @date 2019-11-14
+ * @Description:老师查询历史签到记录,service处理业务逻辑
+ */
 @Service
 public class SignHistoriesServiceImpl implements SignHistoriesService {
     @Autowired
@@ -33,28 +39,32 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
     private CanvasFeignClient canvasFeignClient;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
-
+    //老师查询某一次点名签到情况
     @Override
     public List<SignHistoryInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
         if (StringUtils.isEmpty(id)) {
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
         List<SignHistoryInfo> signHistoryInfo = signHistoriesBasicService.findSignHistoryByRollcallId(id);
-        SignHistoryInfo signHistory = new SignHistoryInfo();
-        List<String> includeList = new ArrayList<>();
-        includeList.add("students");
-        ResponseEntity<SectionsOfCanvas> sectionOfCanvas = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
-                signHistory.getCourseCode(),
-                Integer.valueOf(signHistory.getSectionCodes()),
-                includeList);
-        SectionsOfCanvas sectionCanvas = sectionOfCanvas.getBody();
-        HttpHeaders headers = sectionOfCanvas.getHeaders();
+        for (SignHistoryInfo item:signHistoryInfo) {
+            List<Section> sectionList = JSON.parseArray(item.getSectionListJsonStr(), Section.class);
+            item.setSectionList(sectionList);
+        }
+//        SignHistoryInfo signHistory = new SignHistoryInfo();
+//        List<String> includeList = new ArrayList<>();
+//        includeList.add("students");
+//        ResponseEntity<SectionsOfCanvas> sectionOfCanvas = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
+//                signHistory.getCourseCode(),
+//                Integer.valueOf(signHistory.getSectionCodes()),
+//                includeList);
+//        SectionsOfCanvas sectionCanvas = sectionOfCanvas.getBody();
+//        HttpHeaders headers = sectionOfCanvas.getHeaders();
 
         return signHistoryInfo;
     }
-
+    //根据课程id查看签到历史
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseCode(Integer courseCode) throws BusinessException {
+    public List<SignHistoryDto> findSignHistoryListByCourseCode(Long courseCode) throws BusinessException {
 
 
 //        if(userCode==null||userCode<1){
@@ -73,9 +83,9 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
         for (SignHistoryDto item:signHistoryDtoList) {
             sectionList = JSON.parseArray(item.getSectionListJsonStr(), Section.class);
             item.setSectionList(sectionList);
-        Integer totalOfCourseStudentTemp = 0;
+        Long totalOfCourseStudentTemp = 0L;
             for (Section section : sectionList) {
-                totalOfCourseStudentTemp += section.getStudenttotal();
+                totalOfCourseStudentTemp += section.getStudentTotal();
             }
             item.setTotalStudents(totalOfCourseStudentTemp);
         }
