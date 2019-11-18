@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignRecordsBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsOfCourse;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
@@ -11,12 +10,9 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
 import com.lmsltirollcallsjtu.common.service.SignRecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class SignRecordsServiceImpl implements SignRecordsService {

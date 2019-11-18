@@ -1,5 +1,6 @@
-package com.lmsltirollcallsjtu.common.bean.bo;
+package com.lmsltirollcallsjtu.common.bean.canvas;
 
+import com.lmsltirollcallsjtu.common.bean.bo.Students;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;

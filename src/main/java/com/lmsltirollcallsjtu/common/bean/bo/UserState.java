@@ -9,6 +9,7 @@ import lombok.experimental.Tolerate;
 @Builder
 public class UserState {
     private String id;//表主键
+    private Long userCode;//学生编号
     private String state;//学生签到状态
     private String userName;//学生姓名
     @Tolerate

@@ -5,6 +5,7 @@ import com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo;
 import com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
+import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.dao.SignHistoriesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class SignHistoriesBasicServiceImpl implements SignHistoriesBasicService 
     }
 
     @Override
-    public List<SignHistoryDto> findSignHistoryListByCourseCode(Long courseCode) {
-        return signHistoriesDao.findSignHistoryListByCourseCode(courseCode);
+    public List<SignHistoryDto> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam) {
+        return signHistoriesDao.findSignHistoryListByCourseCode(querySignHistoryListParam);
     }
 
 

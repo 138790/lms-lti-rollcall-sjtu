@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 public class SignHistoryInfo {
     private String id;//
-//    private Integer courseCode;//课程id
+//    private Long courseCode;//课程id
 //    private String studentsName;//学生姓名
     private List<Section> sectionList;//班级列表
     private String sectionListJsonStr;//班级编号集（json字符串格式）

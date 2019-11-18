@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.lmsltirollcallsjtu.common.base.service.RollcallBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
+import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.config.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
@@ -68,6 +69,7 @@ public class RollcallServiceImpl implements RollcallService {
                 .totalStudents(studentTotalOfCourse)
                 .sectionList(sections)
                 .build();
+        //将signHistoryParam赋值给signHistory
         signHistory.setCourseCode(signHistoryParam.getCourseCode());
         List<Long> sectionCodeList = signHistory.getSectionList().stream().map(item -> item.getSectionCode()).collect(Collectors.toList());
         sectionCodeList=signHistoryParam.getSectionCodes();
@@ -77,6 +79,7 @@ public class RollcallServiceImpl implements RollcallService {
         List<String> includeList=new ArrayList<>();
         includeList.add("students");
         List<SignRecordsBo> signRecordsBo=new ArrayList<>();
+        //遍历多次调用canvas获取学生信息
         for (Section section:signHistory.getSectionList()) {
             ResponseEntity<SectionsOfCanvas> sectionDetail = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
                     signHistory.getCourseCode(),

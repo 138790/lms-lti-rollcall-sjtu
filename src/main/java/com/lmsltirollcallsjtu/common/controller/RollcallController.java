@@ -1,19 +1,14 @@
 package com.lmsltirollcallsjtu.common.controller;
 
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistory;
-import com.lmsltirollcallsjtu.common.bean.bo.UserInfo;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
-import com.lmsltirollcallsjtu.common.utils.SecretUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @author huyong
@@ -22,13 +17,15 @@ import java.util.List;
  * @param signHistory
  * @return ResultInfo<String>
  */
+@Api(value = "/rollcall API", tags = "点名相关接口")
 @RestController
 @RequestMapping("/rollcall")
 public class RollcallController {
     @Autowired
     private RollcallService rollcallService;
-    @RequestMapping("/insert")
-    public ResultInfo<String> doInsertSignHistories(@RequestBody SignHistoryParam signHistoryParam){
+    @ApiOperation(value="插入点名记录并创建学生信息" ,notes = "插入点名记录并创建学生信息")
+    @PostMapping("/insertSignHistories")
+    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam){
         rollcallService.insertSignHistories(signHistoryParam);
         ResultInfo<String> resultInfo = ResultInfo.success("发起点名成功");
         return resultInfo;

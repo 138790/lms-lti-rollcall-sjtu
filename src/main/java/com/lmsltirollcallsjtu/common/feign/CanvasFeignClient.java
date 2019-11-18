@@ -1,7 +1,8 @@
 package com.lmsltirollcallsjtu.common.feign;
 
+import com.lmsltirollcallsjtu.common.bean.canvas.CoursesOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.bo.Enrollments;
-import com.lmsltirollcallsjtu.common.bean.bo.SectionsOfCanvas;
+import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +43,17 @@ public interface CanvasFeignClient {
     ResponseEntity<SectionsOfCanvas> getSectionDetail(@RequestHeader("Authorization") String bearerToken,
                                               @PathVariable("courseId") Long courseId,
                                               @PathVariable("id") Long id,
-                                              @RequestParam("include") List<String> includeList);
+                                              @RequestParam("include[]") List<String> includeList);
 
     //GET/api/v1/sections/:section_id/enrollments
     @GetMapping(value = "/api/v1/sections/{sectionId}/enrollments")
     ResponseEntity<List<Enrollments>> getEnrollmentsCount(@RequestHeader (name="Authorization",required = true) String bearerToken,
                                                           @PathVariable("sectionId") Long sectionId);
+
+    //获取该用户所选的所有的课程以及对应的班级
+    // GET /api/v1/users/:user_id/courses
+    @GetMapping(value = "/api/v1/users/{userId}/courses")
+    ResponseEntity<List<CoursesOfCanvas>> getCoursesOfUser(@RequestHeader (name="Authorization",required = true) String bearerToken,
+                                                           @PathVariable("userId") Long userId,
+                                                            @RequestParam("include") String sections);
 }
