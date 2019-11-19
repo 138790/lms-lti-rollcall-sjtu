@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResultInfo ValidationExceptionHandle(MethodArgumentNotValidException methodArgumentNotValidException) {
 
-        ResultInfo resultInfo = ResultInfo.failure("400","参数校验异常",methodArgumentNotValidException);
+        ResultInfo resultInfo = ResultInfo.failure("30000","入参校验异常",methodArgumentNotValidException);
         BindingResult bindingResult = methodArgumentNotValidException.getBindingResult();
 
         if( bindingResult.hasErrors() ){
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
                 errorMessage.append(fieldError.getDefaultMessage());
             }
             //打印错误日志
-            log.error("==============发生异常==============={}",errorMessage.toString(),methodArgumentNotValidException);
+            log.error("==============发生异常：{}===============",errorMessage.toString(),methodArgumentNotValidException);
             //封装响应提示信息
             resultInfo = ResultInfo.failure("400", errorMessage.toString());
         }
@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
     public ResultInfo BusinessExceptionHandle(BusinessException businessException) {
 
         //打印错误日志
-        log.error("==============发生异常==============={}",businessException.getErrorMessage(),businessException);
+        log.error("==============发生异常：{}===============",businessException.getErrorMessage(),businessException);
 
         ResultInfo resultInfo = ResultInfo.failure(businessException.getErrorCode(), businessException.getErrorMessage());
         return resultInfo;
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
     public ResultInfo exceptionHandle(Exception exception) {
 
         //打印错误日志
-        log.error("==============发生异常==============={}",exception.getMessage(),exception);
+        log.error("==============发生异常：{}===============",exception.getMessage(),exception);
 
         ResultInfo resultInfo = ResultInfo.failure(exception.getMessage());
         return resultInfo;

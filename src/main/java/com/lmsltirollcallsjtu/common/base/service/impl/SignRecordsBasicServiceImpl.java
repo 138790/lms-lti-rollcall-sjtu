@@ -2,7 +2,7 @@ package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignRecordsBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
-import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsOfCourse;
+import com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.dao.SignRecordsDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class SignRecordsBasicServiceImpl implements SignRecordsBasicService {
     @Autowired
     private SignRecordsDao signRecordsDao;
     @Override
-    public List<SignRecordsDto> findSignHistoryByUserCodeAndCourseCode(SignRecordsOfCourse signRecordsOfCourse) {
+    public List<SignRecordsDto> findSignHistoryByUserCodeAndCourseCode(SignRecordsOfCourseParam signRecordsOfCourse) {
         return signRecordsDao.findSignHistoryByUserCodeAndCourseCode(signRecordsOfCourse);
     }
 

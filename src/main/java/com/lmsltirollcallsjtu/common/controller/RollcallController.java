@@ -1,5 +1,6 @@
 package com.lmsltirollcallsjtu.common.controller;
 
+import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
@@ -23,9 +24,11 @@ import org.springframework.web.bind.annotation.*;
 public class RollcallController {
     @Autowired
     private RollcallService rollcallService;
+    @UserLoginToken
     @ApiOperation(value="插入点名记录并创建学生信息" ,notes = "插入点名记录并创建学生信息")
+
     @PostMapping("/insertSignHistories")
-    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam){
+    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam,@RequestParam("userCode")Long userCode){
         rollcallService.insertSignHistories(signHistoryParam);
         ResultInfo<String> resultInfo = ResultInfo.success("发起点名成功");
         return resultInfo;

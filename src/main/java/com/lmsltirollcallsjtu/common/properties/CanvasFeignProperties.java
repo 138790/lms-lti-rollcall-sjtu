@@ -1,4 +1,4 @@
-package com.lmsltirollcallsjtu.common.config;
+package com.lmsltirollcallsjtu.common.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,5 +1,6 @@
 package com.lmsltirollcallsjtu.common.controller;
 
+import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
@@ -29,8 +30,8 @@ public class SignHistoriesController {
     /*@Autowired
     private CanvasService canvasService;*/
     //查询一次点名的签到详情
+    @UserLoginToken
     @ApiOperation(value = "查询某一次点名签到列表", notes = "查询某一次点名签到列表")
-    @ApiImplicitParam(name = "id",value = "点名id", required = true, paramType = "path", dataType = "String")
     @GetMapping("scan/{id}")
     public ResultInfo<List<SignHistoryInfo>> querySignHistories(@PathVariable("id") String id) throws BusinessException {
         List<SignHistoryInfo>  signHistoryInfo = signHistoriesService.findSignHistoryByRollcallId(id);
@@ -39,6 +40,7 @@ public class SignHistoriesController {
     }
 
     //查询学生签到历史列表(分页)
+    @UserLoginToken
     @ApiOperation(value = "查询学生签到历史列表", notes = "查询学生签到历史列表")
     @PostMapping("/querySignHistoryList")
     public ResultInfo<PagedVo<List<SignHistoryDto>>> querySignHistoryList(@RequestBody @Validated QuerySignHistoryListParam querySignHistoryListParam) throws BusinessException {

@@ -5,7 +5,7 @@ import com.lmsltirollcallsjtu.common.base.service.RollcallBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
-import com.lmsltirollcallsjtu.common.config.CanvasFeignProperties;
+import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +36,14 @@ public class RollcallServiceImpl implements RollcallService {
     @Override
     public void insertSignHistories(SignHistoryParam signHistoryParam) {
 
+        List<String> includeList2=new ArrayList<String>();
+        includeList2.add("total_students");
+        includeList2.add("students");
         //创建点名记录
         ResponseEntity<List<SectionsOfCanvas>> sectionOfCanvas = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(),
-                                                                 signHistoryParam.getCourseCode(),
-                                                                 "total_students");
+                                                                 includeList2,
+                                                                 signHistoryParam.getCourseCode()
+                                                                 );
         List<SectionsOfCanvas> sectionCanvas = sectionOfCanvas.getBody();
         HttpHeaders headers = sectionOfCanvas.getHeaders();
         SectionsOfCanvas sCanvas = new SectionsOfCanvas();
@@ -62,7 +66,7 @@ public class RollcallServiceImpl implements RollcallService {
                 sections.add(sectionTemp);
             }
         }
-
+        //构建signhistory对象
         SignHistory signHistory = SignHistory.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
                 .attendancesCount(0)
                 .courseCode(signHistoryParam.getCourseCode())
@@ -92,6 +96,7 @@ public class RollcallServiceImpl implements RollcallService {
                         .state("unNormal")
                         .openId("null")
                         .rollcallCode(signHistory.getId())
+                        .sectionName(sectionDetailBody.getName())
                         .userCode(s.getId())
                         .userName(s.getName())
                         .build();

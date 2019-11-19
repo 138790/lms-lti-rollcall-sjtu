@@ -1,6 +1,7 @@
 package com.lmsltirollcallsjtu.common.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.bo.AttendancesCount;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
@@ -24,8 +25,9 @@ import java.util.List;
 public class CombineAttendanceController {
     @Autowired
     private CombineAttendanceService combineAttendanceService;
+    @UserLoginToken
     @RequestMapping("/attendances")
-    public ResultInfo<AttendancesCount> doCombineAttendances(@RequestParam("sectionCodes") List<Long> sectionCodes) throws BusinessException {
+    public ResultInfo<AttendancesCount> doCombineAttendances(@RequestParam("sectionCodes") List<Long> sectionCodes,@RequestParam("userCode")Long userCode) throws BusinessException {
 //  在service层处理      String  sCodes = JSON.toJSONString(sectionCodes);
         AttendancesCount attendancesCount = combineAttendanceService.CombineAttendancesCountBySectionCodes(sectionCodes);
         ResultInfo<AttendancesCount> resultInfo = ResultInfo.success(attendancesCount);

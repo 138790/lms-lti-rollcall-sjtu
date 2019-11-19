@@ -1,11 +1,13 @@
 package com.lmsltirollcallsjtu.common.controller;
 
+import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
  * @author huyong
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ScanSignController {
     @Autowired
     private ScanSignServcie scanSignServcie;
-
+    @UserLoginToken
     @RequestMapping("/sign")
-    public ResultInfo<String> doFindScanSign( @RequestBody  SignRecordsDto signRecordsDto){
+    public ResultInfo<String> doFindScanSign(@RequestBody  SignRecordsDto signRecordsDto, @RequestParam("userCode") Long userCode){
         scanSignServcie.scanUpdateState(signRecordsDto);
         ResultInfo<String> resultInfo = ResultInfo.success("签到正常");
         return resultInfo;

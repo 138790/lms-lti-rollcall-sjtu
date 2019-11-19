@@ -16,7 +16,7 @@ public class SignRecords {
     private String state;//签到状态
     private Date createdDate;//创建时间
     private String createdBy;//创建者
-    private String updatedBy;//创建者
+    private String updatedBy;//修改者
     @Tolerate
     public SignRecords(){
 

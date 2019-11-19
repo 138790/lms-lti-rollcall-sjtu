@@ -3,7 +3,7 @@
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.SignRecordsDao">
     <!--学生查询签到历史列表-->
     <select id="findSignHistoryByUserCodeAndCourseCode"
-            parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordsOfCourse"
+            parameterType="com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
 		select
 		id,

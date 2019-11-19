@@ -25,7 +25,7 @@ public class SwaggerConfig {
     @Bean
     public Docket docket(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("poll")
+                .groupName("rollcall")
                 .apiInfo(getApiInfo())
                 .select()
                 //设置basePackage会将包下的所有被@Api标记类的所有方法作为api

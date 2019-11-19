@@ -12,7 +12,7 @@ public class SignRecordsBo {
     private String rollcallCode;//点名编号
     private String openId;//绑定微信编号
     private String state;//签到状态
-//    private Date createdDate;//创建时间
+    private String sectionName;//班级名称
     private String userName;//学生姓名
     @Tolerate
     public SignRecordsBo(){

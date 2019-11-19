@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @ApiModel
 public class QuerySignHistoryListParam {
 
-    @ApiModelProperty(value = "课程编号",required = true)
+    @ApiModelProperty(value = "课程编号",required = true,example = "1")
     @NotNull(message = "课程编号不能为空！")
     private Long courseCode;//课程编号
     @ApiModelProperty(value = "当前页码",required = true)

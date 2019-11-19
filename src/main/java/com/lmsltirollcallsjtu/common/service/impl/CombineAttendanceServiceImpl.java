@@ -5,7 +5,7 @@ import com.lmsltirollcallsjtu.common.base.service.CombineAttendanceBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.AttendancesCount;
 import com.lmsltirollcallsjtu.common.bean.bo.Section;
 import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
-import com.lmsltirollcallsjtu.common.config.CanvasFeignProperties;
+import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
@@ -35,8 +35,10 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         }
         String sCodes = JSON.toJSONString(sectionCodes);
         AttendancesCount attendancesCount = combineAttendanceBasicService.CombineAttendancesCountBySectionCodes(sCodes);
-
-        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), 540L,"total_students");
+        List<String> includeList2=new ArrayList<>();
+        includeList2.add("total_students");
+        includeList2.add("students");
+        ResponseEntity<List<SectionsOfCanvas>> sections = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(), includeList2,540L);
         List<SectionsOfCanvas> sectionsBody = sections.getBody();
         HttpHeaders headers = sections.getHeaders();
 

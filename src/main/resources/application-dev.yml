@@ -11,6 +11,13 @@ logging:
   pattern:
     level: DEBUG
 
+  #用于移除swagger example error异常
+  level:
+    io:
+      swagger:
+        models:
+          parameters:
+            AbstractSerializableParameter: error
 
 spring:
    #应用名称
@@ -63,7 +70,7 @@ spring:
   #redis配置
   redis:
     #好像是库的标号，通过标号可以切换redis缓存
-    database: 1
+    database: 0
     host: 172.168.70.90
     port: 6379
     #password: 900412
@@ -130,3 +137,9 @@ feign:
     application-name: canvas
     url: http://172.168.70.12:80
     supper-admin-token: Bearer bEfZ4PnUBOUizzUYYj0bVYhuxHuBx1cKwnQx2w2ffXzMPmzgSsVaaUVRQcOhFEN0
+
+
+#LIT认证
+lti-auth:
+  oauth-consumer-key: 123456
+  secret: xcvsd111xcvsdrwefs

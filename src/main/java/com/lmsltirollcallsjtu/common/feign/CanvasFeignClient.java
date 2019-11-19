@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 /**
@@ -34,8 +33,9 @@ public interface CanvasFeignClient {
     //GET /api/v1/courses/:course_id/sections
     @GetMapping(value = "/api/v1/courses/{courseId}/sections")
    ResponseEntity<List<SectionsOfCanvas>> getSections(@RequestHeader(name="Authorization",required = true) String bearerToken,
-                                                      @PathVariable("courseId") Long courseId,
-                                                      @RequestParam("include") String includeTotalStudents);
+                                                      @RequestParam("include[]") List<String> includeList,
+                                                      @PathVariable("courseId") Long courseId
+                                                     );
 
 
     //获取某一课程下某一个班级的信息

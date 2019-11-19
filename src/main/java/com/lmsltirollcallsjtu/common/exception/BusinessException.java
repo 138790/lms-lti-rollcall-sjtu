@@ -36,6 +36,15 @@ public class BusinessException extends Exception{
         return new BusinessException(businessExceptionEnum);
     }
 
+    /**
+     * @description 覆盖父类的异常描述信息
+     * @return String
+     */
+    @Override
+    public String getMessage() {
+        return this.errorMessage;
+    }
+
 //=======================================具体业务异常===================================================
     /**
      *@description {desc}数据不存在

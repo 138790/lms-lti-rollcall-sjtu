@@ -6,11 +6,11 @@
 	<resultMap id="signHistoryInfo" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
 		<id column="id" property="id"/>
 		<result column="section_list" property="sectionListJsonStr"/>
-		<result column="created_date" property="createdDate"/>
 		<collection property="userState" ofType="com.lmsltirollcallsjtu.common.bean.bo.UserState">
 			<id column="id" property="id"/>
 			<result column="state" property="state"/>
 			<result column="user_name" property="userName"/>
+			<result column="section_name" property="sectionName"/>
 		</collection>
 	</resultMap>
 
@@ -19,10 +19,9 @@
     <select id="findSignHistoryByRollcallId" resultMap="signHistoryInfo">
 		select
 			  h.section_list,
-	          h.created_date,
 	          r.state,
 	          r.user_name,
-	          r.user_code
+	          r.section_name
 		from  sign_histories h
 		inner join sign_records r on h.id=r.rollcall_code
 		where  h.id=#{id}

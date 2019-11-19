@@ -4,7 +4,14 @@ import lombok.Getter;
 
 public enum BusinessExceptionEnum {
 
-    NEED_LOGIN("400","用户未登录！"),
+    NEED_LOGIN("10001","用户未登录！"),
+    NOT_FOUND_TOKEN("10001","token不存在，请重新登录！"),
+    LTI_VERIFY_EXCEPTION("10001","LTI认证异常！"),
+    DECODE_TOKEN_ERROR("10001","token解码异常！"),
+    VERIFY_TOKEN_FAILURE("10001","token验证失败！"),
+    NOT_FOUND_USER("10001","用户不存在，请重新登录！"),
+    NOT_PERMISSION_TO_ACCESS("10001","权限不足，无法访问！"),
+
     SYSTEM_IS_BUSY("400","系统繁忙，请稍后再试！"),
     SYSTEM_ERROR("400","系统异常！"),
     ROLL_BACK("400","事务回滚异常！"),

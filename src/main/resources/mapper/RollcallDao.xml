@@ -11,7 +11,8 @@
 		course_code,
 		user_code,
 		section_list,
-		attendances_count)
+		attendances_count
+		)
 		values
 		(
 		#{id},
@@ -30,7 +31,8 @@
 		rollcall_code,
 		open_id,
 		state,
-		user_name
+		user_name,
+		section_name
 		)
 		values
 		<foreach collection="signRecordsBo" item="item" separator=",">
@@ -40,7 +42,8 @@
 		#{item.rollcallCode},
 		#{item.openId},
 		#{item.state},
-		#{item.userName}
+		#{item.userName},
+		#{item.sectionName}
 		)
 		</foreach>
 	</insert>
