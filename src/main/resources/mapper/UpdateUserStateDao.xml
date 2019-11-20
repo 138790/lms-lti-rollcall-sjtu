@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.UpdateStateDao">
-    <!--学生签到插入学生信息-->
-	<update id="updateUserStateBySignRecordsDto" parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
+    <!--根据字典类型从字典表中查询所有的签到状态-->
+    <select id="queryRollcallStatesByDictType" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.dto.DictionaryDto">
+            select id,
+                   dict_code,
+                   dict_name,
+                   dict_type,
+                   description
+            from sign_dictionary
+            where dict_type=#{dictType}
+    </select>
+    <!-- 老师批量更新学生的签到状态插入数据库中-->
+	<update id="updateUserStateBySignRecordsDto" parameterType="java.util.List">
+        <if test="userStateList!=null and userStateList.size()>0">
+            <foreach collection="userStateList" item="item" separator=";">
             update sign_records
-        <set>
-            <if test="id!=null and id!=''">
-                id=#{id},
-            </if>
-            <if test="rollcallCode!=null and rollcallCode!=''">
-                rollcall_code=#{rollcallCode},
-            </if>
-            <if test="openId!=null and openId!=''">
-                open_id=#{openId},
-            </if>
-            <if test="createdBy!=null and createdBy!=''">
-                created_by=#{createdBy},
-            </if>
-            <if test="updatedBy!=null and updatedBy!=''">
-                updated_by=#{updatedBy},
-            </if>
-            <if test="state!=null and state!=''">
-                state=#{state},
-            </if>
-        </set>
-        where user_code=#{userCode}
+                <set>
+                    <if test="updatedBy!=null and updatedBy!=''">
+                        updated_by=#{item.updatedBy},
+                    </if>
+                    <if test="state!=null and state!=''">
+                        state=#{item.state},
+                    </if>
+                </set>
+                where user_code=#{item.userCode} and rollcall_code=#{rollcallCode}
+            </foreach>
+        </if>
 	</update>
-   <!-- update sign_records
-    set id=#{id},
-    rollcall_code=#{rollcallCode},
-    open_id=#{openId},
-    created_by=#{createdBy},
-    created_date=now(),
-    updated_by=#{updatedBy},
-    updated_date=now(),
-    state=#{state}
-    where user_code=#{userCode}-->
+
 </mapper>

@@ -15,6 +15,7 @@ public class SignHistory {
     private List<Section> sectionList;//班级列表
     private String sectionListJsonStr; //班级列表JsonStr格式
     private Long totalStudents;//点名所选班级总人数
+    private String createdBy;//创建者
     @Tolerate
     public SignHistory(){
 

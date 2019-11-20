@@ -19,7 +19,7 @@ public class SignRecordDto {
     private String userName;//学生姓名
     private String createdBy;//创建者
     private String updatedBy;//创建者
-//    private String name;//班级名称
+    private String name;//班级名称
     @Tolerate
     public SignRecordDto(){
 

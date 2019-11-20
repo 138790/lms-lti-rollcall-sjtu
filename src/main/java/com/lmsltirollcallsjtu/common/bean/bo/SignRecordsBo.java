@@ -14,6 +14,7 @@ public class SignRecordsBo {
     private String state;//签到状态
     private String sectionName;//班级名称
     private String userName;//学生姓名
+    private String createdBy;//创建者
     @Tolerate
     public SignRecordsBo(){
 

@@ -29,6 +29,7 @@ public class RollcallController {
 
     @PostMapping("/insertSignHistories")
     public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam,@RequestParam("userCode")Long userCode){
+        signHistoryParam.setUserCode(userCode);
         rollcallService.insertSignHistories(signHistoryParam);
         ResultInfo<String> resultInfo = ResultInfo.success("发起点名成功");
         return resultInfo;

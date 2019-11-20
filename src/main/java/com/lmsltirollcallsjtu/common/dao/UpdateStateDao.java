@@ -1,14 +1,18 @@
 package com.lmsltirollcallsjtu.common.dao;
 
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecords;
+import com.lmsltirollcallsjtu.common.bean.bo.UserStates;
+import com.lmsltirollcallsjtu.common.bean.dto.DictionaryDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import org.apache.ibatis.annotations.Param;
 
-public interface UpdateStateDao {
-    //老师修改学生签到的状态
-    void updateUserStateBySignRecordsDto(SignRecords signRecords);
+import java.util.List;
 
-   /* //讲修改后的状态插入数据库中
-    void insertUserNewStateUserId(@Param("userId") Long userId);*/
-   
+public interface UpdateStateDao {
+
+    //根据字典类型查询字典表中所有的签到状态
+    List<DictionaryDto> queryRollcallStatesByDictType(@Param("dictType") String dictType);
+
+    //老师批量更新学生的签到状态插入数据库中
+    void updateUserStateByUserStates(@Param("rollcallCode") String rollcallCode,@Param("userStateList") List<UserStates> userStateList);
 }

@@ -18,4 +18,5 @@ public class SignHistoryParam {
     @NotEmpty(message = "班级编号不能为空！")
     private List<Long> sectionCodes;
 
+    private Long userCode;//用户编号
 }

@@ -11,7 +11,8 @@
 		course_code,
 		user_code,
 		section_list,
-		attendances_count
+		attendances_count,
+		created_by
 		)
 		values
 		(
@@ -19,7 +20,8 @@
 		#{courseCode},
 		#{userCode},
 		#{sectionListJsonStr},
-		#{attendancesCount}
+		#{attendancesCount},
+		#{createdBy}
 		)
 
 	</insert>
@@ -32,7 +34,8 @@
 		open_id,
 		state,
 		user_name,
-		section_name
+		section_name,
+		created_by
 		)
 		values
 		<foreach collection="signRecordsBo" item="item" separator=",">
@@ -43,7 +46,8 @@
 		#{item.openId},
 		#{item.state},
 		#{item.userName},
-		#{item.sectionName}
+		#{item.sectionName},
+		#{item.createdBy}
 		)
 		</foreach>
 	</insert>

@@ -72,9 +72,9 @@ public class RollcallServiceImpl implements RollcallService {
                 .courseCode(signHistoryParam.getCourseCode())
                 .totalStudents(studentTotalOfCourse)
                 .sectionList(sections)
+                .createdBy(signHistoryParam.getUserCode().toString())
                 .build();
         //将signHistoryParam赋值给signHistory
-        signHistory.setCourseCode(signHistoryParam.getCourseCode());
         List<Long> sectionCodeList = signHistory.getSectionList().stream().map(item -> item.getSectionCode()).collect(Collectors.toList());
         sectionCodeList=signHistoryParam.getSectionCodes();
         signHistory.setSectionListJsonStr(JSON.toJSONString(signHistory.getSectionList()));
@@ -93,12 +93,13 @@ public class RollcallServiceImpl implements RollcallService {
             HttpHeaders httpHeaders = sectionDetail.getHeaders();
             for (Students s : sectionDetailBody.getStudents()) {
                 SignRecordsBo recordsBo = SignRecordsBo.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                        .state("unNormal")
+                        .state("ETC")
                         .openId("null")
                         .rollcallCode(signHistory.getId())
                         .sectionName(sectionDetailBody.getName())
                         .userCode(s.getId())
                         .userName(s.getName())
+                        .createdBy(signHistoryParam.getUserCode().toString())
                         .build();
                 signRecordsBo.add(recordsBo);
             }
