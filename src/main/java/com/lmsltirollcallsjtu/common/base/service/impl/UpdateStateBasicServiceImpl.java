@@ -22,7 +22,7 @@ public class UpdateStateBasicServiceImpl implements UpdateStateBasicService {
     }
 
     @Override
-    public void updateUserStateByUserStates(String rollcallCode,List<UserStates> userStateList) {
-        updateStateDao.updateUserStateByUserStates(rollcallCode,userStateList);
+    public void updateUserStateByUserStates(UserStates userStates) {
+        updateStateDao.updateUserStateByUserStates(userStates);
     }
 }

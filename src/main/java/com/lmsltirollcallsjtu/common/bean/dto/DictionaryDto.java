@@ -15,8 +15,8 @@ public class DictionaryDto {
     private String dictCode;//字段编码
     private String dictName;//字段名称
 //    private String parentDictId;//父节点
-    private String description;//字段类型的描述
-//    private Integer isValid;//'有效状态（1:有效，0:无效
+    private String dictTypeDesc;//字段类型的描述
+    private Integer isValid;//'有效状态（1:有效，0:无效)
 //    private String createdBy;//创建者
 //    private Date createdDate;//创建日期
 //    private String updateBy;//修改者

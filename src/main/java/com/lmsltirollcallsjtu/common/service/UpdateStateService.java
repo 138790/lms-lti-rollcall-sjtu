@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface UpdateStateService {
 
-    public void updateUserStateByUserStates(String rollcallCode,List<UserStates> userStatesList) throws BusinessException;
+    public void updateUserStateByUserStates(String dictCode,UserStates userStates) throws BusinessException;
 }

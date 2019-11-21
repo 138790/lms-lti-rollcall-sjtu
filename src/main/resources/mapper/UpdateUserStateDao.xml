@@ -7,26 +7,23 @@
                    dict_code,
                    dict_name,
                    dict_type,
-                   description
+                   dict_type_desc
             from sign_dictionary
             where dict_type=#{dictType}
     </select>
     <!-- 老师批量更新学生的签到状态插入数据库中-->
-	<update id="updateUserStateBySignRecordsDto" parameterType="java.util.List">
-        <if test="userStateList!=null and userStateList.size()>0">
-            <foreach collection="userStateList" item="item" separator=";">
+	<update id="updateUserStateByUserStates" parameterType="com.lmsltirollcallsjtu.common.bean.bo.UserStates">
             update sign_records
                 <set>
                     <if test="updatedBy!=null and updatedBy!=''">
-                        updated_by=#{item.updatedBy},
+                        updated_by=#{updatedBy},
                     </if>
                     <if test="state!=null and state!=''">
-                        state=#{item.state},
+                        state=#{state},
                     </if>
                 </set>
-                where user_code=#{item.userCode} and rollcall_code=#{rollcallCode}
-            </foreach>
-        </if>
+                where rollcall_code=#{rollcallCode} and user_code=#{userCode}
+
 	</update>
 
 </mapper>

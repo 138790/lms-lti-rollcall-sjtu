@@ -17,8 +17,7 @@ import java.util.Date;
 @Builder
 public class UserInfo {
 
-    private String loginName;   //登录账号
-    private String password;    //登录密码
+    private Long userCode;//用户编号
     private String sign;   //服务器签名
 
     @Tolerate

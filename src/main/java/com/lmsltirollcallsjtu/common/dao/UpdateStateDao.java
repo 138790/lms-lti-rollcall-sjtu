@@ -14,5 +14,5 @@ public interface UpdateStateDao {
     List<DictionaryDto> queryRollcallStatesByDictType(@Param("dictType") String dictType);
 
     //老师批量更新学生的签到状态插入数据库中
-    void updateUserStateByUserStates(@Param("rollcallCode") String rollcallCode,@Param("userStateList") List<UserStates> userStateList);
+    void updateUserStateByUserStates( UserStates userStates);
 }

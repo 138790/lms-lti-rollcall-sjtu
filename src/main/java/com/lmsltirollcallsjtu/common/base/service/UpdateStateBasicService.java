@@ -12,5 +12,5 @@ public interface UpdateStateBasicService {
 
     List<DictionaryDto> queryRollcallStatesByDictType(String dictType);
 
-    void updateUserStateByUserStates(String rollcallCode,List<UserStates> userStateList);
+    void updateUserStateByUserStates(UserStates userStates);
 }

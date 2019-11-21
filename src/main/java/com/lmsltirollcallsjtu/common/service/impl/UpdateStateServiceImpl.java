@@ -10,6 +10,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.UpdateStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -19,18 +20,21 @@ public class UpdateStateServiceImpl implements UpdateStateService {
     @Autowired
     private UpdateStateBasicService updateStateBasicService;
     @Override
-    public void updateUserStateByUserStates(String rollcallCode,List<UserStates> userStateList) throws BusinessException {
+    public void updateUserStateByUserStates(String dictCode,UserStates userStates) throws BusinessException {
+        if (StringUtils.isEmpty(dictCode)){
+            throw BusinessException.getInstance(BusinessExceptionEnum.NO_DATA_FOUND);
+        }
+        if (StringUtils.isEmpty(userStates.getRollcallCode())){
+            throw BusinessException.getInstance(BusinessExceptionEnum.NO_DATA_FOUND);
+        }
         String dictType="ROLLCALL_STATE";
         List<DictionaryDto> dictionaryDtos = updateStateBasicService.queryRollcallStatesByDictType(dictType);
-
         for (DictionaryDto item:dictionaryDtos){
-            for (UserStates userStates:userStateList){
-                userStates.setUpdatedBy(userStates.getUserCode().toString());
-                if (item.getDictCode()==userStates.getState()){
-                    userStates.setState(item.getDictCode());
-                }
+            if (item.getDictCode().equals(dictCode)){
+                userStates.setState(item.getDictCode());
             }
         }
-        updateStateBasicService.updateUserStateByUserStates(rollcallCode,userStateList);
+
+        updateStateBasicService.updateUserStateByUserStates(userStates);
     }
 }

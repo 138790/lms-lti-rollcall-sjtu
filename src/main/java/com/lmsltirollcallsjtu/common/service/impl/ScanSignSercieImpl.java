@@ -1,11 +1,8 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.UserInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
-import com.lmsltirollcallsjtu.common.utils.RedisUtil;
-import com.lmsltirollcallsjtu.common.utils.SecretUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +18,6 @@ public class ScanSignSercieImpl implements ScanSignServcie {
 //        }
         signRecordsDto.setState("normal");
         scanSignBasicService.scanUpdateState(signRecordsDto);
+
     }
 }
