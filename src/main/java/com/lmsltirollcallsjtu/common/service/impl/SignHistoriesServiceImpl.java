@@ -34,27 +34,19 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
     private CanvasFeignProperties canvasFeignProperties;
     //老师查询某一次点名签到情况
     @Override
-    public List<SignHistoryInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
+    public List<SignRecordsInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
         if (StringUtils.isEmpty(id)) {
             throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         }
 
-        List<SignHistoryInfo> signHistoryInfo = signHistoriesBasicService.findSignHistoryByRollcallId(id);
+        List<SignRecordsInfo> signRecordsInfo = signHistoriesBasicService.findSignHistoryByRollcallId(id);
 
-        //循环数据库中取出的班级列表数据
-       for(SignHistoryInfo item:signHistoryInfo){
-           List<Section> sectionList = JSON.parseArray(item.getSectionListJsonStr(), Section.class);
-           item.setSectionList(sectionList);
-       }
-        return signHistoryInfo;
+        return signRecordsInfo;
     }
     //根据课程编号查看签到历史(分页)
     @Override
     public PagedVo<List<SignHistoryDto>> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam)  {
 
-
-//        if(userCode==null||userCode<1){
-//            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
         //1.分页查询签到历史列表
         PageHelper.startPage(querySignHistoryListParam.getPageNum(),querySignHistoryListParam.getPageSize(),"sign_histories.created_date desc");
         Page<SignHistoryDto> signHistoryDtoPage = (Page<SignHistoryDto>) signHistoriesBasicService.findSignHistoryListByCourseCode(querySignHistoryListParam);

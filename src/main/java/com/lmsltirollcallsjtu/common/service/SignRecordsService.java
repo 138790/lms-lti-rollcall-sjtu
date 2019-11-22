@@ -8,7 +8,6 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import java.util.List;
 
 public interface SignRecordsService {
-    List<SignRecordsDto> findSignHistoryByUserCodeAndCourseCode(SignRecordsOfCourseParam signRecordsOfCourseParam) throws BusinessException;
 
-    SignRecordsDto findSignConditionByRollcallCode(SignRecordInfo signRecordInfo) throws BusinessException;
+    List<SignRecordsDto> findSignHistoryByUserCodeAndCourseCode(SignRecordsOfCourseParam signRecordsOfCourseParam) throws BusinessException;
 }

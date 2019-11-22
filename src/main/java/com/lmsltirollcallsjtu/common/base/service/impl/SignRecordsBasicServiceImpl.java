@@ -18,8 +18,4 @@ public class SignRecordsBasicServiceImpl implements SignRecordsBasicService {
         return signRecordsDao.findSignHistoryByUserCodeAndCourseCode(signRecordsOfCourse);
     }
 
-    @Override
-    public SignRecordsDto findSignConditionByRollcallCode(SignRecordInfo signRecordInfo) {
-        return signRecordsDao.findSignConditionByRollcallCode(signRecordInfo);
-    }
 }

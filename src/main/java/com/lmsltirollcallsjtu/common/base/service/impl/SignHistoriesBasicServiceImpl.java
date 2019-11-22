@@ -1,10 +1,8 @@
 package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.SignHistoriesBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo;
-import com.lmsltirollcallsjtu.common.bean.bo.UserCourseInfo;
+import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
-import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.dao.SignHistoriesDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ public class SignHistoriesBasicServiceImpl implements SignHistoriesBasicService 
     private SignHistoriesDao signHistoriesDao;
 
     @Override
-    public List<SignHistoryInfo> findSignHistoryByRollcallId(String id) {
+    public List<SignRecordsInfo> findSignHistoryByRollcallId(String id) {
 
         return signHistoriesDao.findSignHistoryByRollcallId(id);
     }

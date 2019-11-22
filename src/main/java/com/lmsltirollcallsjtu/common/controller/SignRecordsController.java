@@ -31,13 +31,5 @@ public class SignRecordsController {
         ResultInfo<List<SignRecordsDto>> resultInfo = ResultInfo.success(signRecordsDto);
         return resultInfo;
     }
-    //学生查询一次点名的签到详情
-    @UserLoginToken
-    @GetMapping("/condition")
-    public ResultInfo<SignRecordsDto> querySignCondition( SignRecordInfo signRecordInfo,@RequestParam("userCode")Long userCode) throws BusinessException {
-        signRecordInfo.setUserCode(userCode);
-        SignRecordsDto signRecordsDto = signRecordsService.findSignConditionByRollcallCode(signRecordInfo);
-        ResultInfo<SignRecordsDto> resultInfo = ResultInfo.success(signRecordsDto);
-        return resultInfo;
-    }
+
 }

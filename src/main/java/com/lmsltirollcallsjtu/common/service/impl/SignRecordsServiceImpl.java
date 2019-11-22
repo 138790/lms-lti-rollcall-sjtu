@@ -34,12 +34,4 @@ public class SignRecordsServiceImpl implements SignRecordsService {
         return signRecordsDto;
     }
 
-    @Override
-    public SignRecordsDto findSignConditionByRollcallCode(SignRecordInfo signRecordInfo) throws BusinessException {
-        if(StringUtils.isEmpty(signRecordInfo)){
-            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
-        }
-
-        return signRecordsBasicService.findSignConditionByRollcallCode(signRecordInfo);
-    }
 }

@@ -7,7 +7,7 @@ import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import java.util.List;
 
 public interface SignRecordsBasicService {
+
     List<SignRecordsDto> findSignHistoryByUserCodeAndCourseCode(SignRecordsOfCourseParam signRecordsOfCourseParam);
 
-    SignRecordsDto findSignConditionByRollcallCode(SignRecordInfo signRecordInfo);
 }

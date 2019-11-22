@@ -2,37 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.SignHistoriesDao">
 
-
-	<resultMap id="signHistoryInfo" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
-		<id column="id" property="id"/>
-		<result column="section_list" property="sectionListJsonStr"/>
-		<collection property="userState" ofType="com.lmsltirollcallsjtu.common.bean.bo.UserState">
-			<id column="id" property="id"/>
-			<result column="state" property="state"/>
-			<result column="user_name" property="userName"/>
-			<result column="section_name" property="sectionName"/>
-		</collection>
-	</resultMap>
-
     <!--根据点名id查询某一次点名签到详情-->
 
-    <select id="findSignHistoryByRollcallId" resultMap="signHistoryInfo">
+    <select id="findSignHistoryByRollcallId" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo">
 		select
-			  h.section_list,
 	          r.state,
 	          r.user_name,
 	          r.section_name
-		from  sign_histories h
-		inner join sign_records r on h.id=r.rollcall_code
+		from  sign_records r
+		inner join sign_histories h on h.id=r.rollcall_code
 		where  h.id=#{id}
 	</select>
 	<!--老师查询签到历史列表-->
-	<!--<resultMap id="findSignHistory" type="com.lmsltirollcallsjtu.common.bean.bo.SignHistoryInfo">
-		<result property="sectionIds" column="section_ids"/>
-		<result property="attendancesCount" column="attendances_count"/>
-		<result property="insertedAt" column="inserted_at"/>
-		<collection property=""
-	</resultMap>-->
+
 	<select id="findSignHistoryListByCourseCode"
 			parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">

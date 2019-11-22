@@ -6,13 +6,14 @@
             parameterType="com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto">
 		select
-		id,
-		state,
-		created_date
+		r.id,
+		r.state,
+		r.created_date
 		from
-		sign_records
+		sign_records r
+		inner join sign_histories h on h.id=r.rollcall_code
 		where
-		user_code=#{userCode}
+		r.user_code=#{userCode} and h.course_code=#{courseCode}
 	</select>
 	<!--学生查询某一次签到详情-->
 	<select id="findSignConditionByRollcallCode"

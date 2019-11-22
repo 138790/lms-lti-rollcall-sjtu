@@ -33,9 +33,9 @@ public class SignHistoriesController {
     @UserLoginToken
     @ApiOperation(value = "查询某一次点名签到列表", notes = "查询某一次点名签到列表")
     @GetMapping("scan/{id}")
-    public ResultInfo<List<SignHistoryInfo>> querySignHistories(@PathVariable("id") String id) throws BusinessException {
-        List<SignHistoryInfo>  signHistoryInfo = signHistoriesService.findSignHistoryByRollcallId(id);
-        ResultInfo<List<SignHistoryInfo>> resultInfo = ResultInfo.success(signHistoryInfo);
+    public ResultInfo<List<SignRecordsInfo>> querySignHistories(@PathVariable("id") String id) throws BusinessException {
+        List<SignRecordsInfo>  signRecordsInfo = signHistoriesService.findSignHistoryByRollcallId(id);
+        ResultInfo<List<SignRecordsInfo>> resultInfo = ResultInfo.success(signRecordsInfo);
         return resultInfo;
     }
 
