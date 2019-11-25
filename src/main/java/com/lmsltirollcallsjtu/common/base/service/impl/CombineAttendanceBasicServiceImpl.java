@@ -8,16 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class CombineAttendanceBasicServiceImpl implements CombineAttendanceBasicService {
+/*@Service*/
+public class CombineAttendanceBasicServiceImpl /*implements CombineAttendanceBasicService*/ {
 
-    @Autowired
-    private CombineAttendancesDao combineAttendancesDao;
-
-    @Override
-    public AttendancesCount CombineAttendancesCountBySectionCodes(String sectionCodes) {
-
-        return combineAttendancesDao.CombineAttendancesCountBySectionCodes(sectionCodes);
-
-    }
+//    @Autowired
+//    private CombineAttendancesDao combineAttendancesDao;
+//
+//    @Override
+//    public AttendancesCount CombineAttendancesCountBySectionCodes(String sectionCodes) {
+//
+//    }
 }

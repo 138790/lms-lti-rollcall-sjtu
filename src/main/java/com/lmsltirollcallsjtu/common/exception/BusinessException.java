@@ -47,11 +47,29 @@ public class BusinessException extends Exception{
 
 //=======================================具体业务异常===================================================
     /**
-     *@description {desc}数据不存在
+     *@description {desc}不能为空！
+     */
+    public static BusinessException notNull(String desc){
+
+        BusinessExceptionEnum tempException = BusinessExceptionEnum.NOT_NULL;
+        return new BusinessException(tempException.getErrorCode(),desc+tempException.getErrorMessage());
+    }
+
+    /**
+     *@description {desc}不存在！
      */
     public static BusinessException notFoundData(String desc){
 
-        BusinessExceptionEnum tempException = BusinessExceptionEnum.NO_DATA_FOUND;
+        BusinessExceptionEnum tempException = BusinessExceptionEnum.NOT_DATA_FOUND;
+        return new BusinessException(tempException.getErrorCode(),desc+tempException.getErrorMessage());
+    }
+
+    /**
+     *@description {desc}已经存在！
+     */
+    public static BusinessException alreadyExists(String desc){
+
+        BusinessExceptionEnum tempException = BusinessExceptionEnum.ALREADY_EXISTS;
         return new BusinessException(tempException.getErrorCode(),desc+tempException.getErrorMessage());
     }
 

@@ -8,10 +8,10 @@ import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
+import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
     @Autowired
     private SignHistoriesBasicService signHistoriesBasicService;
     @Autowired
-    private CanvasFeignClient canvasFeignClient;
+    private CanvasFeign canvasFeign;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
     //老师查询某一次点名签到情况

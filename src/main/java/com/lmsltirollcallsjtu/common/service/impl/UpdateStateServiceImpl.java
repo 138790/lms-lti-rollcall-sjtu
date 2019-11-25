@@ -22,10 +22,10 @@ public class UpdateStateServiceImpl implements UpdateStateService {
     @Override
     public void updateUserStateByUserStates(String dictCode,UserStates userStates) throws BusinessException {
         if (StringUtils.isEmpty(dictCode)){
-            throw BusinessException.getInstance(BusinessExceptionEnum.NO_DATA_FOUND);
+            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_DATA_FOUND);
         }
         if (StringUtils.isEmpty(userStates.getRollcallCode())){
-            throw BusinessException.getInstance(BusinessExceptionEnum.NO_DATA_FOUND);
+            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_DATA_FOUND);
         }
         String dictType="ROLLCALL_STATE";
         List<DictionaryDto> dictionaryDtos = updateStateBasicService.queryRollcallStatesByDictType(dictType);

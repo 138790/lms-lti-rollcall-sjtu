@@ -6,5 +6,5 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import java.util.List;
 
 public interface CombineAttendanceService {
-    AttendancesCount CombineAttendancesCountBySectionCodes(List<Long> sectionCodes) throws BusinessException;
+//    AttendancesCount CombineAttendancesCountBySectionCodes(List<Long> sectionCodes) throws BusinessException;
 }

@@ -5,13 +5,18 @@ import com.lmsltirollcallsjtu.common.base.service.RollcallBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
+import com.lmsltirollcallsjtu.common.exception.BusinessException;
+import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
-import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
+import com.lmsltirollcallsjtu.common.service.CourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,80 +33,58 @@ public class RollcallServiceImpl implements RollcallService {
     @Autowired
     private RollcallBasicService rollcallBasicService;
     @Autowired
-    private CanvasFeignClient canvasFeignClient;
+    private CanvasFeign canvasFeign;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
-
+    @Autowired
+    private CourseService courseService;
 
     @Override
-    public void insertSignHistories(SignHistoryParam signHistoryParam) {
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    public void insertSignHistories(SignHistoryParam signHistoryParam) throws BusinessException {
 
-        List<String> includeList2=new ArrayList<String>();
-        includeList2.add("total_students");
-        includeList2.add("students");
         //创建点名记录
-        ResponseEntity<List<SectionsOfCanvas>> sectionOfCanvas = canvasFeignClient.getSections(canvasFeignProperties.getSupperAdminToken(),
-                                                                 includeList2,
-                                                                 signHistoryParam.getCourseCode()
-                                                                 );
-        List<SectionsOfCanvas> sectionCanvas = sectionOfCanvas.getBody();
-        HttpHeaders headers = sectionOfCanvas.getHeaders();
-        SectionsOfCanvas sCanvas = new SectionsOfCanvas();
-
-//        for (Section section:signHistory.getSectionList()){
-//            section.setStudenttotal(sCanvas.getTotal_students());
-//        }
-        Long studentTotalOfCourse = 0L;
-        List<Section> sections=new ArrayList<>();
-        Section sectionTemp = null;
+        List<SectionInfo> sectionInfos = courseService.querySectionList(signHistoryParam.getCourseCode());
+            Long studentTotalOfCourse = 0L;
+        List<SectionInfo> neededSections = new ArrayList<>();
         //从canvas中筛选点名的班级
         for(Long item : signHistoryParam.getSectionCodes()){
-            for(SectionsOfCanvas sectionsOfCanvas : sectionCanvas){
-                if(sectionsOfCanvas.getId().equals(item)){
-                    sectionTemp = Section.builder().sectionCode(sectionsOfCanvas.getId()).sectionName(sectionsOfCanvas.getName()).studentTotal(sectionsOfCanvas.getTotal_students()).build();
-                    studentTotalOfCourse += sectionTemp.getStudentTotal();
+            for(SectionInfo sectionInfo : sectionInfos){
+                if(sectionInfo.getSectionCode().equals(item)){
+                    neededSections.add(sectionInfo);
+                    studentTotalOfCourse += sectionInfo.getTotalNumOfStudents();
                 }
             }
-            if(sectionTemp != null){
-                sections.add(sectionTemp);
-            }
+
         }
         //构建signhistory对象
         SignHistory signHistory = SignHistory.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
                 .attendancesCount(0)
+                .userCode(signHistoryParam.getUserCode())
                 .courseCode(signHistoryParam.getCourseCode())
                 .totalStudents(studentTotalOfCourse)
-                .sectionList(sections)
+                .sectionListJsonStr(JSON.toJSONString(neededSections))
                 .createdBy(signHistoryParam.getUserCode().toString())
+                .expAttendancesCount(studentTotalOfCourse)
                 .build();
         //将signHistoryParam赋值给signHistory
-        List<Long> sectionCodeList = signHistory.getSectionList().stream().map(item -> item.getSectionCode()).collect(Collectors.toList());
-        sectionCodeList=signHistoryParam.getSectionCodes();
-        signHistory.setSectionListJsonStr(JSON.toJSONString(signHistory.getSectionList()));
         rollcallBasicService.insertSignHistories(signHistory);
         //创建点名记录之后创建学生信息记录
-        List<String> includeList=new ArrayList<>();
-        includeList.add("students");
         List<SignRecordsBo> signRecordsBo=new ArrayList<>();
+        SignRecordsBo recordsBoTemp;
         //遍历多次调用canvas获取学生信息
-        for (Section section:signHistory.getSectionList()) {
-            ResponseEntity<SectionsOfCanvas> sectionDetail = canvasFeignClient.getSectionDetail(canvasFeignProperties.getSupperAdminToken(),
-                    signHistory.getCourseCode(),
-                    section.getSectionCode(),
-                    includeList);
-            SectionsOfCanvas sectionDetailBody = sectionDetail.getBody();
-            HttpHeaders httpHeaders = sectionDetail.getHeaders();
-            for (Students s : sectionDetailBody.getStudents()) {
-                SignRecordsBo recordsBo = SignRecordsBo.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                        .state("ETC")
+        for(SectionInfo item : neededSections){
+            for(Student student : item.getStudentList()){
+                recordsBoTemp = SignRecordsBo.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
+                        .state("UNNORMAL")
                         .openId("null")
                         .rollcallCode(signHistory.getId())
-                        .sectionName(sectionDetailBody.getName())
-                        .userCode(s.getId())
-                        .userName(s.getName())
+                        .sectionName(item.getSectionName())
+                        .userCode(student.getUserCode())
+                        .userName(student.getUserName())
                         .createdBy(signHistoryParam.getUserCode().toString())
                         .build();
-                signRecordsBo.add(recordsBo);
+                signRecordsBo.add(recordsBoTemp);
             }
         }
         rollcallBasicService.insertStudnetsDetail(signRecordsBo);

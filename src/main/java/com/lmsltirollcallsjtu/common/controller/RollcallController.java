@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.controller;
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
+import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ public class RollcallController {
     @UserLoginToken
     @ApiOperation(value="插入点名记录并创建学生信息" ,notes = "插入点名记录并创建学生信息")
     @PostMapping("/insertSignHistories")
-    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam,@RequestParam("userCode")Long userCode){
+    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam,@RequestParam("userCode")Long userCode) throws BusinessException {
         signHistoryParam.setUserCode(userCode);
         rollcallService.insertSignHistories(signHistoryParam);
         ResultInfo<String> resultInfo = ResultInfo.success("发起点名成功");

@@ -3,25 +3,25 @@
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.RollcallDao">
     <!--老师发起点名插入点名信息-->
 
-    <insert id="insertSignHistories"
-            parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistory">
-		insert into sign_histories
-		(
-		id,
-		course_code,
-		user_code,
-		section_list,
-		attendances_count,
-		created_by
-		)
-		values
-		(
-		#{id},
-		#{courseCode},
-		#{userCode},
-		#{sectionListJsonStr},
-		#{attendancesCount},
-		#{createdBy}
+    <insert id="insertSignHistories" parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistory">
+		insert into sign_histories(
+			id,
+			course_code,
+			user_code,
+			section_list,
+			attendances_count,
+			total_students,
+			exp_attendances_count,
+			created_by
+		)values(
+			#{id},
+			#{courseCode},
+			#{userCode},
+			#{sectionListJsonStr},
+			#{attendancesCount},
+			#{totalStudents},
+			#{expAttendancesCount},
+			#{createdBy}
 		)
 
 	</insert>

@@ -23,6 +23,7 @@ public class SignHistoryDto {
     private Integer attendancesCount;//签到总人数
     private Date createdDate;//创建时间
     private Long totalStudents;//点名所选班级的总人数
+    private Integer isValid;//是否有效（1:有效,0:无效)
   @Tolerate
   public SignHistoryDto(){
 

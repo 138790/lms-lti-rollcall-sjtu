@@ -1,6 +1,7 @@
 package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
+import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.dao.ScanSignDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,12 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     private ScanSignDao scanSignDao;
 
     @Override
-    public void scanUpdateState(SignRecordsDto signRecordsDto) {
-        scanSignDao.scanUpdateState(signRecordsDto);
+    public String queryStateByRecordId(String id) {
+        return scanSignDao.queryStateByRecordId(id);
+    }
+
+    @Override
+    public void scanUpdateState(SignRecordDto signRecordDto) {
+        scanSignDao.scanUpdateState(signRecordDto);
     }
 }

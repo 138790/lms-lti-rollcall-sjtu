@@ -23,15 +23,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/combine")
 public class CombineAttendanceController {
-    @Autowired
-    private CombineAttendanceService combineAttendanceService;
-    @UserLoginToken
-    @RequestMapping("/attendances")
-    public ResultInfo<AttendancesCount> doCombineAttendances(@RequestParam("sectionCodes") List<Long> sectionCodes,@RequestParam("userCode")Long userCode) throws BusinessException {
+//    @Autowired
+//    private CombineAttendanceService combineAttendanceService;
+//    @UserLoginToken
+//    @RequestMapping("/attendances")
+//    public ResultInfo<AttendancesCount> doCombineAttendances(@RequestParam("sectionCodes") List<Long> sectionCodes,@RequestParam("userCode")Long userCode) throws BusinessException {
 //  在service层处理      String  sCodes = JSON.toJSONString(sectionCodes);
-        AttendancesCount attendancesCount = combineAttendanceService.CombineAttendancesCountBySectionCodes(sectionCodes);
-        ResultInfo<AttendancesCount> resultInfo = ResultInfo.success(attendancesCount);
-        return resultInfo;
-    }
+//        AttendancesCount attendancesCount = combineAttendanceService.CombineAttendancesCountBySectionCodes(sectionCodes);
+//        ResultInfo<AttendancesCount> resultInfo = ResultInfo.success(attendancesCount);
+//        return resultInfo;
+//    }
 
 }

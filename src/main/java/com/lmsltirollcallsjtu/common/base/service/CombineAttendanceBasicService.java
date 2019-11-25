@@ -5,5 +5,5 @@ import com.lmsltirollcallsjtu.common.bean.bo.AttendancesCount;
 import java.util.List;
 
 public interface CombineAttendanceBasicService {
-    AttendancesCount CombineAttendancesCountBySectionCodes(String sectionCodes);
+//    AttendancesCount CombineAttendancesCountBySectionCodes(String sectionCodes);
 }

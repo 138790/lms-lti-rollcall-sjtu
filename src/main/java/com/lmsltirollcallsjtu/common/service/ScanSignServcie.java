@@ -1,7 +1,10 @@
 package com.lmsltirollcallsjtu.common.service;
 
+import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
+import com.lmsltirollcallsjtu.common.exception.BusinessException;
 
 public interface ScanSignServcie {
-    void scanUpdateState(SignRecordsDto signRecordsDto);
+
+    void scanUpdateState(SignRecordDto signRecordDto) throws BusinessException;
 }

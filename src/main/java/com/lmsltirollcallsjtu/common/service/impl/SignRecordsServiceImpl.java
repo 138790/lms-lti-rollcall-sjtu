@@ -7,7 +7,7 @@ import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.feign.CanvasFeignClient;
+import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.service.SignRecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class SignRecordsServiceImpl implements SignRecordsService {
     @Autowired
     private SignRecordsBasicService signRecordsBasicService;
     @Autowired
-    private CanvasFeignClient canvasFeignClient;
+    private CanvasFeign canvasFeign;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
     @Override
