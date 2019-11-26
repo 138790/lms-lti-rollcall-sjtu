@@ -3,14 +3,14 @@ package com.lmsltirollcallsjtu.common.controller;
 import com.alibaba.fastjson.JSON;
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.bo.AttendancesCount;
+import com.lmsltirollcallsjtu.common.bean.bo.SignHistory;
+import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsBo;
+import com.lmsltirollcallsjtu.common.bean.param.IdsParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CombineAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 /**
@@ -23,15 +23,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/combine")
 public class CombineAttendanceController {
-//    @Autowired
-//    private CombineAttendanceService combineAttendanceService;
-//    @UserLoginToken
-//    @RequestMapping("/attendances")
-//    public ResultInfo<AttendancesCount> doCombineAttendances(@RequestParam("sectionCodes") List<Long> sectionCodes,@RequestParam("userCode")Long userCode) throws BusinessException {
-//  在service层处理      String  sCodes = JSON.toJSONString(sectionCodes);
-//        AttendancesCount attendancesCount = combineAttendanceService.CombineAttendancesCountBySectionCodes(sectionCodes);
-//        ResultInfo<AttendancesCount> resultInfo = ResultInfo.success(attendancesCount);
-//        return resultInfo;
-//    }
+    @Autowired
+    private CombineAttendanceService combineAttendanceService;
+
+    @UserLoginToken
+    @RequestMapping("/signHistories")
+    public ResultInfo<String> doCombineSignHistories(@RequestBody IdsParam idsParam,@RequestParam("userCode") Long userCode) throws BusinessException {
+        idsParam.setUserCode(userCode);
+        combineAttendanceService.combineInsertSignHistoryBySignHistory(idsParam);
+        ResultInfo<String> resultInfo = ResultInfo.success("合并签到历史成功");
+        return resultInfo;
+    }
 
 }

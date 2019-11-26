@@ -2,28 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.CombineAttendancesDao">
 
-    <!--根据课程查询签到状态信息-->
-
-    <select id="CombineAttendancesCountBySectionCodes" parameterType="java.lang.Long" resultType="com.lmsltirollcallsjtu.common.bean.bo.UserState">
+    <!--根据课程编号查询签到历史列表-->
+	<select id="queryUsersStatesByIds" parameterType="java.util.List" resultType="com.lmsltirollcallsjtu.common.bean.bo.UsersCombine">
 		select
-		h.section_list sectionListJsonStr,
-		h.attendances_count,
-		r.state,
-		r.user_code,
-		from
-		sign_histories h
-		inner join sign_records r on h.id=r.rolllcall_code
-		where
-		h.course_code=#{courseCode} and is_valid=1;
+			r.user_code,
+			r.user_name,
+			h.course_code,
+			h.section_list sectionListJsonStr,
+			h.total_students,
+			h.exp_attendances_count,
+			h.is_valid,
+			h.created_by,
+			r.state,
+			r.section_name,
+			r.created_date
+		from sign_records r
+		inner join sign_histories h on h.id=r.rollcall_code
+		where 1 = 1
+		<if test="ids != null and ids.size() > 0" >
+			and h.id in
+			<foreach collection="ids" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		order by r.user_code desc,r.created_date desc
 	</select>
+
 	<insert id="combineInsertSignHistoryBySignHistory" parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistory">
 		insert into sign_histories
 		(
 		id,
 		course_code,
 		user_code,
-		section_list,
+		section_list ,
 		attendances_count,
+		exp_attendances_count,
 		created_by
 		)
 		values
@@ -33,6 +46,7 @@
 		#{userCode},
 		#{sectionListJsonStr},
 		#{attendancesCount},
+		#{expAttendancesCount},
 		#{createdBy}
 		)
 	</insert>

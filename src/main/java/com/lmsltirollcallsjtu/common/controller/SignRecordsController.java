@@ -4,6 +4,7 @@ import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
+import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.SignRecordsService;
@@ -25,10 +26,10 @@ public class SignRecordsController {
     @ApiOperation(value="查询所选某门课程的签到历史列表" ,notes = "查询所选某门课程的签到历史列表")
     @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @GetMapping("/sign")
-    public ResultInfo<List<SignRecordsDto>> querySignHistoryListsOfCourse(SignRecordsOfCourseParam signRecordsOfCourseParam, @RequestParam("userCode") Long userCode) throws BusinessException {
+    public ResultInfo<PagedVo<List<SignRecordsDto>>> querySignHistoryListsOfCourse(SignRecordsOfCourseParam signRecordsOfCourseParam, @RequestParam("userCode") Long userCode) throws BusinessException {
         signRecordsOfCourseParam.setUserCode(userCode);
-        List<SignRecordsDto> signRecordsDto = signRecordsService.findSignHistoryByUserCodeAndCourseCode(signRecordsOfCourseParam);
-        ResultInfo<List<SignRecordsDto>> resultInfo = ResultInfo.success(signRecordsDto);
+        PagedVo<List<SignRecordsDto>>signRecordsDto = signRecordsService.findSignHistoryByUserCodeAndCourseCode(signRecordsOfCourseParam);
+        ResultInfo<PagedVo<List<SignRecordsDto>>> resultInfo = ResultInfo.success(signRecordsDto);
         return resultInfo;
     }
 

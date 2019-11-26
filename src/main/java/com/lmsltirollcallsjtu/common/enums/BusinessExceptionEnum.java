@@ -11,7 +11,7 @@ public enum BusinessExceptionEnum {
     DECODE_TOKEN_ERROR("10001","token解码异常！"),
     VERIFY_TOKEN_FAILURE("10001","token验证失败！"),
     NOT_PERMISSION_TO_ACCESS("10001","权限不足，无法访问！"),
-
+    NOT_ALLOWED_OPERATION("10001","不允许此操作"),
     ENCRYPT_ERROR("20000","SHA加密错误！"),
     SYSTEM_IS_BUSY("20000","系统繁忙，请稍后再试！"),
 

@@ -18,5 +18,10 @@ public class SignRecordsOfCourseParam {
     @ApiModelProperty(value = "用户编号",required = true)
     @NotNull(message = "用户编号不能为空！")
     private Long userCode;
-
+    @ApiModelProperty(value = "当前页码",required = true)
+    @NotNull(message = "pageNum不能为空！")
+    private Integer pageNum;//当前页码
+    @ApiModelProperty(value = "每页显示数量",required = true)
+    @NotNull(message = "pageSize不能为空！")
+    private Integer pageSize;//每页显示数量
 }

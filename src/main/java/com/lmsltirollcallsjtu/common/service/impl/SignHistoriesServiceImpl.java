@@ -8,8 +8,6 @@ import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
-import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
-import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
@@ -28,10 +26,7 @@ import java.util.List;
 public class SignHistoriesServiceImpl implements SignHistoriesService {
     @Autowired
     private SignHistoriesBasicService signHistoriesBasicService;
-    @Autowired
-    private CanvasFeign canvasFeign;
-    @Autowired
-    private CanvasFeignProperties canvasFeignProperties;
+
     //老师查询某一次点名签到情况
     @Override
     public List<SignRecordsInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
@@ -55,15 +50,10 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
         PagedVo<List<SignHistoryDto>> signHistoryPagedVo = PagedVo.buildPagedVo(signHistoryDtoPage.getTotal(), signHistoryDtoPage.getResult());
 
         List<SignHistoryDto> signHistoryDtoList = signHistoriesBasicService.findSignHistoryListByCourseCode(querySignHistoryListParam);
-        List<Section> sectionList;
+        List<SectionInfo> sectionList;
         for (SignHistoryDto item:signHistoryDtoList) {
-            sectionList = JSON.parseArray(item.getSectionListJsonStr(), Section.class);
+            sectionList = JSON.parseArray(item.getSectionListJsonStr(), SectionInfo.class);
             item.setSectionList(sectionList);
-        Long totalOfCourseStudentTemp = 0L;
-            for (Section section : sectionList) {
-                totalOfCourseStudentTemp += section.getStudentTotal();
-            }
-            item.setTotalStudents(totalOfCourseStudentTemp);
         }
         signHistoryPagedVo.setDataList(signHistoryDtoList);
         return signHistoryPagedVo;

@@ -11,7 +11,7 @@
 	          r.section_name
 		from  sign_records r
 		inner join sign_histories h on h.id=r.rollcall_code
-		where  h.id=#{id}
+		where  h.id=#{id} and is_valid=1
 	</select>
 	<!--老师查询签到历史列表-->
 
@@ -21,11 +21,12 @@
 		select
 		       section_list sectionListJsonStr,
 			   attendances_count,
-			   created_date
+			   created_date,
+			   total_students
 		  from
 		  	   sign_histories
 		 where
-		 	   course_code=#{courseCode}
+		 	   course_code=#{courseCode} and is_valid=1
 	</select>
 
 </mapper>
