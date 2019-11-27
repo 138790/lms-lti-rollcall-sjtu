@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,6 +33,8 @@ public class UpdateStateServiceImpl implements UpdateStateService {
         for (DictionaryDto item:dictionaryDtos){
             if (item.getDictCode().equals(dictCode)){
                 userStates.setState(item.getDictCode());
+                userStates.setUpdatedBy(userStates.getUserCode().toString());
+                userStates.setUpdatedDate(new Date());
             }
         }
 

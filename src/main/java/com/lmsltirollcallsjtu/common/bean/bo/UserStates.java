@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+import java.util.Date;
 
 @Data
 @Builder
@@ -21,6 +22,8 @@ public class UserStates {
     @ApiModelProperty(value="用户状态",required =true)
     private String state;//状态
 //    private String userName;//学生姓名
+    @ApiModelProperty(value="修改时间",required =true)
+    private Date updatedDate;//修改时间
     @Tolerate
     public UserStates(){
 

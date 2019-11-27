@@ -55,7 +55,6 @@ public class RollcallServiceImpl implements RollcallService {
                     studentTotalOfCourse += sectionInfo.getTotalNumOfStudents();
                 }
             }
-
         }
         //构建signhistory对象
         SignHistory signHistory = SignHistory.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
@@ -88,6 +87,7 @@ public class RollcallServiceImpl implements RollcallService {
             }
         }
         rollcallBasicService.insertStudnetsDetail(signRecordsBo);
+
     }
 }
 

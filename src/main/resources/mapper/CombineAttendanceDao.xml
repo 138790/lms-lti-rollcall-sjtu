@@ -5,20 +5,24 @@
     <!--根据课程编号查询签到历史列表-->
 	<select id="queryUsersStatesByIds" parameterType="java.util.List" resultType="com.lmsltirollcallsjtu.common.bean.bo.UsersCombine">
 		select
+			r.rollcall_code,
 			r.user_code,
 			r.user_name,
 			h.course_code,
+			h.id,
 			h.section_list sectionListJsonStr,
 			h.total_students,
 			h.exp_attendances_count,
 			h.is_valid,
 			h.created_by,
+			h.updated_by,
+			h.created_date,
+			h.updated_date,
 			r.state,
-			r.section_name,
-			r.created_date
+			r.section_name
 		from sign_records r
 		inner join sign_histories h on h.id=r.rollcall_code
-		where 1 = 1
+		where h.is_valid = 1 and r.is_valid = 1
 		<if test="ids != null and ids.size() > 0" >
 			and h.id in
 			<foreach collection="ids" item="item" open="(" separator="," close=")">
@@ -36,6 +40,7 @@
 		user_code,
 		section_list ,
 		attendances_count,
+		total_students,
 		exp_attendances_count,
 		created_by
 		)
@@ -46,6 +51,7 @@
 		#{userCode},
 		#{sectionListJsonStr},
 		#{attendancesCount},
+		#{totalStudents},
 		#{expAttendancesCount},
 		#{createdBy}
 		)
@@ -76,5 +82,44 @@
 			)
 		</foreach>
 	</insert>
-
+	<!--修改记录表有效值为0-->
+	<update id="updateIsNotValidByUsersCombineList" parameterType="java.util.List">
+    	<if test="usersCombineList !=null and usersCombineList.size()>0">
+    		<foreach collection="usersCombineList" item="item" separator=";">
+				update sign_histories
+				<set>
+					<if test="item.isValid != null">
+					is_valid=#{item.isValid},
+					</if>
+					<if test="item.updatedBy !=null and item.updatedBy !=''">
+					updated_by=#{item.updatedBy},
+					</if>
+					<if test="item.updatedDate !=null">
+					updated_date=#{item.updatedDate},
+					</if>
+				</set>
+				where id=#{item.id}
+			</foreach>
+		</if>
+	</update>
+	<!--修改明细表有效值为0-->
+	<update id="updateIsNotValidByUsersCombineLists" parameterType="java.util.List">
+		<if test="usersCombineLists !=null and usersCombineLists.size()>0">
+			<foreach collection="usersCombineLists" item="item" separator=";">
+				update sign_records
+				<set>
+					<if test="item.isValid != null ">
+					is_valid=#{item.isValid},
+					</if>
+					<if test="item.updatedBy !=null and item.updatedBy !=''">
+						updated_by=#{item.updatedBy},
+					</if>
+					<if test="item.updatedDate !=null">
+						updated_date=#{item.updatedDate},
+					</if>
+				</set>
+				where rollcall_code=#{item.rollcallCode}
+			</foreach>
+		</if>
+	</update>
 </mapper>

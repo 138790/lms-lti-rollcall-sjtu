@@ -3,8 +3,6 @@ package com.lmsltirollcallsjtu.common.base.service;
 import com.lmsltirollcallsjtu.common.bean.bo.SignHistory;
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsBo;
 import com.lmsltirollcallsjtu.common.bean.bo.UsersCombine;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface CombineAttendanceBasicService {
@@ -14,4 +12,8 @@ public interface CombineAttendanceBasicService {
     void combineInsertSignHistoryBySignHistory(SignHistory signHistory);
 
     void combineInsertSignRecordBySignRecordsInfo(List<SignRecordsBo> signRecordsBo);
+
+    void updateIsNotValidByUsersCombineList(List<UsersCombine> usersCombineList);
+
+    void updateIsNotValidByUsersCombineLists(List<UsersCombine> usersCombineLists);
 }

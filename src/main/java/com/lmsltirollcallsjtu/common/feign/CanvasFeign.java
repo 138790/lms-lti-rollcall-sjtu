@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.feign;
 
 import com.lmsltirollcallsjtu.common.bean.canvas.*;
-import com.lmsltirollcallsjtu.common.bean.bo.Enrollments;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

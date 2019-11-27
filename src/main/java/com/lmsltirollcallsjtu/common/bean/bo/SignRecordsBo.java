@@ -15,7 +15,6 @@ public class SignRecordsBo {
     private String sectionName;//班级名称
     private String userName;//学生姓名
     private String createdBy;//创建者
-    private Integer isValid;//是否有效，(1:有效，0:无效)
     @Tolerate
     public SignRecordsBo(){
 

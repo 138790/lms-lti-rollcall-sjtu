@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.controller;
 
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
-import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;

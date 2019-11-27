@@ -1,6 +1,5 @@
 package com.lmsltirollcallsjtu.common.dao;
 
-import com.lmsltirollcallsjtu.common.bean.bo.SignRecordInfo;
 import com.lmsltirollcallsjtu.common.bean.param.SignRecordsOfCourseParam;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 

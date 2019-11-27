@@ -20,7 +20,9 @@
 		<if test="state!=null and state!=''">
 			state=#{state},
 		</if>
-			updated_date=now(),
+		<if test="updatedDate != null">
+			updated_date=#{updatedDate},
+		</if>
 	</set>
 	where id=#{id}
 </update>
