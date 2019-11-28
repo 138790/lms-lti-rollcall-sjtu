@@ -58,31 +58,30 @@ public class RollcallServiceImpl implements RollcallService {
         }
         //构建signhistory对象
         SignHistory signHistory = SignHistory.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                .attendancesCount(0)
-                .userCode(signHistoryParam.getUserCode())
-                .courseCode(signHistoryParam.getCourseCode())
-                .totalStudents(studentTotalOfCourse)
-                .sectionListJsonStr(JSON.toJSONString(neededSections))
-                .createdBy(signHistoryParam.getUserCode().toString())
-                .expAttendancesCount(studentTotalOfCourse)
-                .build();
-        //将signHistoryParam赋值给signHistory
+                                                       .attendancesCount(0)
+                                                       .userCode(signHistoryParam.getUserCode())
+                                                       .courseCode(signHistoryParam.getCourseCode())
+                                                       .totalStudents(studentTotalOfCourse)
+                                                       .sectionListJsonStr(JSON.toJSONString(neededSections))
+                                                       .createdBy(signHistoryParam.getUserCode().toString())
+                                                       .expAttendancesCount(studentTotalOfCourse).build();
+
+       //将点名记录插入数据库中
         rollcallBasicService.insertSignHistories(signHistory);
-        //创建点名记录之后创建学生信息记录
         List<SignRecordsBo> signRecordsBo=new ArrayList<>();
         SignRecordsBo recordsBoTemp;
         //遍历多次调用canvas获取学生信息
         for(SectionInfo item : neededSections){
             for(Student student : item.getStudentList()){
                 recordsBoTemp = SignRecordsBo.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                        .state("UNNORMAL")
-                        .openId("null")
-                        .rollcallCode(signHistory.getId())
-                        .sectionName(item.getSectionName())
-                        .userCode(student.getUserCode())
-                        .userName(student.getUserName())
-                        .createdBy(signHistoryParam.getUserCode().toString())
-                        .build();
+                                                       .state("UNNORMAL")
+                                                       .openId("null")
+                                                       .rollcallCode(signHistory.getId())
+                                                       .sectionName(item.getSectionName())
+                                                       .userCode(student.getUserCode())
+                                                       .userName(student.getUserName())
+                                                       .createdBy(signHistoryParam.getUserCode().toString()).build();
+
                 signRecordsBo.add(recordsBoTemp);
             }
         }

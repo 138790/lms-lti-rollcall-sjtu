@@ -13,7 +13,7 @@
 		sign_records r
 		inner join sign_histories h on h.id=r.rollcall_code
 		where
-		r.user_code=#{userCode} and h.course_code=#{courseCode} and is_valid=1
+		r.user_code=#{userCode} and h.course_code=#{courseCode} and r.is_valid=1
 	</select>
 
 </mapper>

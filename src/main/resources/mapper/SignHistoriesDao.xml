@@ -11,7 +11,7 @@
 	          r.section_name
 		from  sign_records r
 		inner join sign_histories h on h.id=r.rollcall_code
-		where  h.id=#{id} and is_valid=1
+		where  h.id=#{id} and r.is_valid=1
 	</select>
 	<!--老师查询签到历史列表-->
 

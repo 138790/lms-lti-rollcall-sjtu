@@ -5,6 +5,8 @@ import com.lmsltirollcallsjtu.common.bean.param.IdsParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CombineAttendanceService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @param List<Long> sectionCodes
  * @return ResultInfo<AttendancesCount>
  */
+@Api(value = "/combine API", tags = "合并点名相关接口")
 @RestController
 @RequestMapping("/combine")
 public class CombineAttendanceController {
@@ -22,6 +25,7 @@ public class CombineAttendanceController {
     private CombineAttendanceService combineAttendanceService;
 
     @UserLoginToken
+    @ApiOperation(value="合并点名记录和签到明细记录" ,notes = "合并点名记录和签到明细记录")
     @RequestMapping("/signHistories")
     public ResultInfo<String> doCombineSignHistories(@RequestBody IdsParam idsParam,@RequestParam("userCode") Long userCode) throws BusinessException {
         idsParam.setUserCode(userCode);

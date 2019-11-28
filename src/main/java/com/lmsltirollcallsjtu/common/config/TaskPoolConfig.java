@@ -13,7 +13,7 @@ class TaskPoolConfig {
 
     @Bean("taskExecutor")
     public Executor taskExecutor() {
-
+        
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);    //核心线程数：线程池创建时候初始化的线程数
         executor.setMaxPoolSize(20);     //最大线程数：线程池最大的线程数，只有在缓冲队列满了之后才会申请超过核心线程数的线程
