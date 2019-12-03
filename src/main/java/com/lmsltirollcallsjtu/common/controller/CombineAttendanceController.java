@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author huyong
  * @createdDate 2019.11.14
- * @Description 合并签到
- * @param List<Long> sectionCodes
- * @return ResultInfo<AttendancesCount>
+ * @description 合并点名记录相关接口
  */
-@Api(value = "/combine API", tags = "合并点名相关接口")
+@Api(value = "/combine API", tags = "合并点名记录相关接口")
 @RestController
 @RequestMapping("/combine")
 public class CombineAttendanceController {
+    
     @Autowired
     private CombineAttendanceService combineAttendanceService;
 
