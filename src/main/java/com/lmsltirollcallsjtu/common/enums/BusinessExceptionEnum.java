@@ -14,6 +14,7 @@ public enum BusinessExceptionEnum {
     NOT_ALLOWED_OPERATION("10001","不允许此操作"),
     ENCRYPT_ERROR("20000","SHA加密错误！"),
     SYSTEM_IS_BUSY("20000","系统繁忙，请稍后再试！"),
+    CODE_SWEEP_FAILED("20000","扫码未通过"),
 
     NOT_NULL("30001","不能为空！"),
     ARGS_ERROR("30002","非法参数异常！"),

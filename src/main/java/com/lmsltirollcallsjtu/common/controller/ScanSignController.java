@@ -8,6 +8,7 @@ import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,7 +25,7 @@ public class ScanSignController {
     @UserLoginToken
     @ApiOperation(value="学生扫码签到并修改签到状态" ,notes = "学生扫码签到并修改签到状态")
     @PostMapping("/sign")
-    public ResultInfo<String> doUpdateStateByRecordId(@RequestBody SignRecordDto signRecordDto, @RequestParam("userCode") Long userCode) throws BusinessException {
+    public ResultInfo<String> doUpdateStateByRecordId(@RequestBody @Validated SignRecordDto signRecordDto) throws BusinessException {
         scanSignServcie.scanUpdateState(signRecordDto);
         ResultInfo<String> resultInfo = ResultInfo.success("扫码签到成功");
         return resultInfo;

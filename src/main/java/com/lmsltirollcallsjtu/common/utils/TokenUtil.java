@@ -5,6 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.lmsltirollcallsjtu.common.bean.vo.UserRecordVo;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author wangzhijun
  * @createdDate 2019-10-22
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenUtil {
 
+
     /**
      * @author huyong
      * @createdDate 2019-11-22
@@ -20,13 +24,15 @@ public class TokenUtil {
      * @parameter userInfoVo
      * @return token字符串
      **/
-    public static String generateToken(UserRecordVo userInfoVo) {
+    public static String generateToken(UserRecordVo userRecordVo) {
 
         String token="";
+        System.out.println(userRecordVo);
         token= JWT
                 .create()
-                .withAudience(userInfoVo.getId())
-                .sign(Algorithm.HMAC256(userInfoVo.getDate().toString()));
+                .withAudience(userRecordVo.getId(),new Date().toString())
+                .sign(Algorithm.HMAC256(userRecordVo.getSign()));
+
 
         return token;
     }

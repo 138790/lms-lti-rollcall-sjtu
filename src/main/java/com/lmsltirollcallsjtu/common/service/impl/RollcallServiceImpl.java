@@ -3,25 +3,18 @@ package com.lmsltirollcallsjtu.common.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.lmsltirollcallsjtu.common.base.service.RollcallBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
-import com.lmsltirollcallsjtu.common.bean.canvas.SectionsOfCanvas;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
-import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.service.CourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author huyong
@@ -32,10 +25,6 @@ import java.util.stream.Collectors;
 public class RollcallServiceImpl implements RollcallService {
     @Autowired
     private RollcallBasicService rollcallBasicService;
-    @Autowired
-    private CanvasFeign canvasFeign;
-    @Autowired
-    private CanvasFeignProperties canvasFeignProperties;
     @Autowired
     private CourseService courseService;
 

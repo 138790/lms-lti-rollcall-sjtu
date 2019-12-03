@@ -5,7 +5,7 @@ import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 
 public interface ScanSignBasicService {
 
-    String queryStateByRecordId(String id);
+    String queryStateByRecordId(String rollcallCode,Long userCode);
 
     void scanUpdateState(SignRecordDto signRecordDto);
 }

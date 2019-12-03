@@ -13,8 +13,8 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     private ScanSignDao scanSignDao;
 
     @Override
-    public String queryStateByRecordId(String id) {
-        return scanSignDao.queryStateByRecordId(id);
+    public String queryStateByRecordId(String rollcallCode,Long userCode) {
+        return scanSignDao.queryStateByRecordId(rollcallCode,userCode);
     }
 
     @Override

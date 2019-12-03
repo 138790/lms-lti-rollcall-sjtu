@@ -32,6 +32,7 @@ public class SignHistoriesController {
     //查询一次点名的签到详情
     @UserLoginToken
     @ApiOperation(value = "查询某一次点名签到列表", notes = "查询某一次点名签到列表")
+    @ApiImplicitParam(name = "id", value = "点名编号", paramType = "path", dataType = "String")
     @GetMapping("scan/{id}")
     public ResultInfo<List<SignRecordsInfo>> querySignHistories(@PathVariable("id") String id) throws BusinessException {
         List<SignRecordsInfo>  signRecordsInfo = signHistoriesService.findSignHistoryByRollcallId(id);

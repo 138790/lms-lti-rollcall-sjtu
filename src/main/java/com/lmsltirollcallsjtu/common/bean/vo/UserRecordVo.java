@@ -9,8 +9,8 @@ import java.util.Date;
 @Builder
 public class UserRecordVo {
 
-    private String id;//UUID生成的表主键，点名编号
-    private Date date;//创建对象时间
+    private String id;//点名表主键
+    private String sign;//签名
     @Tolerate
     public UserRecordVo(){
 

@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class SignRecordsController {
     @ApiOperation(value="查询所选某门课程的签到历史列表" ,notes = "查询所选某门课程的签到历史列表")
     @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @GetMapping("/sign")
-    public ResultInfo<PagedVo<List<SignRecordsDto>>> querySignHistoryListsOfCourse(SignRecordsOfCourseParam signRecordsOfCourseParam, @RequestParam("userCode") Long userCode) throws BusinessException {
+    public ResultInfo<PagedVo<List<SignRecordsDto>>> querySignHistoryListsOfCourse(@Validated SignRecordsOfCourseParam signRecordsOfCourseParam, @RequestParam("userCode") Long userCode) throws BusinessException {
         signRecordsOfCourseParam.setUserCode(userCode);
         PagedVo<List<SignRecordsDto>>signRecordsDto = signRecordsService.findSignHistoryByUserCodeAndCourseCode(signRecordsOfCourseParam);
         ResultInfo<PagedVo<List<SignRecordsDto>>> resultInfo = ResultInfo.success(signRecordsDto);

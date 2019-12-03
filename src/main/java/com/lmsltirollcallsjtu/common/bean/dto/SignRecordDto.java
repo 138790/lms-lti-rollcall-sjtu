@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
-
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -16,8 +15,10 @@ public class SignRecordDto {
     @ApiModelProperty(value = "学生表主键",required = true)
     @NotBlank(message = "主键id不能为空")
     private String id;//表记录id
-//    private Long userCode;//学生学号
-//    private String rollcallCode;//点名编号
+    @ApiModelProperty(value = "用户编号",required = true)
+    private Long userCode;//学生学号
+    @ApiModelProperty(value = "点名编号",required = true)
+    private String rollcallCode;//点名编号
 //    private String openId;//绑定微信编号
     @ApiModelProperty(value = "学生签到状态",required = true)
     private String state;//签到状态
@@ -29,6 +30,8 @@ public class SignRecordDto {
     @ApiModelProperty(value = "修改者",required = true)
     private String updatedBy;//修改者
 //    private String name;//班级名称
+    @ApiModelProperty(value = "签名密钥",required = true)
+    private String signToken;//签名密钥
     @Tolerate
     public SignRecordDto(){
 
