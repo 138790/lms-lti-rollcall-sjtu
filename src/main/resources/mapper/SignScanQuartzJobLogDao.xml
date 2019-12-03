@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.SignScanQuartzJobLogDao">
 
-    <!--录入某题目的定时任务记录-->
-    <insert id="saveSignScanQuartzJobLog" parameterType="com.lmsltipollsjtu.common.bean.dto.SignScanQuartzJobDto" >
+    <!--录入某次点名的定时任务日志记录-->
+    <insert id="saveSignScanQuartzJobLog" parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto" >
         insert into poll_sign_scan_quartz_job_log(
             id,
-            sign_record_id,
+            sign_history_id,
             job_name,
             job_group,
             trigger_name,
@@ -17,7 +17,7 @@
             updated_date
         )values(
             #{signScanQuartzJobLogId},
-            #{signRecordId},
+            #{signHistoryId},
             #{jobName},
             #{jobGroup},
             #{triggerName},
@@ -29,7 +29,7 @@
         )
     </insert>
 
-    <!--虚拟删除某题目的定时任务记录-->
+    <!--虚拟删除某次点名的定时任务记录-->
     <update id="updateSignScanQuartzJobLogToInvalid">
         update poll_sign_scan_quartz_job_log pssqjl
         <set>
@@ -41,14 +41,14 @@
                 updated_date = #{updatedDate},
             </if>
         </set>
-        where pssqjl.sign_record_id = #{signRecordId} and pssqjl.is_valid = 1
+        where pssqjl.sign_history_id = #{signHistoryId} and pssqjl.is_valid = 1
     </update>
 
-    <!--查询某题目的定时任务记录列表（仅查有效的记录）-->
-    <select id="querySignScanQuartzJobLogBySignRecordId" parameterType="java.lang.String" resultType="com.lmsltipollsjtu.common.bean.dto.SignScanQuartzJobDto" >
+    <!--查询某次点名的定时任务记录列表（仅查有效的记录）-->
+    <select id="querySignScanQuartzJobLogBySignHistoryId" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto" >
         select
             id signScanQuartzJobLogId,
-            sign_record_id,
+            sign_history_id,
             job_name,
             job_group,
             trigger_name,
@@ -59,7 +59,7 @@
             updated_by,
             updated_date
         from poll_sign_scan_quartz_job_log
-        where sign_record_id = #{signRecordId} and is_valid = 1
+        where sign_history_id = #{signHistoryId} and is_valid = 1
         order by updated_date desc
     </select>
 

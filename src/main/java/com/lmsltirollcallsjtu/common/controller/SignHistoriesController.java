@@ -19,17 +19,17 @@ import java.util.List;
 /**
  * @author huyong
  * @date 2019-11-2
- * @Description:查看签到历史情况controller
+ * @description 查看签到历史情况controller
  */
 @Api(value = "/rollcalls API ",tags = "查询签到历史相关接口")
 @RestController
 @RequestMapping("/rollcalls")
 public class SignHistoriesController {
+
     @Autowired
     private SignHistoriesService signHistoriesService;
-    /*@Autowired
-    private CanvasService canvasService;*/
-    //查询一次点名的签到详情
+
+
     @UserLoginToken
     @ApiOperation(value = "查询某一次点名签到列表", notes = "查询某一次点名签到列表")
     @ApiImplicitParam(name = "id", value = "点名编号", paramType = "path", dataType = "String")

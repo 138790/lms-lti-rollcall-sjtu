@@ -33,16 +33,16 @@ public interface SignScanQuartzJobService {
      * @author wangzhijun
      * @createdDate 2019.11.26
      * @description 移除一个定时任务
-     * @param signRecordId
+     * @param signHistoryId
      */
-    void removeSignScanJob(String signRecordId) throws BusinessException, SchedulerException;
+    void removeSignScanJob(String signHistoryId) throws BusinessException, SchedulerException;
 
     /**
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 查询某次点名的定时任务记录列表（仅查有效的记录）
-     * @param signRecordId
+     * @param signHistoryId
      * @return List<SignScanQuartzJobDto>
      */
-    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId) throws BusinessException;
+    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId) throws BusinessException;
 }

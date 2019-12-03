@@ -18,5 +18,6 @@ public class SignHistoryParam {
     @NotEmpty(message = "班级编号不能为空！")
     private List<Long> sectionCodes;
 
+    @ApiModelProperty(value="课程编号",hidden =true)
     private Long userCode;//用户编号
 }

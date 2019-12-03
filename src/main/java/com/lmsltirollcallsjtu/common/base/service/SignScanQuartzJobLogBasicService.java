@@ -20,17 +20,17 @@ public interface SignScanQuartzJobLogBasicService {
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 虚拟删除某次点名的定时任务记录
-     * @param signRecordId
+     * @param signHistoryId
      * @return void
      */
-    void updateSignScanQuartzJobLogToInvalid(String signRecordId, String updatedBy, Date updatedDate) throws BusinessException;
+    void updateSignScanQuartzJobLogToInvalid(String signHistoryId, String updatedBy, Date updatedDate) throws BusinessException;
 
     /**
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description  查询某次点名的定时任务记录列表（仅查有效的记录）
-     * @param signRecordId
+     * @param signHistoryId
      * @return List<SignScanQuartzJobDto>
      */
-    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId) throws BusinessException;
+    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId) throws BusinessException;
 }

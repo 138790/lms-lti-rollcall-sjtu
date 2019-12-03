@@ -72,7 +72,7 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
 
         //4.job唯一标识，并生成jobDetail
         JobKey jobKey = new JobKey(signScanQuartzJobDto.getJobName(), signScanQuartzJobDto.getJobGroup());
-        JobDetail jobDetail = JobBuilder.newJob(RefreshSignScanTokenJob.class).withIdentity(jobKey).usingJobData("signRecordId",signScanQuartzJobDto.getSignRecordId()).build();
+        JobDetail jobDetail = JobBuilder.newJob(RefreshSignScanTokenJob.class).withIdentity(jobKey).usingJobData("signHistoryId",signScanQuartzJobDto.getSignHistoryId()).build();
 
         //5.生成该任务的触发器
         TriggerKey triggerKey = TriggerKey.triggerKey(signScanQuartzJobDto.getTriggerName(), signScanQuartzJobDto.getTriggerGroup());
@@ -92,14 +92,14 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
      * @author wangzhijun
      * @createdDate 2019.11.26
      * @description 移除一个定时任务
-     * @param signRecordId
+     * @param signHistoryId
      */
     @Override
     @Transactional(propagation= Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    public void removeSignScanJob(String signRecordId) throws BusinessException, SchedulerException {
+    public void removeSignScanJob(String signHistoryId) throws BusinessException, SchedulerException {
 
         //1.查询该次点名的定时任务记录
-        List<SignScanQuartzJobDto> signScanQuartzJobDtoList = querySignScanQuartzJobLogBySignRecordId(signRecordId);
+        List<SignScanQuartzJobDto> signScanQuartzJobDtoList = querySignScanQuartzJobLogBySignHistoryId(signHistoryId);
 
         //2.如果定时任务记录不为空，则移除该次点名的定时任务
         if(!CollectionUtils.isEmpty(signScanQuartzJobDtoList)){
@@ -110,7 +110,7 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
                 }
 
                 //2.2 虚拟删除该次点名的定时任务记录
-                signScanQuartzJobLogBasicService.updateSignScanQuartzJobLogToInvalid(signScanQuartzJobDto.getSignRecordId(),signScanQuartzJobDto.getUpdatedBy(),signScanQuartzJobDto.getUpdatedDate());
+                signScanQuartzJobLogBasicService.updateSignScanQuartzJobLogToInvalid(signScanQuartzJobDto.getSignHistoryId(),signScanQuartzJobDto.getUpdatedBy(),signScanQuartzJobDto.getUpdatedDate());
 
                 //2.3 停止触发器
                 TriggerKey triggerKey = TriggerKey.triggerKey(signScanQuartzJobDto.getTriggerName(),signScanQuartzJobDto.getTriggerGroup());
@@ -129,13 +129,13 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 查询某次点名的定时任务记录列表（仅查有效的记录）
-     * @param signRecordId
+     * @param signHistoryId
      * @return List<SignScanQuartzJobDto>
      */
     @Override
-    public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId) throws BusinessException {
+    public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId) throws BusinessException {
 
-        List<SignScanQuartzJobDto> signScanQuartzJobDtoList = signScanQuartzJobLogBasicService.querySignScanQuartzJobLogBySignRecordId(signRecordId);
+        List<SignScanQuartzJobDto> signScanQuartzJobDtoList = signScanQuartzJobLogBasicService.querySignScanQuartzJobLogBySignHistoryId(signHistoryId);
         return signScanQuartzJobDtoList;
     }
 }

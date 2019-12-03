@@ -37,32 +37,32 @@ public class SignScanQuartzJobLogBasicServiceImpl implements SignScanQuartzJobLo
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 虚拟删除某次点名的定时任务记录
-     * @param signRecordId
+     * @param signHistoryId
      * @return void
      */
     @Override
-    public void updateSignScanQuartzJobLogToInvalid(String signRecordId, String updatedBy, Date updatedDate) throws BusinessException {
+    public void updateSignScanQuartzJobLogToInvalid(String signHistoryId, String updatedBy, Date updatedDate) throws BusinessException {
 
-        if(StringUtils.isBlank(signRecordId)){
-            throw BusinessException.notNull("signRecordId");
+        if(StringUtils.isBlank(signHistoryId)){
+            throw BusinessException.notNull("signHistoryId");
         }
-        signScanQuartzJobLogDao.updateSignScanQuartzJobLogToInvalid(signRecordId,updatedBy,updatedDate);
+        signScanQuartzJobLogDao.updateSignScanQuartzJobLogToInvalid(signHistoryId,updatedBy,updatedDate);
     }
 
     /**
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description  查询某次点名的定时任务记录列表（仅查有效的记录）
-     * @param signRecordId
+     * @param signHistoryId
      * @return List<SignScanQuartzJobDto>
      */
     @Override
-    public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId) throws BusinessException {
+    public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId) throws BusinessException {
 
-        if(StringUtils.isBlank(signRecordId)){
-            throw BusinessException.notNull("signRecordId");
+        if(StringUtils.isBlank(signHistoryId)){
+            throw BusinessException.notNull("signHistoryId");
         }
-        List<SignScanQuartzJobDto> titleQuartzJobDtoList = signScanQuartzJobLogDao.querySignScanQuartzJobLogBySignRecordId(signRecordId);
-        return titleQuartzJobDtoList;
+        List<SignScanQuartzJobDto> signScanQuartzJobDtoList = signScanQuartzJobLogDao.querySignScanQuartzJobLogBySignHistoryId(signHistoryId);
+        return signScanQuartzJobDtoList;
     }
 }

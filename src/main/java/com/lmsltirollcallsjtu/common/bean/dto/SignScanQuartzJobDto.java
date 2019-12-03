@@ -10,8 +10,8 @@ import java.util.Date;
 @Data
 public class SignScanQuartzJobDto {
 
-    private String signScanQuartzJobLogId;
-    private String signRecordId;
+    private String signScanQuartzJobLogId;    //签到扫描的定时任务日志表主键
+    private String signHistoryId;   //点名ID
     private String jobName;
     private String jobGroup;
     private String triggerName;

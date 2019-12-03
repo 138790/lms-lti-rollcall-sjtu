@@ -15,8 +15,9 @@ public class RollcallBasicServiceImpl implements RollcallBasicService {
     private RollcallDao rollcallDao;
 
     @Override
-    public void insertSignHistories(SignHistory signHistory) {
+    public String insertSignHistories(SignHistory signHistory) {
         rollcallDao.insertSignHistories(signHistory);
+        return signHistory.getId();
     }
 
     @Override

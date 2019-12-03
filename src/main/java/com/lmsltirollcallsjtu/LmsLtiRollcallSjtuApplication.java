@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan
 @EnableScheduling
 @MapperScan(basePackages = "com.lmsltirollcallsjtu.*.dao")
-@EnableTransactionManagement
 public class LmsLtiRollcallSjtuApplication {
 
     public static void main(String[] args) {

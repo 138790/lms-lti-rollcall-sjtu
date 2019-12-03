@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 @Component
 public class StompClientConnectionFactory {
 
-    private String url = "http://172.168.71.206:8081/lms-lti-rollcall-sjtu-dev/stomp";
+    private String url = "http://localhost:8081/lms-lti-rollcall-sjtu-dev/stomp";
     private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.qfd0G-elhE1aGr15LrnYlIZ_3UToaOM5HeMcXrmDGBM";
 
     public ListenableFuture<StompSession> connect() throws InterruptedException, ExecutionException {

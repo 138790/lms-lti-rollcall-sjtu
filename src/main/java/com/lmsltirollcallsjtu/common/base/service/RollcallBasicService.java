@@ -6,7 +6,7 @@ import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsBo;
 import java.util.List;
 
 public interface RollcallBasicService {
-    void insertSignHistories(SignHistory signHistory);
+    String insertSignHistories(SignHistory signHistory);
 
     void insertStudnetsDetail(List<SignRecordsBo> signRecordsBo);
 }

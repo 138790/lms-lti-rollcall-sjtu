@@ -31,7 +31,7 @@ public class SignRecordDto {
     private String updatedBy;//修改者
 //    private String name;//班级名称
     @ApiModelProperty(value = "签名密钥",required = true)
-    private String signToken;//签名密钥
+    private String signScanToken;//签名密钥
     @Tolerate
     public SignRecordDto(){
 

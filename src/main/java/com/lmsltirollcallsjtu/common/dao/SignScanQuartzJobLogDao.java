@@ -20,10 +20,10 @@ public interface SignScanQuartzJobLogDao {
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 虚拟删除某次点名的定时任务记录
-     * @param signRecordId
+     * @param signHistoryId、updatedBy、updatedDate
      * @return void
      */
-    void updateSignScanQuartzJobLogToInvalid(@Param("titleId") String signRecordId,
+    void updateSignScanQuartzJobLogToInvalid(@Param("signHistoryId") String signHistoryId,
                                           @Param("updatedBy") String updatedBy,
                                           @Param("updatedDate") Date updatedDate);
 
@@ -31,9 +31,9 @@ public interface SignScanQuartzJobLogDao {
      * @author wangzhijun
      * @createdDate 2019.11.27
      * @Description 查询某次点名的定时任务记录列表（仅查有效的记录）
-     * @param signRecordId
+     * @param signHistoryId
      * @return List<SignScanQuartzJobDto>
      */
-    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId);
+    List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId);
 
 }

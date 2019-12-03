@@ -22,17 +22,17 @@ public class RefreshSignScanTokenJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 
         log.info("========================signScanTokenJob Start：" + LocalDateTime.now());
-        //1.获取recordId
+        //1.获取signRecordId
         JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
-        String recordId = (String) jobDataMap.get("recordId");
+        String signHistoryId = (String) jobDataMap.get("signHistoryId");
 
         //2.生成某次点名的签到token
-        String singScanToken = TokenUtil.generateRecordToken(recordId);
-        RedisUtil.putToMap("signScanTokens",recordId,singScanToken);
+        String singScanToken = TokenUtil.generateSignScanToken(signHistoryId);
+        RedisUtil.putToMap("signScanTokens", signHistoryId, singScanToken);
 
-        //3.推送消息到学生客户端和教师客户端
+        //3.推送消息到客户端
         if(!StringUtils.isEmpty(singScanToken)){
-            simpMessageSendingOperations.convertAndSend("/topic/"+recordId, singScanToken);
+            simpMessageSendingOperations.convertAndSend("/topic/"+signHistoryId, singScanToken);
         }
         log.info("========================TitleOfTimeoutJob End：" + LocalDateTime.now());
     }
