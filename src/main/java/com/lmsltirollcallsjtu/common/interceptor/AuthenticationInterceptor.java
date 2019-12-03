@@ -9,7 +9,6 @@ import com.lmsltirollcallsjtu.common.annotations.PassToken;
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.properties.LTIAuthProperties;
 import com.lmsltirollcallsjtu.common.properties.OurServerProperties;
 import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -35,8 +34,6 @@ import java.lang.reflect.Method;
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Autowired
-    LTIAuthProperties ltiAuthProperties;
-    @Autowired
     private OurServerProperties ourServerProperties;
 
     /**
@@ -48,21 +45,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
      **/
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws BusinessException {
-
-        //进行LTI认证，如果认证成功，便直接通过，否则继续进行用户token验证
-        LtiVerifier ltiVerifier = new LtiOauthVerifier();
-        String oauthConsumerKey = httpServletRequest.getParameter("oauth_consumer_key");
-        if(oauthConsumerKey != null && StringUtils.isNotBlank(oauthConsumerKey)){
-            try {
-                LtiVerificationResult ltiResult = ltiVerifier.verify(httpServletRequest, ltiAuthProperties.getSecret(oauthConsumerKey));
-                if(ltiResult.getSuccess()) {
-                    //LTI认证成功
-                    return true;
-                }
-            } catch (LtiVerificationException e) {
-                throw BusinessException.getInstance(BusinessExceptionEnum.LTI_VERIFY_EXCEPTION);
-            }
-        }
 
         // 如果不是映射到方法直接通过
         if(!(object instanceof HandlerMethod)){

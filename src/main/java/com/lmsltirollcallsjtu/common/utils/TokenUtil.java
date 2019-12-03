@@ -2,11 +2,10 @@ package com.lmsltirollcallsjtu.common.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.lmsltirollcallsjtu.common.bean.vo.UserRecordVo;
+import com.lmsltirollcallsjtu.common.properties.OurServerProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author wangzhijun
@@ -16,6 +15,8 @@ import java.util.List;
 @Component
 public class TokenUtil {
 
+    @Autowired
+    private static OurServerProperties ourServerProperties;
 
     /**
      * @author huyong
@@ -24,16 +25,15 @@ public class TokenUtil {
      * @parameter userInfoVo
      * @return token字符串
      **/
-    public static String generateToken(UserRecordVo userRecordVo) {
+    public static String generateRecordToken(String signRecordId) {
 
-        String token="";
-        System.out.println(userRecordVo);
-        token= JWT
+        String singScanToken="";
+        singScanToken= JWT
                 .create()
-                .withAudience(userRecordVo.getId(),new Date().toString())
-                .sign(Algorithm.HMAC256(userRecordVo.getSign()));
+                .withAudience(signRecordId,new Date().toString())
+                .sign(Algorithm.HMAC256(ourServerProperties.getSign()));
 
 
-        return token;
+        return singScanToken;
     }
 }

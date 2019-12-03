@@ -1,0 +1,68 @@
+package com.lmsltirollcallsjtu.common.base.service.impl;
+
+import com.lmsltirollcallsjtu.common.base.service.SignScanQuartzJobLogBasicService;
+import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
+import com.lmsltirollcallsjtu.common.dao.SignScanQuartzJobLogDao;
+import com.lmsltirollcallsjtu.common.exception.BusinessException;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class SignScanQuartzJobLogBasicServiceImpl implements SignScanQuartzJobLogBasicService {
+
+    @Autowired
+    private SignScanQuartzJobLogDao signScanQuartzJobLogDao;
+
+    /**
+     * @author wangzhijun
+     * @createdDate 2019.11.27
+     * @Description 录入某次点名的定时任务日志记录
+     * @param signScanQuartzJobDto
+     * @return void
+     */
+    @Override
+    public void saveSignScanQuartzJobLog(SignScanQuartzJobDto signScanQuartzJobDto) throws BusinessException {
+
+        if(signScanQuartzJobDto == null){
+            throw BusinessException.notNull("签到的定时任务日志记录入参signScanQuartzJobDto");
+        }
+        signScanQuartzJobLogDao.saveSignScanQuartzJobLog(signScanQuartzJobDto);
+    }
+
+    /**
+     * @author wangzhijun
+     * @createdDate 2019.11.27
+     * @Description 虚拟删除某次点名的定时任务记录
+     * @param signRecordId
+     * @return void
+     */
+    @Override
+    public void updateSignScanQuartzJobLogToInvalid(String signRecordId, String updatedBy, Date updatedDate) throws BusinessException {
+
+        if(StringUtils.isBlank(signRecordId)){
+            throw BusinessException.notNull("signRecordId");
+        }
+        signScanQuartzJobLogDao.updateSignScanQuartzJobLogToInvalid(signRecordId,updatedBy,updatedDate);
+    }
+
+    /**
+     * @author wangzhijun
+     * @createdDate 2019.11.27
+     * @Description  查询某次点名的定时任务记录列表（仅查有效的记录）
+     * @param signRecordId
+     * @return List<SignScanQuartzJobDto>
+     */
+    @Override
+    public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignRecordId(String signRecordId) throws BusinessException {
+
+        if(StringUtils.isBlank(signRecordId)){
+            throw BusinessException.notNull("signRecordId");
+        }
+        List<SignScanQuartzJobDto> titleQuartzJobDtoList = signScanQuartzJobLogDao.querySignScanQuartzJobLogBySignRecordId(signRecordId);
+        return titleQuartzJobDtoList;
+    }
+}
