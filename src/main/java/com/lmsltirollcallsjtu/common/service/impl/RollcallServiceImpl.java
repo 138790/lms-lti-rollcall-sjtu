@@ -10,6 +10,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
+import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,6 +112,8 @@ public class RollcallServiceImpl implements RollcallService {
 
         //2.关闭该次点名的定时任务
         signScanQuartzJobService.removeSignScanJob(signHistoryId);
+
+
     }
 }
 
