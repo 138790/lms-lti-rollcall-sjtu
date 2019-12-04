@@ -19,9 +19,12 @@ import java.util.Date;
 @Component
 public class TokenUtil {
 
-    @Autowired
-    private static OurServerProperties ourServerProperties;
 
+    private static OurServerProperties ourServerProperties;
+    @Autowired
+    public void setOurServerProperties(OurServerProperties ourServerProperties){
+        TokenUtil.ourServerProperties=ourServerProperties;
+    }
     /**
      * @author huyong
      * @createdDate 2019-11-22
@@ -34,7 +37,7 @@ public class TokenUtil {
         String signScanToken="";
         signScanToken= JWT
                 .create()
-                .withAudience(signHistoryId,new Date().toString())
+                .withAudience( signHistoryId,new Date().toString())
                 .sign(Algorithm.HMAC256(ourServerProperties.getSign()));
 
 
@@ -44,9 +47,9 @@ public class TokenUtil {
     /**
      * @author huyong
      * @createdDate 2019-11-22
-     * @description 生成token
+     * @description 验证token
      * @parameter userInfoVo
-     * @return token字符串
+     * @return signHistoryId
      **/
     public static String verifySignScanToken(String signScanToken) throws BusinessException {
 
@@ -59,7 +62,7 @@ public class TokenUtil {
         }
         //从token中解析出signRecordId
         String signHistoryId = JWT.decode(signScanToken).getAudience().get(0);
-        String signScanTokenFromRedis =(String) RedisUtil.getValueFromMap("signScans", signHistoryId);
+        String signScanTokenFromRedis =(String) RedisUtil.getValueFromMap("signScanTokens", signHistoryId);
 
         if (!signScanTokenFromRedis.equals(signScanToken)){
             throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_SIGN_SCAN_TOKEN_FAILED);

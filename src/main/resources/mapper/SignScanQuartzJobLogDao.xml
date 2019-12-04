@@ -4,7 +4,7 @@
 
     <!--录入某次点名的定时任务日志记录-->
     <insert id="saveSignScanQuartzJobLog" parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto" >
-        insert into poll_sign_scan_quartz_job_log(
+        insert into sign_scan_quartz_job_log(
             id,
             sign_history_id,
             job_name,
@@ -31,7 +31,7 @@
 
     <!--虚拟删除某次点名的定时任务记录-->
     <update id="updateSignScanQuartzJobLogToInvalid">
-        update poll_sign_scan_quartz_job_log pssqjl
+        update sign_scan_quartz_job_log pssqjl
         <set>
             is_valid = 0,
             <if test="updatedBy != null and updatedBy != ''">
@@ -58,7 +58,7 @@
             created_date,
             updated_by,
             updated_date
-        from poll_sign_scan_quartz_job_log
+        from sign_scan_quartz_job_log
         where sign_history_id = #{signHistoryId} and is_valid = 1
         order by updated_date desc
     </select>

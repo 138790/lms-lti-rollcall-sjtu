@@ -3,7 +3,6 @@ package com.lmsltirollcallsjtu.common.bean.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
-
 import java.util.Date;
 
 @Builder

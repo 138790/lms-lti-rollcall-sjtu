@@ -24,17 +24,18 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
     @Override
     @Transactional(propagation=Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     public void combineInsertSignHistoryBySignHistory(IdsParam idsParam) throws BusinessException {
+        //判断合并的班级是否为1个
         if (idsParam.getIds().size()==1){
             throw BusinessException.getInstance(BusinessExceptionEnum.NOT_ALLOWED_OPERATION);
         }
-        //1根据id查询点名记录和签到明细记录
+        //2根据id查询点名记录和签到明细记录
         List<UsersCombine> usersCombineListTemp = combineAttendanceBasicService.queryUsersStatesByIds(idsParam.getIds());
         List<String> sectionList = usersCombineListTemp.stream().map(item -> item.getSectionListJsonStr()).collect(Collectors.toList());
-        //2判断是否为同一组班级，是才能合并
+        //3判断是否为同一组班级，是才能合并
         if (sectionList.stream().distinct().count()!=1){
             throw BusinessException.getInstance(BusinessExceptionEnum.NOT_ALLOWED_OPERATION);
         }
-        //3合并时修改点名记录和签到明细记录的有效值为0
+        //4合并时修改点名记录和签到明细记录的有效值为0
         for (UsersCombine item:usersCombineListTemp){
             item.setIsValid(0);
             item.setUpdatedBy(idsParam.getUserCode().toString());
@@ -43,7 +44,7 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         combineAttendanceBasicService.updateIsNotValidByUsersCombineList(usersCombineListTemp);
         combineAttendanceBasicService.updateIsNotValidByUsersCombineLists(usersCombineListTemp);
         UsersCombine usersCombine;
-        //4合并后插入一条有效的点名记录
+        //5合并后插入一条有效的点名记录
         SignHistory signHistory = SignHistory.builder().userCode( idsParam.getUserCode())
                                                        .id(UUID.randomUUID().toString().replaceAll("\\-", ""))
                                                        .attendancesCount(0)
@@ -52,7 +53,7 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
                                                        .totalStudents(usersCombineListTemp.get(0).getTotalStudents())
                                                        .expAttendancesCount(usersCombineListTemp.get(0).getExpAttendancesCount())
                                                        .createdBy(idsParam.getUserCode().toString()).build();
-        //5合并签到明细记录
+        //6合并签到明细记录
         SignRecordsBo signRecordsBo;
         List<SignRecordsBo> signRecordsBos = new ArrayList<>();
         List<UsersCombine> usersCombineListTemp2;
