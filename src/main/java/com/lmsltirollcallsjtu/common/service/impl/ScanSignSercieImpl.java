@@ -37,7 +37,7 @@ public class ScanSignSercieImpl implements ScanSignServcie {
         if(StringUtils.isBlank(SignInState)){
             throw BusinessException.notFoundData("点名历史"+signHistoryId);
         }
-
+        
         //4.如果用户没有正常签到，则做更新状态操作，否则抛出异常
         if (!SignInState.equals(SignInStateEnum.NORMAL.getCode())){
             SignRecordDto signRecordDto = SignRecordDto.builder().rollcallCode(signHistoryId)

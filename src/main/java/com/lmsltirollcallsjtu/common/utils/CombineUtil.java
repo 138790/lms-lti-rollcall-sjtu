@@ -19,32 +19,40 @@ public class CombineUtil {
                 .expAttendancesCount(usersCombineTemp.get(0).getExpAttendancesCount())
                 .build();
         if (usersCombineTemp.size() == 2){
-            if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) && usersCombineTemp.get(1).getState().equals(SignInStateEnum.NORMAL.getCode())) {
+            if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
+                    usersCombineTemp.get(1).getState().equals(SignInStateEnum.NORMAL.getCode())) {
                 usersCombine.setState(SignInStateEnum.NORMAL.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) && usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
+                    usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
                 usersCombine.setState(SignInStateEnum.LEAVE_EARLY.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) && usersCombineTemp.get(1).getState().equals(SignInStateEnum.NORMAL.getCode())){
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
+                    usersCombineTemp.get(1).getState().equals(SignInStateEnum.NORMAL.getCode())){
                 usersCombine.setState(SignInStateEnum.LATE.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) && usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
+                    usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
                 usersCombine.setState(SignInStateEnum.TRUANT.getCode());
             }else{
                 usersCombine.setState(SignInStateEnum.ETC.getCode());
             }
         }
         if (usersCombineTemp.size() >= 3){
-            if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) && usersCombineTemp.get(2).getState().equals(SignInStateEnum.NORMAL.getCode())) {
+            if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
+                    usersCombineTemp.get(2).getState().equals(SignInStateEnum.NORMAL.getCode())) {
                 usersCombine.setState(SignInStateEnum.NORMAL.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) && usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
+                    usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
                 usersCombine.setState(SignInStateEnum.LEAVE_EARLY.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) && usersCombineTemp.get(2).getState().equals(SignInStateEnum.NORMAL.getCode())){
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
+                    usersCombineTemp.get(2).getState().equals(SignInStateEnum.NORMAL.getCode())){
                 usersCombine.setState(SignInStateEnum.LATE.getCode());
-            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) && usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
+            }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
+                    usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
                 usersCombine.setState(SignInStateEnum.TRUANT.getCode());
             }else{
                 usersCombine.setState(SignInStateEnum.ETC.getCode());
             }
         }
-
+        
         return usersCombine;
     }
 }

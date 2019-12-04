@@ -56,7 +56,7 @@ public class RollcallController {
     @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @DeleteMapping("/{signHistoryId}")
     public ResultInfo<String> backoutRollcall(@PathVariable String signHistoryId, @RequestParam("userCode") Long userCode) throws BusinessException, SchedulerException {
-        
+
         //1.修改点名记录的状态，关闭该次点名的定时任务
         rollcallService.backoutRollcall(signHistoryId);
 

@@ -24,8 +24,8 @@ public interface SignScanQuartzJobLogDao {
      * @return void
      */
     void updateSignScanQuartzJobLogToInvalid(@Param("signHistoryId") String signHistoryId,
-                                          @Param("updatedBy") String updatedBy,
-                                          @Param("updatedDate") Date updatedDate);
+                                             @Param("updatedBy") String updatedBy,
+                                             @Param("updatedDate") Date updatedDate);
 
      /**
      * @author wangzhijun
