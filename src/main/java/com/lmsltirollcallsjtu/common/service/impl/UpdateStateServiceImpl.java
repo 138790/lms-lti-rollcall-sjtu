@@ -8,7 +8,9 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.UpdateStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -18,17 +20,13 @@ public class UpdateStateServiceImpl implements UpdateStateService {
     @Autowired
     private UpdateStateBasicService updateStateBasicService;
     @Override
-    public void updateUserStateByUserStates(String dictCode,UserStates userStates) throws BusinessException {
-        if (StringUtils.isEmpty(dictCode)){
-            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_DATA_FOUND);
-        }
-        if (StringUtils.isEmpty(userStates.getRollcallCode())){
-            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_DATA_FOUND);
-        }
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
+    public void updateUserStateByUserStates(UserStates userStates) throws BusinessException {
+
         String dictType="ROLLCALL_STATE";
         List<DictionaryDto> dictionaryDtos = updateStateBasicService.queryRollcallStatesByDictType(dictType);
         for (DictionaryDto item:dictionaryDtos){
-            if (item.getDictCode().equals(dictCode)){
+            if (item.getDictCode().equals(userStates.getState())){
                 userStates.setState(item.getDictCode());
                 userStates.setUpdatedBy(userStates.getUserCode().toString());
                 userStates.setUpdatedDate(new Date());

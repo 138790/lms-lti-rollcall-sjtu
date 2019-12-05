@@ -8,7 +8,9 @@ import com.lmsltirollcallsjtu.common.service.UpdateStateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value = "/rollcall API", tags = "修改签到状态相关接口")
@@ -17,15 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class UpdateStateController {
     @Autowired
     private UpdateStateService updateStateService;
+
     @UserLoginToken
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "dictCode", value = "字典编号", paramType = "path", dataType = "String"),
-            @ApiImplicitParam(name = "rollcallCode", value = "点名编号", paramType = "path", dataType = "String")
-    })
-    @PostMapping("/state/{rollcallCode}/{dictCode}")
-    public ResultInfo<String> doUpdateState(@RequestBody UserStates userStates,@PathVariable("dictCode")String dictCode,@PathVariable("rollcallCode") String rollcallCode) throws BusinessException {
-        userStates.setRollcallCode(rollcallCode);
-        updateStateService.updateUserStateByUserStates(dictCode,userStates);
+    @ApiOperation(value="修改学生签到状态" ,notes = "修改学生签到状态")
+    @PostMapping("/doUpdateState")
+    public ResultInfo<String> doUpdateState(@RequestBody @Validated UserStates userStates,@RequestParam("userCode") Long userCode) throws BusinessException {
+        userStates.setUserCode(userCode);
+        updateStateService.updateUserStateByUserStates(userStates);
         ResultInfo<String> resultInfo = ResultInfo.success("修改状态成功");
         return resultInfo;
     }

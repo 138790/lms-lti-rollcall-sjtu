@@ -4,8 +4,9 @@
 
     <!--根据点名id查询某一次点名签到详情-->
 
-    <select id="findSignHistoryByRollcallId" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo">
+    <select id="findSignHistoryByRollcallId" parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam" resultType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo">
 		select
+			  r.user_code,
 	          r.state,
 	          r.user_name,
 	          r.section_name
@@ -18,15 +19,16 @@
 	<select id="findSignHistoryListByCourseCode"
 			parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
-		select
+		select id,
 		       section_list sectionListJsonStr,
 			   attendances_count,
 			   created_date,
 			   total_students
-		  from
+		from
 		  	   sign_histories
-		 where
+		where
 		 	   course_code=#{courseCode} and is_valid=1
+		order by created_date desc
 	</select>
 
 </mapper>

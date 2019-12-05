@@ -31,32 +31,32 @@ public class StompHandshakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
 
-        //1.获取token，并判断有没有传入token，如果没有则不允许通过
-        String token = getToken(request);
-        if (StringUtils.isBlank(token)) {
-            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_FOUND_TOKEN);
-        }
-
-        //2.验证token
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(ourServerProperties.getSign())).build();
-        try {
-            jwtVerifier.verify(token);
-        }catch (JWTVerificationException e) {
-            throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_TOKEN_FAILURE);
-        }
-
-        //3.从token中解析出用户编号
-        String userCode = JWT.decode(token).getAudience().get(0);
-
-        //4.验证是否已登录，如果用户不存在，则抛出异常
-        Object userData = RedisUtil.getValueFromMap("userInfos", userCode);
-        if(userData == null){
-            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_FOUND_USER);
-        }
-
-        //5.sessionAttributes中添加userCode属性
-        StompAuthUser sompAuthUser = StompAuthUser.builder().userCode(Long.parseLong(userCode)).build();
-        attributes.put("stompUser",sompAuthUser);
+//        //1.获取token，并判断有没有传入token，如果没有则不允许通过
+//        String token = getToken(request);
+//        if (StringUtils.isBlank(token)) {
+//            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_FOUND_TOKEN);
+//        }
+//
+//        //2.验证token
+//        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(ourServerProperties.getSign())).build();
+//        try {
+//            jwtVerifier.verify(token);
+//        }catch (JWTVerificationException e) {
+//            throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_TOKEN_FAILURE);
+//        }
+//
+//        //3.从token中解析出用户编号
+//        String userCode = JWT.decode(token).getAudience().get(0);
+//
+//        //4.验证是否已登录，如果用户不存在，则抛出异常
+//        Object userData = RedisUtil.getValueFromMap("userInfos", userCode);
+//        if(userData == null){
+//            throw BusinessException.getInstance(BusinessExceptionEnum.NOT_FOUND_USER);
+//        }
+//
+//        //5.sessionAttributes中添加userCode属性
+//        StompAuthUser sompAuthUser = StompAuthUser.builder().userCode(Long.parseLong(userCode)).build();
+//        attributes.put("stompUser",sompAuthUser);
         return true;
     }
 
@@ -69,9 +69,12 @@ public class StompHandshakeInterceptor implements HandshakeInterceptor {
     //从请求头中获取token
     private String getToken(ServerHttpRequest request) {
 
+        int i =0;
+
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest serverRequest = (ServletServerHttpRequest) request;
-            String token = serverRequest.getServletRequest().getHeader("Authorization");
+            //获取token认证
+            String token = serverRequest.getServletRequest().getParameter("token");
             return token;
         }
         return null;

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.lmsltirollcallsjtu.common.base.service.SignHistoriesBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
+import com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
@@ -29,15 +30,17 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
 
     //老师查询某一次点名签到情况
     @Override
-    public List<SignRecordsInfo> findSignHistoryByRollcallId(String id) throws BusinessException {
-        if (StringUtils.isEmpty(id)) {
-            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
-        }
-
-        List<SignRecordsInfo> signRecordsInfo = signHistoriesBasicService.findSignHistoryByRollcallId(id);
-
-        return signRecordsInfo;
+    public PagedVo<List<SignRecordsInfo>> findSignHistoryByRollcallId(QuerySignDetailsListParam querySignDetailsListParam) throws BusinessException {
+        //1.分页查询某次签到历史详情列表
+        PageHelper.startPage(querySignDetailsListParam.getPageNum(),querySignDetailsListParam.getPageSize());
+        Page<SignRecordsInfo> signRecordsInfoDtoPage = (Page<SignRecordsInfo>) signHistoriesBasicService.findSignHistoryByRollcallId(querySignDetailsListParam);
+//        List<SignRecordsInfo> signRecordsInfo = signHistoriesBasicService.findSignHistoryByRollcallId(querySignDetailsListParam);
+        //2.封装分页信息出参
+        PagedVo<List<SignRecordsInfo>> signRecordsPagedVo = PagedVo.buildPagedVo(signRecordsInfoDtoPage.getTotal(), signRecordsInfoDtoPage.getResult());
+        return signRecordsPagedVo;
     }
+
+
     //根据课程编号查看签到历史(分页)
     @Override
     public PagedVo<List<SignHistoryDto>> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam)  {

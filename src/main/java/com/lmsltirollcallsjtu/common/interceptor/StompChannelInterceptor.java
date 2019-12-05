@@ -15,19 +15,25 @@ public class StompChannelInterceptor implements ChannelInterceptor {
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
 
-        StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-        //1. 判断是否首次连接请求
-        if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-//            String token = accessor.getFirstNativeHeader("Authorization");    //从StompHeader中取出属性
-            StompAuthUser sompAuthUser = (StompAuthUser)accessor.getSessionAttributes().get("stompUser");
-            if(sompAuthUser != null){
-                accessor.setUser(sompAuthUser);
-                return message;
-            }else{
-                return null;
-            }
-        }
-        //不是首次连接，已经成功登陆
+//        //1.获取StompHeaderAccessor
+//        StompHeaderAccessor stompHeaderAccessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
+//        if (StompCommand.CONNECT.equals(stompHeaderAccessor.getCommand())) {
+//            //1.1 如果是首次连接请求
+////            String token = accessor.getFirstNativeHeader("Authorization");    //从StompHeader中取出属性
+//            StompAuthUser sompAuthUser = (StompAuthUser) stompHeaderAccessor.getSessionAttributes().get("stompUser");
+//            if(sompAuthUser != null){
+//                stompHeaderAccessor.setUser(sompAuthUser);
+//                return message;
+//            }else{
+//                System.out.println("============================================4");
+//                return null;
+//            }
+//        }else if (StompCommand.DISCONNECT.equals(stompHeaderAccessor.getCommand())){
+//            //1.2 如果是断开连接请求
+//
+//        }
+
+        //2.如果不是首次连接，即已经成功登陆，则直接通过
         return message;
     }
 

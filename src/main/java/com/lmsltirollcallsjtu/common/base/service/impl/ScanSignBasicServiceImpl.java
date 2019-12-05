@@ -1,6 +1,7 @@
 package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
+import com.lmsltirollcallsjtu.common.bean.bo.SignHistories;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.dao.ScanSignDao;
@@ -20,5 +21,15 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     @Override
     public void scanUpdateState(SignRecordDto signRecordDto) {
         scanSignDao.scanUpdateState(signRecordDto);
+    }
+
+    @Override
+    public Integer selectAttendancesCount(String id) {
+        return scanSignDao.selectAttendancesCount(id);
+    }
+
+    @Override
+    public void updateAttendancesCount(SignHistories signHistories) {
+        scanSignDao.updateAttendancesCount(signHistories);
     }
 }

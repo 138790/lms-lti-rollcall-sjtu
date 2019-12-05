@@ -9,21 +9,36 @@
 	</select>
 
     <!--扫码之后修改状态为正常-->
-    <!-- useGeneratedKeys表示应用自增主键值
-         keyProperty 表示把自增主键值赋值给参数对象的id属性-->
     <update id="scanUpdateState" parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto">
-	update sign_records
-	<set>
-		<if test="updatedBy!=null and updatedBy!=''">
-			updated_by=#{updatedBy},
-		</if>
-		<if test="state!=null and state!=''">
-			state=#{state},
-		</if>
-		<if test="updatedDate != null">
-			updated_date=#{updatedDate},
-		</if>
-	</set>
-	where rollcall_code=#{rollcallCode} and user_code=#{userCode}
+		update sign_records
+			<set>
+				<if test="updatedBy!=null and updatedBy!=''">
+					updated_by=#{updatedBy},
+				</if>
+				<if test="state!=null and state!=''">
+					state=#{state},
+				</if>
+				<if test="updatedDate != null">
+					updated_date=#{updatedDate},
+				</if>
+			</set>
+		where rollcall_code=#{rollcallCode} and user_code=#{userCode}
+	</update>
+	<!--查询此次点名的签到总数-->
+	<select id="selectAttendancesCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select attendances_count
+		from sign_histories
+		where id=#{id}
+	</select>
+	<!--签到总数不断加1-->
+	<update id="updateAttendancesCount" parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistories">
+		update sign_histories
+			<set>
+				<if test="attendancesCount!=null">
+					attendances_count=#{attendancesCount},
+				</if>
+			</set>
+		where id=#{id}
 	</update>
 </mapper>
+

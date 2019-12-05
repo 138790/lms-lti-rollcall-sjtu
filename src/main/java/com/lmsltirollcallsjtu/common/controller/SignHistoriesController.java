@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.controller;
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
+import com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
@@ -33,18 +34,18 @@ public class SignHistoriesController {
     @UserLoginToken
     @ApiOperation(value = "查询某一次点名签到列表", notes = "查询某一次点名签到列表")
     @ApiImplicitParam(name = "id", value = "点名编号", paramType = "path", dataType = "String")
-    @GetMapping("scan/{id}")
-    public ResultInfo<List<SignRecordsInfo>> querySignHistories(@PathVariable("id") String id) throws BusinessException {
-        List<SignRecordsInfo>  signRecordsInfo = signHistoriesService.findSignHistoryByRollcallId(id);
-        ResultInfo<List<SignRecordsInfo>> resultInfo = ResultInfo.success(signRecordsInfo);
+    @GetMapping("/scan")
+    public ResultInfo<PagedVo<List<SignRecordsInfo>>> querySignHistories(@Validated QuerySignDetailsListParam querySignDetailsListParam) throws BusinessException {
+        PagedVo<List<SignRecordsInfo>>  signRecordsInfo = signHistoriesService.findSignHistoryByRollcallId(querySignDetailsListParam);
+        ResultInfo<PagedVo<List<SignRecordsInfo>>> resultInfo = ResultInfo.success(signRecordsInfo);
         return resultInfo;
     }
 
     //查询学生签到历史列表(分页)
     @UserLoginToken
     @ApiOperation(value = "查询学生签到历史列表", notes = "查询学生签到历史列表")
-    @PostMapping("/querySignHistoryList")
-    public ResultInfo<PagedVo<List<SignHistoryDto>>> querySignHistoryList(@RequestBody @Validated QuerySignHistoryListParam querySignHistoryListParam) throws BusinessException {
+    @GetMapping("/querySignHistoryList")
+    public ResultInfo<PagedVo<List<SignHistoryDto>>> querySignHistoryList(@Validated QuerySignHistoryListParam querySignHistoryListParam) throws BusinessException {
         PagedVo<List<SignHistoryDto>> signHistoryInfo = signHistoriesService.findSignHistoryListByCourseCode(querySignHistoryListParam);
         ResultInfo<PagedVo<List<SignHistoryDto>>> resultInfo = ResultInfo.success(signHistoryInfo);
         return resultInfo;

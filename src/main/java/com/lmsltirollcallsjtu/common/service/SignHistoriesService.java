@@ -2,6 +2,7 @@ package com.lmsltirollcallsjtu.common.service;
 
 import com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
+import com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
@@ -15,7 +16,7 @@ public interface SignHistoriesService {
      * @param id
      * @return  List<SignHistoryDto>
      */
-    List<SignRecordsInfo> findSignHistoryByRollcallId(String id) throws BusinessException;
+    PagedVo<List<SignRecordsInfo>> findSignHistoryByRollcallId(QuerySignDetailsListParam querySignDetailsListParam) throws BusinessException;
 
     /**
      * @author huyong

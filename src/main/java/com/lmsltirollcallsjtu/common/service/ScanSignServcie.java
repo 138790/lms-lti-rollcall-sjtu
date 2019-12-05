@@ -5,5 +5,5 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 
 public interface ScanSignServcie {
 
-    void scanUpdateState(UpdateSignHistoryStateParam updateSignHistoryStateParam) throws BusinessException;
+    void scanUpdateState(UpdateSignHistoryStateParam updateSignHistoryStateParam) throws BusinessException, InterruptedException;
 }
