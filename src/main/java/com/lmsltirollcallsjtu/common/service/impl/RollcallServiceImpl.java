@@ -5,10 +5,12 @@ import com.lmsltirollcallsjtu.common.base.service.RollcallBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
+import com.lmsltirollcallsjtu.common.enums.SignInStateEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
+import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +39,7 @@ public class RollcallServiceImpl implements RollcallService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    public void insertSignHistories(SignHistoryParam signHistoryParam) throws BusinessException, SchedulerException {
+    public String insertSignHistories(SignHistoryParam signHistoryParam) throws BusinessException, SchedulerException {
 
         //1.获取系统当前时间
         Date nowDate = new Date();
@@ -74,7 +76,7 @@ public class RollcallServiceImpl implements RollcallService {
         for(SectionInfo item : neededSections){
             for(Student student : item.getStudentList()){
                 recordsBoTemp = SignRecordsBo.builder().id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                                                       .state("UNNORMAL")
+                                                       .state(SignInStateEnum.UNNORMAL.getCode())
                                                        .openId("null")
                                                        .rollcallCode(signHistoryId)
                                                        .sectionName(item.getSectionName())
@@ -98,6 +100,8 @@ public class RollcallServiceImpl implements RollcallService {
                                                                                   .updatedBy(String.valueOf(signHistoryParam.getUserCode()))
                                                                                   .updatedDate(nowDate).build();
         signScanQuartzJobService.addSignScanJob(signScanQuartzJobDto);
+
+        return signHistoryId;
     }
 
     @Override
@@ -108,6 +112,8 @@ public class RollcallServiceImpl implements RollcallService {
 
         //2.关闭该次点名的定时任务
         signScanQuartzJobService.removeSignScanJob(signHistoryId);
+
+
     }
 }
 

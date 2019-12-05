@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.service.impl;
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.bean.param.UpdateSignHistoryStateParam;
+import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.enums.SignInStateEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
@@ -37,13 +38,16 @@ public class ScanSignSercieImpl implements ScanSignServcie {
             throw BusinessException.notFoundData("点名历史"+signHistoryId);
         }
 
-        //4.如果用户没有正常签到，则做更新状态操作，否则直接跳过
+        //4.如果用户没有正常签到，则做更新状态操作，否则抛出异常
         if (!SignInState.equals(SignInStateEnum.NORMAL.getCode())){
             SignRecordDto signRecordDto = SignRecordDto.builder().rollcallCode(signHistoryId)
-                    .state(SignInStateEnum.NORMAL.getCode())
-                    .updatedBy(String.valueOf(updateSignHistoryStateParam.getUserCode()))
-                    .updatedDate(nowDate).build();
+                                                                 .state(SignInStateEnum.NORMAL.getCode())
+                                                                 .userCode(updateSignHistoryStateParam.getUserCode())
+                                                                 .updatedBy(String.valueOf(updateSignHistoryStateParam.getUserCode()))
+                                                                 .updatedDate(nowDate).build();
             scanSignBasicService.scanUpdateState(signRecordDto);
+        }else{
+            throw BusinessException.getInstance(BusinessExceptionEnum.ALREADY_EXISTS);
         }
     }
 }

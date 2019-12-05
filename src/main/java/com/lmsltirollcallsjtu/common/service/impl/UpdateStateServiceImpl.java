@@ -1,17 +1,14 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.UpdateStateBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.SignRecords;
 import com.lmsltirollcallsjtu.common.bean.bo.UserStates;
 import com.lmsltirollcallsjtu.common.bean.dto.DictionaryDto;
-import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.UpdateStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import java.util.Date;
 import java.util.List;
 

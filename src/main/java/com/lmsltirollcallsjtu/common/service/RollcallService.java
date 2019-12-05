@@ -6,7 +6,7 @@ import org.quartz.SchedulerException;
 
 public interface RollcallService {
 
-    void insertSignHistories(SignHistoryParam signHistoryParam) throws BusinessException, SchedulerException;
+    String insertSignHistories(SignHistoryParam signHistoryParam) throws BusinessException, SchedulerException;
 
     void backoutRollcall(String signHistoryId) throws SchedulerException, BusinessException;
 }
