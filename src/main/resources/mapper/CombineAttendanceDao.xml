@@ -42,6 +42,7 @@
 		attendances_count,
 		total_students,
 		exp_attendances_count,
+		is_combined,
 		created_by
 		)
 		values
@@ -53,6 +54,7 @@
 		#{attendancesCount},
 		#{totalStudents},
 		#{expAttendancesCount},
+		#{isCombined},
 		#{createdBy}
 		)
 	</insert>
@@ -66,6 +68,7 @@
 		state,
 		user_name,
 		section_name,
+		is_combined,
 		created_by
 		)
 		values
@@ -78,6 +81,7 @@
 			#{item.state},
 			#{item.userName},
 			#{item.sectionName},
+			#{item.isCombined},
 			#{item.createdBy}
 			)
 		</foreach>

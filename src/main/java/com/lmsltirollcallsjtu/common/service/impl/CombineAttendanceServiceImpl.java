@@ -7,6 +7,7 @@ import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CombineAttendanceService;
 import com.lmsltirollcallsjtu.common.utils.CombineUtil;
+import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -36,27 +37,30 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
             throw BusinessException.getInstance(BusinessExceptionEnum.NOT_ALLOWED_OPERATION);
         }
         //4合并时修改点名记录和签到明细记录的有效值为0
+        String updateUserCode = ExecutionContext.getUserCode();
         for (UsersCombine item:usersCombineListTemp){
             item.setIsValid(0);
-            item.setUpdatedBy(idsParam.getUserCode().toString());
+            item.setUpdatedBy(updateUserCode);
             item.setUpdatedDate(new Date());
         }
         combineAttendanceBasicService.updateIsNotValidByUsersCombineList(usersCombineListTemp);
         combineAttendanceBasicService.updateIsNotValidByUsersCombineLists(usersCombineListTemp);
         UsersCombine usersCombine;
         //5合并后插入一条有效的点名记录
-        SignHistory signHistory = SignHistory.builder().userCode( idsParam.getUserCode())
+        SignHistory signHistory = SignHistory.builder().userCode( Long.valueOf(updateUserCode))
                                                        .id(UUID.randomUUID().toString().replaceAll("\\-", ""))
                                                        .attendancesCount(0)
+                                                       .isCombined(1)
                                                        .sectionListJsonStr( usersCombineListTemp.get(0).getSectionListJsonStr())
                                                        .courseCode( usersCombineListTemp.get(0).getCourseCode())
                                                        .totalStudents(usersCombineListTemp.get(0).getTotalStudents())
                                                        .expAttendancesCount(usersCombineListTemp.get(0).getExpAttendancesCount())
-                                                       .createdBy(idsParam.getUserCode().toString()).build();
+                                                       .createdBy(updateUserCode).build();
         //6合并签到明细记录
         SignRecordsBo signRecordsBo;
         List<SignRecordsBo> signRecordsBos = new ArrayList<>();
         List<UsersCombine> usersCombineListTemp2;
+
         for (int i=0;i<usersCombineListTemp.size();i++){
             usersCombineListTemp2 = new ArrayList<>();
             for (int j=i;j<usersCombineListTemp.size();j++){
@@ -71,12 +75,13 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
             signRecordsBo = SignRecordsBo.builder().rollcallCode(signHistory.getId())
                                                    .openId("null")
                                                    .id(UUID.randomUUID().toString().replaceAll("\\-", ""))
+                                                   .isCombined(1)
                                                    .userCode(usersCombine.getUserCode())
                                                    .userName(usersCombine.getUserName())
                                                    .state(usersCombine.getState())
                                                    .sectionName(usersCombine.getSectionName())
                                                    .createdBy(signHistory.getCreatedBy())
-                                                   .updatedBy(String.valueOf(idsParam.getUserCode())).build();
+                                                   .updatedBy(updateUserCode).build();
             signRecordsBos.add(signRecordsBo);
         }
         combineAttendanceBasicService.combineInsertSignHistoryBySignHistory(signHistory);

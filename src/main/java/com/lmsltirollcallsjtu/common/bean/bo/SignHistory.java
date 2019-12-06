@@ -17,6 +17,7 @@ public class SignHistory {
     private Long totalStudents;//点名所选班级总人数
     private String createdBy;//创建者
     private Long expAttendancesCount;//预期应到总人数
+    private Integer isCombined;//是否合并(1:已合并，0:未合并)
     @Tolerate
     public SignHistory(){
 

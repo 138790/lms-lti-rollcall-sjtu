@@ -1,6 +1,7 @@
 package com.lmsltirollcallsjtu.common.filter;
 
 import com.auth0.jwt.JWT;
+import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import javax.servlet.FilterChain;
@@ -36,6 +37,7 @@ public class TokenFilter extends HttpFilter {
         }else{
             //从token中解析出用户编号
             String userCode = JWT.decode(token).getAudience().get(0);
+            ExecutionContext.setUserCode(userCode);
             parameterMap.put("userCode",userCode.split(","));
             changedRequestWrapper.setParameterMap(parameterMap);
         }
