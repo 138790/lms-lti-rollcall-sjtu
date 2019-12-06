@@ -27,8 +27,8 @@ public class CombineAttendanceController {
     @UserLoginToken
     @ApiOperation(value="合并点名记录和签到明细记录" ,notes = "合并点名记录和签到明细记录")
     @PostMapping("/signHistories")
-    public ResultInfo<String> doCombineSignHistories(@RequestBody @Validated IdsParam idsParam, @RequestParam("userCode") Long userCode) throws BusinessException {
-        idsParam.setUserCode(userCode);
+    public ResultInfo<String> doCombineSignHistories(@RequestBody @Validated IdsParam idsParam) throws BusinessException {
+
         combineAttendanceService.combineInsertSignHistoryBySignHistory(idsParam);
         ResultInfo<String> resultInfo = ResultInfo.success("合并签到历史成功");
         return resultInfo;

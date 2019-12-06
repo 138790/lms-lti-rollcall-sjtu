@@ -60,7 +60,7 @@ public class TokenUtil {
         }catch(JWTVerificationException e){
             throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_TOKEN_FAILURE);
         }
-        //从token中解析出signRecordId
+        //从token中解析出signHistoryId
         String signHistoryId = JWT.decode(signScanToken).getAudience().get(0);
         String signScanTokenFromRedis =(String) RedisUtil.getValueFromMap("signScanTokens", signHistoryId);
 

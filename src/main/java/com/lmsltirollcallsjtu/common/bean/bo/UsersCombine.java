@@ -27,6 +27,7 @@ public class UsersCombine {
     private String updatedBy;//修改者
     private String sectionName;//班级名称
     private Integer isValid;//点名记录有效值 是否有效(1:有效,0:无效)
+//    private Integer isCombined;//此记录是否合并(1:已合并,0:未合并)
     @Tolerate
     public UsersCombine(){
 

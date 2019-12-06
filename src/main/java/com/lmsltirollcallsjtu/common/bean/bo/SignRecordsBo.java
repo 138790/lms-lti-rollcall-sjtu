@@ -16,6 +16,7 @@ public class SignRecordsBo {
     private String userName; //学生姓名
     private String createdBy; //创建者
     private String updatedBy;  //修改者
+    private Integer isCombined;//是否合并(1:已合并，0:未合并)
     @Tolerate
     public SignRecordsBo(){
 
