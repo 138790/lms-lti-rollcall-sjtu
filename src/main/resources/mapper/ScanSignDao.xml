@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.ScanSignDao">
 	<!--根据主键id查询学生状态-->
-	<select id="queryStateByRecordId" resultType="java.lang.String">
-		select state
-		from sign_records
-		where rollcall_code=#{rollcallCode} and user_code=#{userCode} and is_valid=1
+	<select id="queryStateByRecordId" resultType="com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo">
+		select state,
+			   user_name,
+			   updated_date
+		from   sign_records
+		where  rollcall_code=#{rollcallCode} and user_code=#{userCode} and is_valid=1
+		order by updated_date asc
 	</select>
 
     <!--扫码之后修改状态为正常-->
@@ -29,6 +32,7 @@
 		select attendances_count
 		from sign_histories
 		where id=#{id}
+		order by attendances_count asc
 	</select>
 	<!--签到总数不断加1-->
 	<update id="updateAttendancesCount" parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistories">

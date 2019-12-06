@@ -20,6 +20,7 @@ public class SignHistoryDto {
 //    private String sectionName;//班级名称集
 //    private String sectionCodes;//班级编集（json字符串格式）
 //    private List<Long> sectionCodes;//班级编号集
+    private Integer isCombined;//是否为合并的记录(1:是,0；否)
     @JsonIgnore
     private String sectionListJsonStr; //班级列表JsonStr格式
     private Integer attendancesCount;//签到总人数

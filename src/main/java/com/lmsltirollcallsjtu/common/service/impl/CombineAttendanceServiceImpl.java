@@ -4,6 +4,7 @@ import com.lmsltirollcallsjtu.common.base.service.CombineAttendanceBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.param.IdsParam;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
+import com.lmsltirollcallsjtu.common.enums.SignInStateEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CombineAttendanceService;
 import com.lmsltirollcallsjtu.common.utils.CombineUtil;
@@ -64,7 +65,7 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         for (int i=0;i<usersCombineListTemp.size();i++){
             usersCombineListTemp2 = new ArrayList<>();
             for (int j=i;j<usersCombineListTemp.size();j++){
-                if (usersCombineListTemp.get(i).getUserName().equals(usersCombineListTemp.get(j).getUserName())){
+                if(usersCombineListTemp.get(i).getUserName().equals(usersCombineListTemp.get(j).getUserName())){
                     usersCombineListTemp2.add(usersCombineListTemp.get(j));
                     i=j;
                 }else{
@@ -75,7 +76,6 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
             signRecordsBo = SignRecordsBo.builder().rollcallCode(signHistory.getId())
                                                    .openId("null")
                                                    .id(UUID.randomUUID().toString().replaceAll("\\-", ""))
-                                                   .isCombined(1)
                                                    .userCode(usersCombine.getUserCode())
                                                    .userName(usersCombine.getUserName())
                                                    .state(usersCombine.getState())
@@ -84,6 +84,13 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
                                                    .updatedBy(updateUserCode).build();
             signRecordsBos.add(signRecordsBo);
         }
+        Integer count=signHistory.getAttendancesCount();
+        for (SignRecordsBo recordsBo:signRecordsBos){
+            if (recordsBo.getState().equals(SignInStateEnum.NORMAL.getCode())){
+                count+=1;
+            }
+        }
+        signHistory.setAttendancesCount(count);
         combineAttendanceBasicService.combineInsertSignHistoryBySignHistory(signHistory);
         combineAttendanceBasicService.combineInsertSignRecordBySignRecordsInfo(signRecordsBos);
 

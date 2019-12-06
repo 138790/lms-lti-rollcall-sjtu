@@ -10,8 +10,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface RollcallDao {
+    //新增
     void insertSignHistories(SignHistory signHistory);
 
     void insertStudnetsDetail(@Param("signRecordsBo") List<SignRecordsBo> signRecordsBo);
 
+    void deleteSignHistories(@Param("id") String id);
 }

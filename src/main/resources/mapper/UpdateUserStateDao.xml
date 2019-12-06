@@ -10,6 +10,7 @@
                    dict_type_desc
             from sign_dictionary
             where dict_type=#{dictType} and is_valid=1
+            order by id asc
     </select>
     <!-- 老师更新学生的签到状态插入数据库中-->
 	<update id="updateUserStateByUserStates" parameterType="com.lmsltirollcallsjtu.common.bean.bo.UserStates">

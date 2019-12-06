@@ -2,6 +2,7 @@ package com.lmsltirollcallsjtu.common.base.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.SignHistories;
+import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import com.lmsltirollcallsjtu.common.dao.ScanSignDao;
@@ -14,7 +15,7 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     private ScanSignDao scanSignDao;
 
     @Override
-    public String queryStateByRecordId(String rollcallCode,Long userCode) {
+    public UserStateInfo queryStateByRecordId(String rollcallCode, Long userCode) {
         return scanSignDao.queryStateByRecordId(rollcallCode,userCode);
     }
 

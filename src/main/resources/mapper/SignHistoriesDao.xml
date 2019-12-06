@@ -13,6 +13,7 @@
 		from  sign_records r
 		inner join sign_histories h on h.id=r.rollcall_code
 		where  h.id=#{id} and r.is_valid=1
+		order by r.user_code desc
 	</select>
 	<!--老师查询签到历史列表-->
 
@@ -20,6 +21,7 @@
 			parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
 		select id,
+			   is_combined,
 		       section_list sectionListJsonStr,
 			   attendances_count,
 			   created_date,

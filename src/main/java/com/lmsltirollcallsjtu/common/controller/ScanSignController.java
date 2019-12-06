@@ -35,15 +35,14 @@ public class ScanSignController {
     @ApiOperation(value="学生扫码签到并修改签到状态" ,notes = "学生扫码签到并修改签到状态")
     @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @GetMapping("/sign/{signScanToken}")
-    public ResultInfo<String> doUpdateStateByRecordId(@PathVariable String signScanToken,@RequestParam("userCode") Long userCode) throws BusinessException, InterruptedException {
+    public ResultInfo<String> doUpdateStateByRecordId(@PathVariable String signScanToken) throws BusinessException, InterruptedException {
 
-//        //1.设置用户编号参数
-//        updateSignHistoryStateParam.setUserCode(userCode);
 
-        //2.更新该次点名的签到状态
-        scanSignServcie.scanUpdateState(signScanToken,userCode);
 
-        //3.响应结果
+        //1.更新该次点名的签到状态
+        scanSignServcie.scanUpdateState(signScanToken);
+
+        //2.响应结果
         return ResultInfo.success("扫码签到成功");
     }
 }
