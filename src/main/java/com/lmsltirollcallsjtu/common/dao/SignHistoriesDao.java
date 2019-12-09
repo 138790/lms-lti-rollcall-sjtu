@@ -18,5 +18,9 @@ public interface SignHistoriesDao {
     /* @Select("select inserted_at,section_ids,attendances_count from rollcall_sign_histories where course_id=#{courseId} and user_id=#{userId}")*/
      List<SignHistoryDto> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam);
 
+     //删除签到明细记录
+     void deleteSignRecord(@Param("id") String id);
 
+     //删除签到历史记录
+     void deleteSignHistory(@Param("id") String id);
 }

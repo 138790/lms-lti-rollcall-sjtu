@@ -11,4 +11,7 @@ public interface SignHistoriesBasicService {
 
     List<SignHistoryDto> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam);
 
+    void deleteSignRecord(String rollcallCode);
+
+    void deleteSignHistory(String id);
 }

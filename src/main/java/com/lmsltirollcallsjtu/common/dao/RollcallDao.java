@@ -15,5 +15,5 @@ public interface RollcallDao {
 
     void insertStudnetsDetail(@Param("signRecordsBo") List<SignRecordsBo> signRecordsBo);
 
-    void deleteSignHistories(@Param("id") String id);
+
 }

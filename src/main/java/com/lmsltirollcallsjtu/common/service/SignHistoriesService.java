@@ -26,4 +26,6 @@ public interface SignHistoriesService {
      * @return  PagedVo<List<SignHistoryDto>>
      */
     PagedVo<List<SignHistoryDto>> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam) ;
+
+    void deleteSignHistory(String id) throws BusinessException;
 }

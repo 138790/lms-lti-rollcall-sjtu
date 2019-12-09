@@ -84,6 +84,7 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
                                                    .updatedBy(updateUserCode).build();
             signRecordsBos.add(signRecordsBo);
         }
+        //7。合并之后的签到人数为合并后签到正常的总人数
         Integer count=signHistory.getAttendancesCount();
         for (SignRecordsBo recordsBo:signRecordsBos){
             if (recordsBo.getState().equals(SignInStateEnum.NORMAL.getCode())){

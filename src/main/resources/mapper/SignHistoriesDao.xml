@@ -3,7 +3,6 @@
 <mapper namespace="com.lmsltirollcallsjtu.common.dao.SignHistoriesDao">
 
     <!--根据点名id查询某一次点名签到详情-->
-
     <select id="findSignHistoryByRollcallId" parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam" resultType="com.lmsltirollcallsjtu.common.bean.bo.SignRecordsInfo">
 		select
 			  r.user_code,
@@ -15,8 +14,8 @@
 		where  h.id=#{id} and r.is_valid=1
 		order by r.user_code desc
 	</select>
-	<!--老师查询签到历史列表-->
 
+	<!--老师查询签到历史列表-->
 	<select id="findSignHistoryListByCourseCode"
 			parameterType="com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam"
 			resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto">
@@ -33,4 +32,15 @@
 		order by created_date desc
 	</select>
 
+	<!--删除签到明细记录-->
+	<delete id="deleteSignRecord">
+		delete from sign_records
+		where rollcall_code=#{id}
+	</delete>
+
+	<!--删除签到历史记录-->
+	<delete id="deleteSignHistory">
+		delete from sign_histories
+		where id=#{id}
+	</delete>
 </mapper>

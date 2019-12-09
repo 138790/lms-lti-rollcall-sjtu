@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.controller;
 
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
-import com.lmsltirollcallsjtu.common.bean.param.UpdateSignHistoryStateParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
@@ -9,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
