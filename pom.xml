@@ -231,7 +231,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
+                    <mainClass>com.lmsltirollcallsjtu.LmsLtiRollcallSjtuApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
