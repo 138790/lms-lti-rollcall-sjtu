@@ -24,13 +24,13 @@ public class CombineUtil {
                 usersCombine.setState(SignInStateEnum.NORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
                     usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
-                usersCombine.setState(SignInStateEnum.LEAVE_EARLY.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
                     usersCombineTemp.get(1).getState().equals(SignInStateEnum.NORMAL.getCode())){
-                usersCombine.setState(SignInStateEnum.LATE.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
                     usersCombineTemp.get(1).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
-                usersCombine.setState(SignInStateEnum.TRUANT.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else{
                 usersCombine.setState(SignInStateEnum.ETC.getCode());
             }
@@ -41,13 +41,13 @@ public class CombineUtil {
                 usersCombine.setState(SignInStateEnum.NORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.NORMAL.getCode()) &&
                     usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())) {
-                usersCombine.setState(SignInStateEnum.LEAVE_EARLY.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
                     usersCombineTemp.get(2).getState().equals(SignInStateEnum.NORMAL.getCode())){
-                usersCombine.setState(SignInStateEnum.LATE.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else if (usersCombineTemp.get(0).getState().equals(SignInStateEnum.UNNORMAL.getCode()) &&
                     usersCombineTemp.get(2).getState().equals(SignInStateEnum.UNNORMAL.getCode())){
-                usersCombine.setState(SignInStateEnum.TRUANT.getCode());
+                usersCombine.setState(SignInStateEnum.UNNORMAL.getCode());
             }else{
                 usersCombine.setState(SignInStateEnum.ETC.getCode());
             }

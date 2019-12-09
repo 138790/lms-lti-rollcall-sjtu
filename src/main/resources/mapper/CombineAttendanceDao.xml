@@ -68,7 +68,6 @@
 		state,
 		user_name,
 		section_name,
-		is_combined,
 		created_by
 		)
 		values
@@ -81,7 +80,6 @@
 			#{item.state},
 			#{item.userName},
 			#{item.sectionName},
-			#{item.isCombined},
 			#{item.createdBy}
 			)
 		</foreach>

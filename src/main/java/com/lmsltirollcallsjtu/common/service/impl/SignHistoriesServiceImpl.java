@@ -14,6 +14,9 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import java.util.List;
 
@@ -60,6 +63,16 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
         }
         signHistoryPagedVo.setDataList(signHistoryDtoList);
         return signHistoryPagedVo;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
+    public void deleteSignHistory(String id) throws BusinessException {
+        if (StringUtils.isEmpty(id)){
+            throw BusinessException.getInstance(BusinessExceptionEnum.ARGS_ERROR);
+        }
+        signHistoriesBasicService.deleteSignRecord(id);
+        signHistoriesBasicService.deleteSignHistory(id);
     }
 
 }

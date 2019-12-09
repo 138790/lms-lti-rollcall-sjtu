@@ -26,6 +26,7 @@ public enum BusinessExceptionEnum {
     USER_NOT_BELONG_SECTION_AND_ROLE("50000","用户没有归属班级和身份！"),
     NOT_DATA_FOUND("50000","不存在！"),
     ALREADY_EXISTS("50000","已经存在！"),
+    ALREADY_ROLLCALL_DONOT_REPEAT_SCAN("50000","已经签到，请不要重复扫码"),
     UNPUBLISHED_TITLE("50000","题目未发布！"),
     PUBLISH_FAILURE("50000","发布失败"),
     EXISTENTIAL_HISTORICAL_ANSWER("50000","已有回答记录，无法删除！"),

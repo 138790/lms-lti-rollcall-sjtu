@@ -26,6 +26,16 @@ public class SignHistoriesBasicServiceImpl implements SignHistoriesBasicService 
         return signHistoriesDao.findSignHistoryListByCourseCode(querySignHistoryListParam);
     }
 
+    @Override
+    public void deleteSignRecord(String rollcallCode) {
+        signHistoriesDao.deleteSignRecord(rollcallCode);
+    }
+
+    @Override
+    public void deleteSignHistory(String id) {
+        signHistoriesDao.deleteSignHistory(id);
+    }
+
 
 }
 
