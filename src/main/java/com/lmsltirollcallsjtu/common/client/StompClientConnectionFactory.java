@@ -1,5 +1,6 @@
 package com.lmsltirollcallsjtu.common.client;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@Profile("dev")
 @Component
 public class StompClientConnectionFactory {
 

@@ -12,7 +12,7 @@
     <artifactId>lms-lti-rollcall-sjtu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>lms-lti-rollcall-sjtu</name>
-    <description>签到系统</description>
+    <description>点名签到</description>
 
     <properties>
         <java.version>13</java.version>
@@ -226,6 +226,7 @@
         </resources>
 
         <plugins>
+            <!--spring boot maven插件-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -242,18 +243,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--maven编译插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <!--设置编译使用的编码格式-->
+                    <encoding>UTF-8</encoding>
                     <!--使用jdk13进行编译-->
                     <release>${java.version}</release>
+                    <!--要使编译版本配置生效，还需要将fork设为true，用于明确表示编译版本配置的可用-->
                     <fork>true</fork>
-                    <!--是否跳过test模块-->
+                    <!--跳过编译测试模块-->
                     <skip>true</skip>
                     <!--开启预览功能(默认是关闭的)：jdk预先发行的一些功能，比如switch、文本块等功能-->
                     <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+            <!--maven执行测试用例的插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--跳过项目运行测试用例-->
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
         </plugins>
