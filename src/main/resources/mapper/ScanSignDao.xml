@@ -27,21 +27,11 @@
 			</set>
 		where rollcall_code=#{rollcallCode} and user_code=#{userCode}
 	</update>
-	<!--查询此次点名的签到总数-->
-	<select id="selectAttendancesCount" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select attendances_count
-		from sign_histories
-		where id=#{id}
-		order by attendances_count asc
-	</select>
+
 	<!--签到总数不断加1-->
-	<update id="updateAttendancesCount" parameterType="com.lmsltirollcallsjtu.common.bean.bo.SignHistories">
+	<update id="updateAttendancesCount">
 		update sign_histories
-			<set>
-				<if test="attendancesCount!=null">
-					attendances_count=#{attendancesCount},
-				</if>
-			</set>
+		set    attendances_count=attendances_count+1
 		where id=#{id}
 	</update>
 </mapper>

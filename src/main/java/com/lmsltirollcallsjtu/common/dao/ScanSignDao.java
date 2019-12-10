@@ -15,5 +15,5 @@ public interface ScanSignDao {
     //查询此次点名的签到总数
     Integer selectAttendancesCount(@Param("id") String id);
     //签到总数不断加1
-    void updateAttendancesCount(SignHistories signHistories);
+    void updateAttendancesCount(@Param("id") String id);
 }

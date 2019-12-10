@@ -1,6 +1,5 @@
 package com.lmsltirollcallsjtu.common.base.service;
 
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistories;
 import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 
@@ -10,7 +9,5 @@ public interface ScanSignBasicService {
 
     void scanUpdateState(SignRecordDto signRecordDto);
 
-    Integer selectAttendancesCount(String id);
-
-    void updateAttendancesCount(SignHistories signHistories);
+    void updateAttendancesCount(String id);
 }

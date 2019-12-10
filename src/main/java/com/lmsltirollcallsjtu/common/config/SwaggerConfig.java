@@ -40,7 +40,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("API接口文档")
                 .description("swagger2 签到 api")
-                .termsOfServiceUrl("http://localhost:8081"+ourServerProperties.getContextPath()+"/swagger-ui.html")
+                .termsOfServiceUrl("http://localhost:8082"+ourServerProperties.getContextPath()+"/swagger-ui.html")
                 .version("2.9.2")
                 .contact(new Contact("镜中月", "http://localhost/swagger-ui.html", "1109900298@qq.com"))
                 .build();

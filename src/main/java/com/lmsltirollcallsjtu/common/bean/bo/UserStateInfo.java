@@ -10,6 +10,7 @@ import java.util.Date;
 @Builder
 public class UserStateInfo {
 
+    private String signHistoryId;   //点名ID
     private String state;//用户签到状态
     private String userName;//用户名
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
