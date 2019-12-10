@@ -3,6 +3,7 @@ package com.lmsltirollcallsjtu.common.client;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
@@ -11,6 +12,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import java.lang.reflect.Type;
 import java.util.concurrent.ExecutionException;
 
+@Profile("dev")
 @Slf4j
 public class StompClientSessionHandler  extends StompSessionHandlerAdapter {
 

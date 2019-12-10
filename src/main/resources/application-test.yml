@@ -2,12 +2,12 @@
 server:
   port: 8082
   servlet:
-    context-path: /lms-lti-rollcall-sjtu-dev
+    context-path: /lms-lti-rollcall-sjtu-test
     sign: 123456
 #日志配置
 logging:
   file:
-    name: C:\log\lms-lti-rollcall-sjtu-dev.log
+    name: /opt/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
   pattern:
     level: DEBUG
 
@@ -22,7 +22,7 @@ logging:
 spring:
    #应用名称
   application:
-    name: lms-lti-rollcall-sjtu-dev
+    name: lms-lti-rollcall-sjtu-test
 
   main:
      #当遇到同样名字的依赖时，是否允许覆盖注册（默认是false，遇到冲突启动报错）
@@ -70,7 +70,7 @@ spring:
   #redis配置
   redis:
     #好像是库的标号，通过标号可以切换redis缓存
-    database: 0
+    database: 1
     host: 172.168.70.90
     port: 6379
     #password: 900412
@@ -177,5 +177,5 @@ feign:
   #自定义canvas远程服务属性
   client:
     application-name: canvas
-    url: http://172.168.70.11:8764
+    url: http://172.168.70.11:8765
     supper-admin-token: Bearer bEfZ4PnUBOUizzUYYj0bVYhuxHuBx1cKwnQx2w2ffXzMPmzgSsVaaUVRQcOhFEN0
