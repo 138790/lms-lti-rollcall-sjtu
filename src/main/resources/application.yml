@@ -43,4 +43,4 @@ feign:
       supper-admin-token: Bearer Gea65nuznsyBx62PDD99xeE9Gzl5LirkR3lzSarh1C0ZAnqVWSBN8e1waioBxc7Q
     test:
       url: http://172.168.70.227:28082
-      supper-admin-token: Bearer 6os66RdfK4HuOJUd4UpPeoaTevLIiJbzsjPb3G7uiVNddtvvA93EwP9iZmuTgmCv
+      supper-admin-token: Bearer lIlaLi07WNcOhXb2ig8xk6KeBjQThWWkFA7p239CZCYKvbSaQhIyfjs9sWx1JrG4
