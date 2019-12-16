@@ -11,12 +11,12 @@ import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
 import com.lmsltirollcallsjtu.common.utils.PagingUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +57,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
         List<CourseInfoOfCanvas> courseInfoListOfCanvas = queryCourseListByUserCode(queryCoursePagedListParam.getUserCode());
 
         //3.如果模糊的课程名称不为空，则筛选出名称匹配的课程列表
-        if(StringUtils.isNotBlank(queryCoursePagedListParam.getVagueCourseName())){
+        if(!StringUtils.isEmpty(queryCoursePagedListParam.getVagueCourseName())){
             courseInfoListOfCanvas = courseInfoListOfCanvas.stream()
                     .filter(courseInfoOfCanvas -> courseInfoOfCanvas.getName().contains(queryCoursePagedListParam.getVagueCourseName()))
                     .collect(Collectors.toList());
@@ -156,7 +156,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
             while(matcher.find()){
                 numberOfTotalPages = switch(matcher.groupCount()){
                     case 0-> {
-                        if(StringUtils.isBlank(matcher.group(0))){
+                        if(StringUtils.isEmpty(matcher.group(0))){
                             yield null;
                         }
                         yield Long.parseLong(matcher.group(0));
@@ -261,7 +261,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
             while(matcher.find()){
                 numberOfTotalPages = switch(matcher.groupCount()){
                     case 0-> {
-                        if(StringUtils.isBlank(matcher.group(0))){
+                        if(StringUtils.isEmpty(matcher.group(0))){
                             yield null;
                         }
                         yield Long.parseLong(matcher.group(0));

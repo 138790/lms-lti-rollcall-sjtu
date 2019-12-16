@@ -9,7 +9,6 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.ScanSignServcie;
 import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
 import com.lmsltirollcallsjtu.common.utils.TokenUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +48,7 @@ public class ScanSignServiceImpl implements ScanSignServcie {
             try {
                 //3.1 查询本次点名该用户的签到状态
                 UserStateInfo userStateInfo = scanSignBasicService.queryStateByRecordId(signHistoryId, userCode);
-                if (userStateInfo == null || StringUtils.isBlank(userStateInfo.getState()) || StringUtils.isEmpty(userStateInfo.getUserName())) {
+                if (userStateInfo == null || StringUtils.isEmpty(userStateInfo.getState()) || StringUtils.isEmpty(userStateInfo.getUserName())) {
                     throw BusinessException.notFoundData("点名历史" + signHistoryId);
                 }
                 userStateInfo.setSignHistoryId(signHistoryId);

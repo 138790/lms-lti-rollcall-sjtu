@@ -4,9 +4,9 @@ import com.lmsltirollcallsjtu.common.base.service.SignScanQuartzJobLogBasicServi
 import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
 import com.lmsltirollcallsjtu.common.dao.SignScanQuartzJobLogDao;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -43,7 +43,7 @@ public class SignScanQuartzJobLogBasicServiceImpl implements SignScanQuartzJobLo
     @Override
     public void updateSignScanQuartzJobLogToInvalid(String signHistoryId, String updatedBy, Date updatedDate) throws BusinessException {
 
-        if(StringUtils.isBlank(signHistoryId)){
+        if(StringUtils.isEmpty(signHistoryId)){
             throw BusinessException.notNull("signHistoryId");
         }
         signScanQuartzJobLogDao.updateSignScanQuartzJobLogToInvalid(signHistoryId,updatedBy,updatedDate);
@@ -59,7 +59,7 @@ public class SignScanQuartzJobLogBasicServiceImpl implements SignScanQuartzJobLo
     @Override
     public List<SignScanQuartzJobDto> querySignScanQuartzJobLogBySignHistoryId(String signHistoryId) throws BusinessException {
 
-        if(StringUtils.isBlank(signHistoryId)){
+        if(StringUtils.isEmpty(signHistoryId)){
             throw BusinessException.notNull("signHistoryId");
         }
         List<SignScanQuartzJobDto> signScanQuartzJobDtoList = signScanQuartzJobLogDao.querySignScanQuartzJobLogBySignHistoryId(signHistoryId);

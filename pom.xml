@@ -30,7 +30,6 @@
         <postgresql.version>42.2.8</postgresql.version>
         <redisson.version>3.11.5</redisson.version>
         <java-jwt.version>3.8.3</java-jwt.version>
-        <basiclti-util.version>1.2.0</basiclti-util.version>
         <fastjson.version>1.2.62</fastjson.version>
         <swagger.version>2.9.2</swagger.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
@@ -129,13 +128,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <!--LTI依赖包，用于完成对签名的认证工作，用于外部应用接入canvas系统-->
-        <dependency>
-            <groupId>org.imsglobal</groupId>
-            <artifactId>basiclti-util</artifactId>
-            <version>${basiclti-util.version}</version>
         </dependency>
 
         <!--fastjson包 -->

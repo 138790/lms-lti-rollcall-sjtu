@@ -4,10 +4,11 @@ import com.auth0.jwt.JWT;
 import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
 import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.util.StringUtils;
+
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class TokenFilter extends HttpFilter {
 
         String token = request.getHeader("Authorization");
         //判断有没有传入token,如果没有,则直接通过
-        if (StringUtils.isBlank(token)) {
+        if (StringUtils.isEmpty(token)) {
             changedRequestWrapper.setParameterMap(parameterMap);
         }else{
             //从token中解析出用户编号
