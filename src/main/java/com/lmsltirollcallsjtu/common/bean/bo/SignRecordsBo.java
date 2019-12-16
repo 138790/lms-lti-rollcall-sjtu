@@ -18,6 +18,6 @@ public class SignRecordsBo {
     private String updatedBy;  //修改者
     @Tolerate
     public SignRecordsBo(){
-
+        
     }
 }

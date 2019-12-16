@@ -43,7 +43,8 @@
 		total_students,
 		exp_attendances_count,
 		is_combined,
-		created_by
+		created_by,
+		updated_by
 		)
 		values
 		(
@@ -55,7 +56,8 @@
 		#{totalStudents},
 		#{expAttendancesCount},
 		#{isCombined},
-		#{createdBy}
+		#{createdBy},
+		#{updatedBy}
 		)
 	</insert>
 	<insert id="combineInsertSignRecordBySignRecordsInfo" parameterType="java.util.List">
@@ -68,7 +70,8 @@
 		state,
 		user_name,
 		section_name,
-		created_by
+		created_by,
+		updated_by
 		)
 		values
 		<foreach collection="signRecordsBo" item="item" separator=",">
@@ -80,7 +83,8 @@
 			#{item.state},
 			#{item.userName},
 			#{item.sectionName},
-			#{item.createdBy}
+			#{item.createdBy},
+			#{item.updatedBy}
 			)
 		</foreach>
 	</insert>
@@ -92,6 +96,9 @@
 				<set>
 					<if test="item.isValid != null">
 					is_valid=#{item.isValid},
+					</if>
+					<if test="item.combinedId != null and item.combinedId !=''">
+					combined_id=#{item.combinedId},
 					</if>
 					<if test="item.updatedBy !=null and item.updatedBy !=''">
 					updated_by=#{item.updatedBy},

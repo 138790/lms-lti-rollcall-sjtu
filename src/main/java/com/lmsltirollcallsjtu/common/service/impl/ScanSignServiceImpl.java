@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.service.impl;
 
 import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistories;
 import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
@@ -14,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,12 +21,10 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class ScanSignSercieImpl implements ScanSignServcie {
+public class ScanSignServiceImpl implements ScanSignServcie {
 
     @Autowired
     private ScanSignBasicService scanSignBasicService;
-    @Autowired
-    private SimpMessageSendingOperations simpMessageSendingOperations;
     @Autowired
     private Redisson redisson;
     private static String  prefixLockKey="attendancesCount:";
@@ -52,10 +48,10 @@ public class ScanSignSercieImpl implements ScanSignServcie {
             try {
                 //3.1 查询本次点名该用户的签到状态
                 UserStateInfo userStateInfo = scanSignBasicService.queryStateByRecordId(signHistoryId, userCode);
-                userStateInfo.setSignHistoryId(signHistoryId);
                 if (userStateInfo == null || StringUtils.isBlank(userStateInfo.getState()) || StringUtils.isEmpty(userStateInfo.getUserName())) {
                     throw BusinessException.notFoundData("点名历史" + signHistoryId);
                 }
+                userStateInfo.setSignHistoryId(signHistoryId);
                 //3.2 如果用户没有正常签到，则做更新状态操作，否则跳过
                 if (!userStateInfo.getState().equals(SignInStateEnum.NORMAL.getCode())) {
                     SignRecordDto signRecordDto = SignRecordDto.builder().rollcallCode(signHistoryId)

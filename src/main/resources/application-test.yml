@@ -7,7 +7,7 @@ server:
 #日志配置
 logging:
   file:
-    name: /opt/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
+    name: /root/install/service/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
   pattern:
     level: DEBUG
 
@@ -42,7 +42,7 @@ spring:
     #alibaba连接池配置
     druid:
       #jdbc配置
-      url: jdbc:postgresql://172.168.70.11:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
+      url: jdbc:postgresql://172.168.70.227:65431/lms_lti_rollcall_sjtu?useUnicode=true&characterEncoding=utf8&useSSL=false
       username: dbuser
       password: 1q2w3e4r5t
       driver-class-name: org.postgresql.Driver
@@ -177,5 +177,5 @@ feign:
   #自定义canvas远程服务属性
   client:
     application-name: canvas
-    url: http://172.168.70.11:8765
-    supper-admin-token: Bearer bEfZ4PnUBOUizzUYYj0bVYhuxHuBx1cKwnQx2w2ffXzMPmzgSsVaaUVRQcOhFEN0
+    url: http://172.168.70.227:28082
+    supper-admin-token: Bearer 6os66RdfK4HuOJUd4UpPeoaTevLIiJbzsjPb3G7uiVNddtvvA93EwP9iZmuTgmCv

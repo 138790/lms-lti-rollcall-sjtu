@@ -37,17 +37,11 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         if (sectionList.stream().distinct().count()!=1){
             throw BusinessException.getInstance(BusinessExceptionEnum.NOT_ALLOWED_OPERATION);
         }
-        //4合并时修改点名记录和签到明细记录的有效值为0
+
         String updateUserCode = ExecutionContext.getUserCode();
-        for (UsersCombine item:usersCombineListTemp){
-            item.setIsValid(0);
-            item.setUpdatedBy(updateUserCode);
-            item.setUpdatedDate(new Date());
-        }
-        combineAttendanceBasicService.updateIsNotValidByUsersCombineList(usersCombineListTemp);
-        combineAttendanceBasicService.updateIsNotValidByUsersCombineLists(usersCombineListTemp);
+
         UsersCombine usersCombine;
-        //5合并后插入一条有效的点名记录
+        //4合并后插入一条有效的点名记录
         SignHistory signHistory = SignHistory.builder().userCode( Long.valueOf(updateUserCode))
                                                        .id(UUID.randomUUID().toString().replaceAll("\\-", ""))
                                                        .attendancesCount(0)
@@ -56,7 +50,10 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
                                                        .courseCode( usersCombineListTemp.get(0).getCourseCode())
                                                        .totalStudents(usersCombineListTemp.get(0).getTotalStudents())
                                                        .expAttendancesCount(usersCombineListTemp.get(0).getExpAttendancesCount())
-                                                       .createdBy(updateUserCode).build();
+                                                       .createdBy(updateUserCode)
+                                                       .updatedBy(updateUserCode).build();
+
+
         //6合并签到明细记录
         SignRecordsBo signRecordsBo;
         List<SignRecordsBo> signRecordsBos = new ArrayList<>();
@@ -94,7 +91,15 @@ public class CombineAttendanceServiceImpl implements CombineAttendanceService {
         signHistory.setAttendancesCount(count);
         combineAttendanceBasicService.combineInsertSignHistoryBySignHistory(signHistory);
         combineAttendanceBasicService.combineInsertSignRecordBySignRecordsInfo(signRecordsBos);
-
+        //8.将合并后的记录有效改为无效记录0，记录下合并后的id
+        for (UsersCombine item:usersCombineListTemp){
+            item.setIsValid(0);
+            item.setUpdatedBy(updateUserCode);
+            item.setUpdatedDate(new Date());
+            item.setCombinedId(signHistory.getId());
+        }
+        combineAttendanceBasicService.updateIsNotValidByUsersCombineList(usersCombineListTemp);
+        combineAttendanceBasicService.updateIsNotValidByUsersCombineLists(usersCombineListTemp);
     }
 
 }

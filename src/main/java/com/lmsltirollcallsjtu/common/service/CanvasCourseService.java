@@ -11,7 +11,7 @@ import java.util.List;
  * @author wangzhijun
  * @createdDate 2019.11.06
  */
-public interface CourseService {
+public interface CanvasCourseService {
 
     /**
      * @author wangzhijun

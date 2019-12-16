@@ -1,8 +1,12 @@
 package com.lmsltirollcallsjtu.common.filter;
 
 import com.auth0.jwt.JWT;
+import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
 import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,9 +19,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Order(1)
 @WebFilter(filterName = "tokenFilter", urlPatterns = "/*")
 public class TokenFilter extends HttpFilter {
+
+    @Autowired
+    private SignScanQuartzJobService signScanQuartzJobService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -47,6 +55,13 @@ public class TokenFilter extends HttpFilter {
 
     @Override
     public void destroy() {
-        System.out.println("----------------------->过滤器被销毁");
+
+        try {
+            signScanQuartzJobService.shutdownJobs();
+            log.error("scheduler任务调度器关闭成功！");
+        } catch (SchedulerException e) {
+            log.error("scheduler任务调度器关闭失败");
+        }
+        log.info("----------------------->过滤器被销毁");
     }
 }

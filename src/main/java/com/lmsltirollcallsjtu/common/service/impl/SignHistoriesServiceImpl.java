@@ -12,6 +12,7 @@ import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
+import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -73,6 +74,16 @@ public class SignHistoriesServiceImpl implements SignHistoriesService {
         }
         signHistoriesBasicService.deleteSignRecord(id);
         signHistoriesBasicService.deleteSignHistory(id);
+    }
+
+    @Override
+    public String querySignScanTokenById(String id) throws BusinessException {
+
+       String signScanToken = (String)RedisUtil.getValueFromMap("signScanTokens", id);
+       if (StringUtils.isEmpty(signScanToken)){
+           throw BusinessException.notFoundData("signScanTokens");
+       }
+        return signScanToken;
     }
 
 }

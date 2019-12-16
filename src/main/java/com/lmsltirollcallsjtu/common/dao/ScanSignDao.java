@@ -1,9 +1,7 @@
 package com.lmsltirollcallsjtu.common.dao;
 
-import com.lmsltirollcallsjtu.common.bean.bo.SignHistories;
 import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.dto.SignRecordDto;
-import com.lmsltirollcallsjtu.common.bean.dto.SignRecordsDto;
 import org.apache.ibatis.annotations.Param;
 
 public interface ScanSignDao {

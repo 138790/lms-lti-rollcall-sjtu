@@ -7,10 +7,9 @@ import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
 import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.enums.SignInStateEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-import com.lmsltirollcallsjtu.common.service.CourseService;
+import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
-import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class RollcallServiceImpl implements RollcallService {
     @Autowired
     private RollcallBasicService rollcallBasicService;
     @Autowired
-    private CourseService courseService;
+    private CanvasCourseService courseService;
     @Autowired
     private SignScanQuartzJobService signScanQuartzJobService;
 
@@ -67,6 +66,7 @@ public class RollcallServiceImpl implements RollcallService {
                                                        .totalStudents(studentTotalOfCourse)
                                                        .sectionListJsonStr(JSON.toJSONString(neededSections))
                                                        .createdBy(signHistoryParam.getUserCode().toString())
+                                                       .updatedBy(signHistoryParam.getUserCode().toString())
                                                        .expAttendancesCount(studentTotalOfCourse).build();
         String signHistoryId = rollcallBasicService.insertSignHistories(signHistory);
 
@@ -82,7 +82,8 @@ public class RollcallServiceImpl implements RollcallService {
                                                        .sectionName(item.getSectionName())
                                                        .userCode(student.getUserCode())
                                                        .userName(student.getUserName())
-                                                       .createdBy(signHistoryParam.getUserCode().toString()).build();
+                                                       .createdBy(signHistoryParam.getUserCode().toString())
+                                                       .updatedBy(signHistoryParam.getUserCode().toString()).build();
                 signRecordsBo.add(recordsBoTemp);
             }
         }

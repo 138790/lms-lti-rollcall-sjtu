@@ -11,7 +11,8 @@ import java.util.List;
 @Builder
 public class UsersCombine {
 
-    private String id;//点名表主键
+    private String id;//点名编号
+    private String combinedId;//合并之后生成的点名编号
     private String rollcallCode;//明细表外键
     private Long userCode;//用户编号
     private String userName;//用户名

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lmsltirollcallsjtu.common.dao.DecomposeSignHistoryDao">
+
+	<!--将合并后的记录分解，将合并前的记录再查询出来-->
+	<select id="queryBeforeCombinedSignHistory" resultType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDecomposeDto">
+		select id,
+			   combined_id,
+			   is_valid,
+		       section_list sectionListJsonStr,
+			   attendances_count,
+			   created_date,
+			   total_students
+		from
+		  	   sign_histories
+		where
+		 	   combined_id=#{combinedId}
+		order by created_date desc
+	</select>
+
+	<!--将拆分后的sign_histories表字段is_valid值0改为1-->
+	<update id="updateSignHistoryIsValid" parameterType="java.util.List">
+		<if test="signHistoryDecomposeDtos !=null and signHistoryDecomposeDtos.size()>0">
+			<foreach collection="signHistoryDecomposeDtos" item="item" separator=";">
+				update sign_histories
+				<set>
+					<if test="item.isValid != null">
+						is_valid=#{item.isValid},
+					</if>
+					<if test="item.updatedBy != null and item.updatedBy !=''">
+						updated_by=#{item.updatedBy},
+					</if>
+					<if test="item.updatedDate != null">
+						updated_date=#{item.updatedDate},
+					</if>
+				</set>
+				where combined_id=#{item.combinedId}
+			</foreach>
+		</if>
+	</update>
+	<!--将要分解的记录sign_histories表字段is_valid值1改为0-->
+	<update id="updateDecomposeSignHistoryIsValid" parameterType="com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDecomposeDto">
+		update sign_histories
+		<set>
+			<if test="isValid != null">
+				is_valid=#{isValid},
+			</if>
+			<if test=" updatedBy != null and updatedBy != ''">
+				updated_by=#{updatedBy},
+			</if>
+			<if test="updatedDate != null">
+				updated_date=#{updatedDate},
+			</if>
+		</set>
+		where id=#{id} and is_valid=1
+	</update>
+	<!--拆分后的sign_records表字段is_valid值0改为1-->
+	<update id="updateSignRecordIsValid" parameterType="java.util.List">
+		<if test="signRecords !=null and signRecords.size()>0">
+			<foreach collection="signRecords" item="item" separator=";">
+				update sign_records
+				<set>
+					<if test="item.isValid != null">
+						is_valid=#{item.isValid},
+					</if>
+					<if test="item.updatedBy != null and item.updatedBy != ''">
+						updated_by=#{item.updatedBy},
+					</if>
+					<if test="item.updatedDate != null">
+						updated_date=#{item.updatedDate},
+					</if>
+				</set>
+				where rollcall_code=#{item.rollcallCode}
+			</foreach>
+		</if>
+	</update>
+	<!--将要分解的记录sign_records表字段is_valid值1改为0-->
+	<update id="updateDecomposeSignRecordIsValid" parameterType="java.util.List">
+		<if test="signRecords !=null and signRecords.size()>0">
+			<foreach collection="signRecords" item="item" separator=";">
+				update sign_records
+				<set>
+					<if test="item.isValid != null">
+						is_valid=#{item.isValid},
+					</if>
+					<if test="item.updatedBy != null and item.updatedBy != ''">
+						updated_by=#{item.updatedBy},
+					</if>
+					<if test="item.updatedDate != null">
+						updated_date=#{item.updatedDate},
+					</if>
+				</set>
+				where rollcall_code=#{item.rollcallCode} and is_valid=1
+			</foreach>
+		</if>
+	</update>
+</mapper>

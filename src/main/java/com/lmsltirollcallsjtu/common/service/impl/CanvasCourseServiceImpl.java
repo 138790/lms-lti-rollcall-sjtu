@@ -9,7 +9,7 @@ import com.lmsltirollcallsjtu.common.enums.RoleEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
-import com.lmsltirollcallsjtu.common.service.CourseService;
+import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
 import com.lmsltirollcallsjtu.common.utils.PagingUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  * @createdDate 2019.11.06
  */
 @Service
-public class CourseServiceImpl implements CourseService {
+public class CanvasCourseServiceImpl implements CanvasCourseService {
 
     @Autowired
     private CanvasFeign canvasFeign;

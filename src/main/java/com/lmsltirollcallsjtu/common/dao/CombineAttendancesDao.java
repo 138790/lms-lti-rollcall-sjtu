@@ -16,4 +16,6 @@ public interface CombineAttendancesDao {
     void updateIsNotValidByUsersCombineList(@Param("usersCombineList") List<UsersCombine> usersCombineList);
     //将签到明细记录有效值变为0(无效)
     void updateIsNotValidByUsersCombineLists(@Param("usersCombineLists") List<UsersCombine> usersCombineLists);
+
+
 }

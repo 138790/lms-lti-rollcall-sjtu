@@ -5,6 +5,7 @@ import com.lmsltirollcallsjtu.common.bean.bo.*;
 import com.lmsltirollcallsjtu.common.bean.dto.SignHistoryDto;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignDetailsListParam;
 import com.lmsltirollcallsjtu.common.bean.param.QuerySignHistoryListParam;
+import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.bean.vo.PagedVo;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
@@ -12,9 +13,12 @@ import com.lmsltirollcallsjtu.common.service.SignHistoriesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -59,5 +63,18 @@ public class SignHistoriesController {
     public ResultInfo<String> doDeleteSignHisory(@PathVariable String id) throws BusinessException {
         signHistoriesService.deleteSignHistory(id);
         return ResultInfo.success("删除签到记录成功");
+    }
+
+    @UserLoginToken
+    @ApiOperation(value="查询签到扫描token" ,notes = "查询签到扫描token")
+    @ApiImplicitParam(name = "id",value = "点名ID", paramType = "path", dataType = "String")
+    @GetMapping("/querySignHistory/{id}")
+    public ResultInfo<String> querySignScanTokenById(@PathVariable @NotBlank String id) throws BusinessException {
+
+        //1.根据点名ID查询签到扫描Token
+        String signScanToken = signHistoriesService.querySignScanTokenById(id);
+
+        //2.响应信息
+        return ResultInfo.success(signScanToken);
     }
 }

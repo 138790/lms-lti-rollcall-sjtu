@@ -13,7 +13,7 @@ public interface SignHistoriesService {
      * @author huyong
      * @createdDate 2019.11.18
      * @Description 查询某一次点名签到历史详情（分页）
-     * @param id
+     * @param querySignDetailsListParam
      * @return  List<SignHistoryDto>
      */
     PagedVo<List<SignRecordsInfo>> findSignHistoryByRollcallId(QuerySignDetailsListParam querySignDetailsListParam) throws BusinessException;
@@ -28,4 +28,6 @@ public interface SignHistoriesService {
     PagedVo<List<SignHistoryDto>> findSignHistoryListByCourseCode(QuerySignHistoryListParam querySignHistoryListParam) ;
 
     void deleteSignHistory(String id) throws BusinessException;
+
+    String querySignScanTokenById(String id) throws BusinessException;
 }
