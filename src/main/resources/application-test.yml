@@ -4,12 +4,13 @@ server:
   servlet:
     context-path: /lms-lti-rollcall-sjtu-test
     sign: 123456
+
 #日志配置
 logging:
   file:
-    name: /opt/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
+    name: ${log.test.fileUrl}
   pattern:
-    level: DEBUG
+    level: ${log.test.level}
 
   #用于移除swagger example error异常
   level:
@@ -42,9 +43,9 @@ spring:
     #alibaba连接池配置
     druid:
       #jdbc配置
-      url: jdbc:postgresql://172.168.70.11:5432/lms_lti_rollcall_sjtu_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
-      username: dbuser
-      password: 1q2w3e4r5t
+      url: jdbc:postgresql://${db.rollcall.test.address}/lms_lti_rollcall_sjtu?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: ${db.rollcall.test.username}
+      password: ${db.rollcall.test.password}
       driver-class-name: org.postgresql.Driver
       #连接池配置
       #连接池最大空间
@@ -70,9 +71,9 @@ spring:
   #redis配置
   redis:
     #好像是库的标号，通过标号可以切换redis缓存
-    database: 1
-    host: 172.168.70.90
-    port: 6379
+    database: ${redis.test.database}
+    host: ${redis.test.ip}
+    port: ${redis.test.port}
     #password: 900412
     timeout: 20000
     #是否启用SSL协议支持
@@ -177,5 +178,5 @@ feign:
   #自定义canvas远程服务属性
   client:
     application-name: canvas
-    url: http://172.168.70.11:8765
-    supper-admin-token: Bearer bEfZ4PnUBOUizzUYYj0bVYhuxHuBx1cKwnQx2w2ffXzMPmzgSsVaaUVRQcOhFEN0
+    url: ${feign.canvas.test.url}
+    supper-admin-token: ${feign.canvas.test.supper-admin-token}
