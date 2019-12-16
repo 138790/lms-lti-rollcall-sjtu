@@ -1,4 +1,46 @@
 #环境配置
 spring:
   profiles:
-    active: dev
+    active: test
+
+
+log:
+  dev:
+    fileUrl: C:\log\lms-lti-rollcall-sjtu-dev.log
+    level: DEBUG
+  test:
+    fileUrl: /opt/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
+    level: DEBUG
+
+
+db:
+  rollcall:
+    dev:
+      address: 172.168.70.12:5432
+      username: dbuser
+      password: 1q2w3e4r5t
+    test:
+      address: 172.168.70.227:65431
+      username: dbuser
+      password: 1q2w3e4r5t
+
+
+redis:
+  dev:
+    ip: 172.168.70.90
+    port: 6379
+    database: 0
+  test:
+    ip: 172.168.70.90
+    port: 6379
+    database: 1
+
+
+feign:
+  canvas:
+    dev:
+      url: http://172.168.70.12:80
+      supper-admin-token: Bearer Gea65nuznsyBx62PDD99xeE9Gzl5LirkR3lzSarh1C0ZAnqVWSBN8e1waioBxc7Q
+    test:
+      url: http://172.168.70.227:28082
+      supper-admin-token: Bearer 6os66RdfK4HuOJUd4UpPeoaTevLIiJbzsjPb3G7uiVNddtvvA93EwP9iZmuTgmCv
