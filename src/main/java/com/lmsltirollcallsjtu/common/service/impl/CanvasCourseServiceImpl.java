@@ -152,7 +152,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
             Pattern pattern = Pattern.compile("(?<=page=)\\d+(?=&per_page=\\d+>; rel=\"last\")");
             Matcher matcher = pattern.matcher(link.get(0));
             //如果仅匹配到一个则为正常，否则抛出异常
-            Long numberOfTotalPages = null;   //课程编号
+            Long numberOfTotalPages = null;   //总页数
             while(matcher.find()){
                 numberOfTotalPages = switch(matcher.groupCount()){
                     case 0-> {
@@ -197,7 +197,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
      * @createdDate 2019.11.06
      * @Description 根据课程编号查询班级列表（下拉列表）
      * @param courseCode
-     * @return PagedVo<List<SectionInfo>>
+     * @return List<SectionInfo>
      */
     @Override
     public List<SectionInfo> querySectionList(Long courseCode) throws BusinessException {
@@ -257,7 +257,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
             Pattern pattern = Pattern.compile("(?<=page=)\\d+(?=&per_page=\\d+>; rel=\"last\")");
             Matcher matcher = pattern.matcher(link.get(0));
             //如果仅匹配到一个则为正常，否则抛出异常
-            Long numberOfTotalPages = null;   //课程编号
+            Long numberOfTotalPages = null;   //总页数
             while(matcher.find()){
                 numberOfTotalPages = switch(matcher.groupCount()){
                     case 0-> {
