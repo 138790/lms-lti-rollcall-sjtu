@@ -16,7 +16,7 @@ log:
 db:
   rollcall:
     dev:
-      address: 172.168.70.12:5432
+      address: 172.168.70.12:65431
       username: dbuser
       password: 1q2w3e4r5t
     test:
@@ -27,20 +27,20 @@ db:
 
 redis:
   dev:
-    ip: 172.168.70.90
-    port: 6379
-    database: 0
+    ip: 172.168.70.12
+    port: 56379
+    database: 2
   test:
-    ip: 172.168.70.90
-    port: 6379
-    database: 1
+    ip: 172.168.70.12
+    port: 56379
+    database: 3
 
 
 feign:
   canvas:
     dev:
-      url: http://172.168.70.12:80
-      supper-admin-token: Bearer Gea65nuznsyBx62PDD99xeE9Gzl5LirkR3lzSarh1C0ZAnqVWSBN8e1waioBxc7Q
+      url: http://172.168.70.12:28082
+      supper-admin-token: Bearer kBjFq10ipfsNTUl8y8Y3KH0gaaudS6DoeDYUWWRQYS4YmeJW5ZiGX2Skj0LU2ZA1
     test:
       url: http://172.168.70.227:28082
       supper-admin-token: Bearer lIlaLi07WNcOhXb2ig8xk6KeBjQThWWkFA7p239CZCYKvbSaQhIyfjs9sWx1JrG4
