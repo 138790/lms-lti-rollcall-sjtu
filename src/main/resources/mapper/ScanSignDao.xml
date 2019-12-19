@@ -34,6 +34,7 @@
 		set    attendances_count=attendances_count+1
 		where id=#{id}
 	</update>
+    <!--查询当前已签到总人数-->
 	<select id="queryAttendancesCount" resultType="java.lang.Integer">
 		select attendances_count
 		from sign_histories
