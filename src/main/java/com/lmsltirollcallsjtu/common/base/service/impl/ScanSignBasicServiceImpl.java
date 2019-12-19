@@ -26,4 +26,9 @@ public class ScanSignBasicServiceImpl implements ScanSignBasicService {
     public void updateAttendancesCount(String id) {
         scanSignDao.updateAttendancesCount(id);
     }
+
+    @Override
+    public Integer queryAttendancesCount(String id) {
+        return scanSignDao.queryAttendancesCount(id);
+    }
 }

@@ -45,7 +45,7 @@ public class ScanSignController {
         UserStateInfo userStateInfo = scanSignServcie.scanUpdateState(signScanToken);
 
         //2.推送签到用户的姓名到客户端
-        simpMessageSendingOperations.convertAndSend("/topic/users/" + userStateInfo.getSignHistoryId(), userStateInfo.getUserName());
+        simpMessageSendingOperations.convertAndSend("/topic/users/" + userStateInfo.getSignHistoryId(), userStateInfo.getUserName()+","+userStateInfo.getCurrentAttendancesCount());
 
         //3.响应结果
         return ResultInfo.success("扫码签到成功");

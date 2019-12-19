@@ -10,6 +10,7 @@ import java.util.Date;
 @Builder
 public class UserStateInfo {
 
+    private Integer currentAttendancesCount;//当前已签到总人数
     private String signHistoryId;   //点名ID
     private String state;//用户签到状态
     private String userName;//用户名

@@ -11,7 +11,7 @@ public interface ScanSignDao {
     //扫码之后签到状态改为正常
     void scanUpdateState(SignRecordDto signRecordDto);
     //查询此次点名的签到总数
-    Integer selectAttendancesCount(@Param("id") String id);
+    Integer queryAttendancesCount(@Param("id") String id);
     //签到总数不断加1
     void updateAttendancesCount(@Param("id") String id);
 }
