@@ -40,7 +40,7 @@ feign:
   canvas:
     dev:
       url: http://172.168.70.12:28082
-      supper-admin-token: Bearer kBjFq10ipfsNTUl8y8Y3KH0gaaudS6DoeDYUWWRQYS4YmeJW5ZiGX2Skj0LU2ZA1
+      supper-admin-token: Bearer 5Gs0WF1MeLjEoJlxlSjWFeVrrAD4AYVahVgnWD9sZncQkbU2hRS4q3BFJexeGtDx
     test:
       url: http://172.168.70.227:28082
       supper-admin-token: Bearer lIlaLi07WNcOhXb2ig8xk6KeBjQThWWkFA7p239CZCYKvbSaQhIyfjs9sWx1JrG4
