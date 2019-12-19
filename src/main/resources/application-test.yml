@@ -7,11 +7,8 @@ server:
 
 #日志配置
 logging:
-  file:
-    name: ${log.test.fileUrl}
-  pattern:
-    level: ${log.test.level}
-
+  #指定使用logback日志配置
+  config: classpath:spring-boot-logback.xml
   #用于移除swagger example error异常
   level:
     io:

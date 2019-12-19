@@ -4,13 +4,14 @@ spring:
     active: dev
 
 
-log:
+#自定义logging属性
+logging:
   dev:
-    fileUrl: C:\log\lms-lti-rollcall-sjtu-dev.log
-    level: DEBUG
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu-dev/logs
   test:
-    fileUrl: /opt/lms-lti-rollcall-sjtu-test/lms-lti-rollcall-sjtu.log
-    level: DEBUG
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu-test/logs
+  prod:
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu-prod/logs
 
 
 db:

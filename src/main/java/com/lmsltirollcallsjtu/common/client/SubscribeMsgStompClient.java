@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 
-@Profile("dev")
+@Profile("local")
 @Slf4j
 @Component
 public class SubscribeMsgStompClient {

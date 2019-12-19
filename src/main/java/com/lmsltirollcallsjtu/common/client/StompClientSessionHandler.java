@@ -12,7 +12,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import java.lang.reflect.Type;
 import java.util.concurrent.ExecutionException;
 
-@Profile("dev")
+@Profile("local")
 @Slf4j
 public class StompClientSessionHandler  extends StompSessionHandlerAdapter {
 
