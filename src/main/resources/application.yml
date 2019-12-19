@@ -29,11 +29,11 @@ redis:
   dev:
     ip: 172.168.70.12
     port: 56379
-    database: 2
+    database: 1
   test:
-    ip: 172.168.70.12
+    ip: 172.168.70.227
     port: 56379
-    database: 3
+    database: 0
 
 
 feign:
