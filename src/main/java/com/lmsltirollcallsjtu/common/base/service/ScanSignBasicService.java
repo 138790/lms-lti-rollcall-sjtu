@@ -10,4 +10,6 @@ public interface ScanSignBasicService {
     void scanUpdateState(SignRecordDto signRecordDto);
 
     void updateAttendancesCount(String id);
+
+    Integer queryAttendancesCount(String id);
 }
