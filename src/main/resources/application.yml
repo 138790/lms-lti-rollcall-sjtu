@@ -29,7 +29,7 @@ redis:
   dev:
     ip: 172.168.70.12
     port: 56379
-    database: 1
+    database: 0
   test:
     ip: 172.168.70.227
     port: 56379
