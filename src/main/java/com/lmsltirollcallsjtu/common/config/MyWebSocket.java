@@ -1,15 +1,11 @@
 package com.lmsltirollcallsjtu.common.config;
 
 import org.springframework.stereotype.Component;
-
-import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /*@author huyong
-        * @date 2019-11-2
-        * @Description:前后端交互的类实现消息的接收推送
+* @date 2019-11-2
+* @Description:前后端交互的类实现消息的接收推送
  */
 @ServerEndpoint(value = "/wsdemo")
 @Component
