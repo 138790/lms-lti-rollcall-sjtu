@@ -78,4 +78,28 @@ public interface CanvasFeign {
                                               @PathVariable("id") Long id,
                                               @RequestParam("include[]") List<String> includeList);
 
+
+    //获取某一下课程下讨论主题列表
+    @GetMapping(value = "/api/v1/courses/{courseId}/discussion_topics")
+    ResponseEntity<List<CourseDiscussionTopicOfCanvas>> queryDiscussionTopicListOfCanvas(@RequestHeader(name = "Authorization", required = true) String token,
+                                                                                         @PathVariable("courseId") Long courseCode,
+                                                                                         @RequestParam("sort") String sort,
+                                                                                         @RequestParam("order") String order,
+                                                                                         @RequestParam("per_page") Integer perPage,
+                                                                                         @RequestParam("page") Integer page);
+    //获取某一课程下某一个主题讨论详情
+    @GetMapping(value = "/api/v1/courses/{courseId}/discussion_topics/{topicId}")
+    TopicDetailsOfCanvas querySingleTopicOfCanvas(@RequestHeader(name = "Authorization", required = true) String token,
+                                                  @PathVariable("courseId") Long courseCode,
+                                                  @PathVariable("topicId") Long TopicCode);
+
+    //获取某一课程下某一主题讨论详情的回复列表
+    @GetMapping(value = "/api/v1/courses/{courseId}/discussion_topics/{topicId}/entries")
+    ResponseEntity<List<CourseTopicEntryOfCanvas>> queryCourseTopicEntryList(@RequestHeader(name = "Authorization", required = true) String token,
+                                                                             @PathVariable("courseId") Long courseCode,
+                                                                             @PathVariable("topicId") Long TopicCode,
+                                                                             @RequestParam("sort") String sort,
+                                                                             @RequestParam("order") String order,
+                                                                             @RequestParam("per_page") Integer perPage,
+                                                                             @RequestParam("page") Integer page);
 }
