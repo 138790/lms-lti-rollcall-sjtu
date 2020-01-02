@@ -7,11 +7,11 @@ spring:
 #自定义logging属性
 logging:
   dev:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-dev/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
   test:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-test/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
   prod:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-prod/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
 
 
 db:
@@ -44,4 +44,4 @@ feign:
       supper-admin-token: Bearer 5Gs0WF1MeLjEoJlxlSjWFeVrrAD4AYVahVgnWD9sZncQkbU2hRS4q3BFJexeGtDx
     test:
       url: http://172.168.70.227:28082
-      supper-admin-token: Bearer lIlaLi07WNcOhXb2ig8xk6KeBjQThWWkFA7p239CZCYKvbSaQhIyfjs9sWx1JrG4
+      supper-admin-token: Bearer xkPwNNAEMNoe8gPWW9Ab5EGubQ0eNR4o8jAwPNwxXoAUj2FhbgWiEEqlTRBpdIAC

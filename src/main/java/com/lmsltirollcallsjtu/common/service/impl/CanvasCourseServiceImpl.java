@@ -10,7 +10,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
-import com.lmsltirollcallsjtu.common.utils.PagingUtil;
+import com.lmsltirollcallsjtu.common.utils. PagingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -133,7 +133,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
         includeList.add("sections");
         includeList.add("teachers");
         //查询课程的第一页数据（默认每页显示10条数据）
-        ResponseEntity<List<CourseInfoOfCanvas>> responseEntityTemp = canvasFeign.queryCoursePagedListOfUser(canvasFeignProperties.getSupperAdminToken(),
+        ResponseEntity<List<CourseInfoOfCanvas>> responseEntityTemp = canvasFeign.  queryCoursePagedListOfUser(canvasFeignProperties.getSupperAdminToken(),
                                                                                                              userCode,
                                                                                                             "active",
                                                                                                              courseStateList,
