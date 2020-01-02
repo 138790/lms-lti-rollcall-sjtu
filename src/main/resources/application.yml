@@ -7,11 +7,11 @@ spring:
 #自定义logging属性
 logging:
   dev:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-dev/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
   test:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-test/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
   prod:
-    dir-path: /root/install/service/lms-lti-rollcall-sjtu-prod/logs
+    dir-path: /root/install/service/lms-lti-rollcall-sjtu/docker/logs
 
 
 db:
