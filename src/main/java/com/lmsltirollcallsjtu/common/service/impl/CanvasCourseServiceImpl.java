@@ -10,7 +10,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.feign.CanvasFeign;
 import com.lmsltirollcallsjtu.common.properties.CanvasFeignProperties;
 import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
-import com.lmsltirollcallsjtu.common.utils. PagingUtil;
+import com.lmsltirollcallsjtu.common.utils.PagingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +36,6 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
     private CanvasFeign canvasFeign;
     @Autowired
     private CanvasFeignProperties canvasFeignProperties;
-    @Autowired
-    private PagingUtil pagingUtil;
 
     /**
      * @author wangzhijun
@@ -64,7 +62,7 @@ public class CanvasCourseServiceImpl implements CanvasCourseService {
         }
 
         //4.对课程列表数据做分页处理
-        PagedVo<List<CourseInfoOfCanvas>> coursePagedInfoOfCanvas = pagingUtil.getCurrentPagedInfo(queryCoursePagedListParam.getPageNum(), queryCoursePagedListParam.getPageSize(), courseInfoListOfCanvas);
+        PagedVo<List<CourseInfoOfCanvas>> coursePagedInfoOfCanvas = PagingUtil.getCurrentPagedInfo(queryCoursePagedListParam.getPageNum(), queryCoursePagedListParam.getPageSize(), courseInfoListOfCanvas);
 
         //5.封装当前页的数据出参，并返回
         List<CourseInfo> courseInfoListOfCurrentPage = new ArrayList<CourseInfo>();

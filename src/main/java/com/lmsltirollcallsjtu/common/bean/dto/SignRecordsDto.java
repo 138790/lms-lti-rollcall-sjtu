@@ -1,5 +1,7 @@
 package com.lmsltirollcallsjtu.common.bean.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -9,16 +11,20 @@ import java.util.Date;
   *@author huyong
   *@createdDate 2019-10-28
  */
+@ApiModel
 @Data
 @Builder
 public class SignRecordsDto {
 
+    @ApiModelProperty(value = "表记录id")
     private String id;//表记录id
 //    private Long userCode;//学生学号
 //    private String rollcallCode;//点名编号
 //    private String openId;//绑定微信编号
+    @ApiModelProperty(value = "签到状态")
     private String state;//签到状态
 //    private Date updatedDate;//修改时间
+    @ApiModelProperty(value = "创建时间")
     private Date createdDate;//创建时间
 //    private String userName;//学生姓名
 //    private String createdBy;//创建者
