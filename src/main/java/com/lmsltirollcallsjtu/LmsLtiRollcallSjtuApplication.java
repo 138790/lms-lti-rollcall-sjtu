@@ -16,7 +16,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 @EnableFeignClients
 @ServletComponentScan
 @EnableScheduling
-@EnableAsync
 @MapperScan(basePackages = "com.lmsltirollcallsjtu.*.dao")
 public class LmsLtiRollcallSjtuApplication {
 
