@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Slf4j
 @Order(1)
-@WebFilter(filterName = "tokenFilter", urlPatterns = "/*", asyncSupported=true)
+@WebFilter(filterName = "tokenFilter", urlPatterns = "/*", asyncSupported = true)
 public class TokenFilter extends HttpFilter {
 
     @Autowired
