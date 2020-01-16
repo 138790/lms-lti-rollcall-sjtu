@@ -7,8 +7,8 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -31,9 +31,8 @@ public class RollcallController {
      */
     @UserLoginToken
     @ApiOperation(value="发起点名" ,notes = "发起点名")
-    @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @PostMapping("/insertSignHistories")
-    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam, @RequestParam("userCode") Long userCode) throws BusinessException, SchedulerException {
+    public ResultInfo<String> insertSignHistories(@RequestBody @Validated SignHistoryParam signHistoryParam, @ApiParam(hidden = true) @RequestParam("userCode") Long userCode) throws BusinessException, SchedulerException {
 
         //1.设置用户编号参数
         signHistoryParam.setUserCode(userCode);
@@ -54,9 +53,8 @@ public class RollcallController {
      */
     @UserLoginToken
     @ApiOperation(value="关闭点名" ,notes = "关闭点名")
-    @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
     @DeleteMapping("/{signHistoryId}")
-    public ResultInfo<String> backoutRollcall(@PathVariable String signHistoryId, @RequestParam("userCode") Long userCode) throws BusinessException, SchedulerException {
+    public ResultInfo<String> backoutRollcall(@PathVariable String signHistoryId) throws BusinessException, SchedulerException {
 
         //1.修改点名记录的状态，关闭该次点名的定时任务
         rollcallService.backoutRollcall(signHistoryId);
