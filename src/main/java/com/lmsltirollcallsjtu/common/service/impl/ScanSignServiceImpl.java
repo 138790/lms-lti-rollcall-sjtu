@@ -63,10 +63,10 @@ public class ScanSignServiceImpl implements ScanSignServcie {
                     scanSignBasicService.scanUpdateState(signRecordDto);
                     //4.签到总数不断增加
                     scanSignBasicService.updateAttendancesCount(signHistoryId);
-                    //5.查询当前已签到总人数
-                    Integer currectAttendancesCount = scanSignBasicService.queryAttendancesCount(signHistoryId);
-                    userStateInfo.setCurrentAttendancesCount(currectAttendancesCount);
                 }
+                //5.查询当前已签到总人数
+                Integer currectAttendancesCount = scanSignBasicService.queryAttendancesCount(signHistoryId);
+                userStateInfo.setCurrentAttendancesCount(currectAttendancesCount);
                 //返回用户该次点名的状态信息
                 return userStateInfo;
             } finally {
