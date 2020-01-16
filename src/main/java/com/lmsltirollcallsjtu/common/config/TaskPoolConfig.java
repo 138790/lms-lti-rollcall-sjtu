@@ -8,6 +8,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
+@EnableAsync
 class TaskPoolConfig {
 
     @Bean("taskExecutor")
