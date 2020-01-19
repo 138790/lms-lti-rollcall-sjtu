@@ -109,7 +109,7 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
                 }
 
                 //2.2 虚拟删除该次点名的定时任务记录
-                signScanQuartzJobLogBasicService.updateSignScanQuartzJobLogToInvalid(signScanQuartzJobDto.getSignHistoryId(),signScanQuartzJobDto.getUpdatedBy(),signScanQuartzJobDto.getUpdatedDate());
+                signScanQuartzJobLogBasicService.deleteSignScanQuartzJobLog(signHistoryId);
 
                 //2.3 停止触发器
                 TriggerKey triggerKey = TriggerKey.triggerKey(signScanQuartzJobDto.getTriggerName(),signScanQuartzJobDto.getTriggerGroup());

@@ -5,7 +5,6 @@ import com.lmsltirollcallsjtu.common.bean.param.SignHistoryParam;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
-import com.lmsltirollcallsjtu.common.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -59,12 +58,18 @@ public class RollcallController {
         //1.修改点名记录的状态，关闭该次点名的定时任务
         rollcallService.backoutRollcall(signHistoryId);
 
-        //2.移除该次点名的signScanTokens缓存
-        RedisUtil.deleteHashKey("signScanTokens", signHistoryId);
-
-        //3.响应信息
+        //2.响应信息
         return ResultInfo.success("关闭点名成功");
     }
+    @UserLoginToken
+    @ApiOperation(value = "重启点名",notes = "重启点名")
+    @GetMapping("/{signHistoryId}")
+    public ResultInfo<String> restartRollcall(@PathVariable String signHistoryId) throws SchedulerException, BusinessException {
+        //1.添加定时任务
+        rollcallService.restartRollcall(signHistoryId);
 
+        //2.响应信息
+        return ResultInfo.success("重启点名成功");
+    }
 
 }
