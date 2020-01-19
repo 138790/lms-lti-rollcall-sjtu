@@ -24,9 +24,9 @@ public class TokenUtil {
     }
     /**
      * @author huyong
-     * @createdDate 2019-11-22
+     * @createdDate 2020-1-19
      * @description 生成token
-     * @parameter userInfoVo
+     * @parameter signHistoryId
      * @return token字符串
      **/
     public static String generateSignScanToken(String signHistoryId) {
@@ -38,9 +38,9 @@ public class TokenUtil {
 
     /**
      * @author huyong
-     * @createdDate 2019-11-22
+     * @createdDate 2020-1-19
      * @description 验证token
-     * @parameter userInfoVo
+     * @parameter signScanToken
      * @return signHistoryId
      **/
     public static String verifySignScanToken(String signScanToken) throws BusinessException {
