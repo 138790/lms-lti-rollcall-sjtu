@@ -61,6 +61,15 @@ public class RollcallController {
         //2.响应信息
         return ResultInfo.success("关闭点名成功");
     }
+    @UserLoginToken
+    @ApiOperation(value = "重启点名",notes = "重启点名")
+    @GetMapping("/{signHistoryId}")
+    public ResultInfo<String> restartRollcall(@PathVariable String signHistoryId) throws SchedulerException, BusinessException {
+        //1.添加定时任务
+        rollcallService.restartRollcall(signHistoryId);
 
+        //2.响应信息
+        return ResultInfo.success("重启点名成功");
+    }
 
 }

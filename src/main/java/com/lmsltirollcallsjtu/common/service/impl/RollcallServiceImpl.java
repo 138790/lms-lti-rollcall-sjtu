@@ -10,6 +10,7 @@ import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.service.CanvasCourseService;
 import com.lmsltirollcallsjtu.common.service.RollcallService;
 import com.lmsltirollcallsjtu.common.service.SignScanQuartzJobService;
+import com.lmsltirollcallsjtu.common.utils.ExecutionContext;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -116,5 +117,29 @@ public class RollcallServiceImpl implements RollcallService {
 
 
     }
+
+    @Override
+    public void restartRollcall(String signHistoryId) throws BusinessException, SchedulerException {
+        //1.获取系统当前时间
+        Date nowDate = new Date();
+
+        //2.解析用户编号
+        String userCode = ExecutionContext.getUserCode();
+
+        //3.构建定时任务对象
+        SignScanQuartzJobDto signScanQuartzJobDto = SignScanQuartzJobDto.builder().signScanQuartzJobLogId(UUID.randomUUID().toString().replaceAll("\\-",""))
+                                                                                  .signHistoryId(signHistoryId)
+                                                                                  .jobName(UUID.randomUUID().toString().replaceAll("\\-",""))
+                                                                                  .jobGroup("signScanJob")
+                                                                                  .triggerName(UUID.randomUUID().toString().replaceAll("\\-",""))
+                                                                                  .triggerGroup("signScanTrigger")
+                                                                                  .createdBy(userCode)
+                                                                                  .createdDate(nowDate)
+                                                                                  .updatedBy(userCode)
+                                                                                  .updatedDate(nowDate).build();
+        //4.添加定时任务
+        signScanQuartzJobService.addSignScanJob(signScanQuartzJobDto);
+    }
+
 }
 
