@@ -46,7 +46,7 @@ public class TokenUtil {
     public static String verifySignScanToken(String signScanToken) throws BusinessException {
 
         if ("1".equals(RedisUtil.getString("rollcallToken:" + signScanToken))) {
-            String[] tokenArray = signScanToken.split(":");
+            String[] tokenArray = signScanToken.split("\\:");
             String signHistoryId = tokenArray[1];
             return signHistoryId;
         } else {
