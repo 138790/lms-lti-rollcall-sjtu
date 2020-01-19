@@ -4,7 +4,9 @@ import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.param.UpdateSignHistoryStateParam;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 
+import java.util.Date;
+
 public interface ScanSignServcie {
 
-    UserStateInfo scanUpdateState(String signScanToken) throws BusinessException, InterruptedException;
+    UserStateInfo scanUpdateState(String signHistoryId, Long userCode, Date nowDate) throws BusinessException, InterruptedException;
 }
