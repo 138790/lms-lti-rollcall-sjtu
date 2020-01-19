@@ -79,8 +79,8 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
                 .withIdentity(triggerKey)
                 //延迟一秒首次执行
                 .startAt(new Date(System.currentTimeMillis() + 1000))
-                //每隔5秒重复执行一次
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(60).repeatForever())
+                //每隔2秒重复执行一次
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever())
                 .build();
 
         //6.执行定时job
