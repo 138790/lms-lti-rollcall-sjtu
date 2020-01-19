@@ -1,7 +1,6 @@
 package com.lmsltirollcallsjtu.common.controller;
 
 import com.lmsltirollcallsjtu.common.annotations.UserLoginToken;
-import com.lmsltirollcallsjtu.common.base.service.ScanSignBasicService;
 import com.lmsltirollcallsjtu.common.bean.bo.UserStateInfo;
 import com.lmsltirollcallsjtu.common.bean.vo.ResultInfo;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
@@ -11,7 +10,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author huyong
@@ -37,7 +39,7 @@ public class ScanSignController {
      */
     @UserLoginToken
     @ApiOperation(value="学生扫码签到并修改签到状态" ,notes = "学生扫码签到并修改签到状态")
-    @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "query", dataType = "Long")
+    @ApiImplicitParam(name = "signScanToken",value = "签到二维码token", paramType = "path", dataType = "String")
     @GetMapping("/sign/{signScanToken}")
     public ResultInfo<String> doUpdateStateByRecordId(@PathVariable String signScanToken) throws BusinessException, InterruptedException {
 

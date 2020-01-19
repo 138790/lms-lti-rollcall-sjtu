@@ -1,14 +1,11 @@
 package com.lmsltirollcallsjtu.common.utils;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.lmsltirollcallsjtu.common.enums.BusinessExceptionEnum;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
 import com.lmsltirollcallsjtu.common.properties.OurServerProperties;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -34,13 +31,8 @@ public class TokenUtil {
      **/
     public static String generateSignScanToken(String signHistoryId) {
 
-        String signScanToken="";
-        signScanToken= JWT
-                .create()
-                .withAudience( signHistoryId,new Date().toString())
-                .sign(Algorithm.HMAC256(ourServerProperties.getSign()));
-
-
+        String suffix= DigestUtils.md5Hex(ourServerProperties.getSign()+new Date());
+        String signScanToken=signHistoryId+":"+suffix;
         return signScanToken;
     }
 
@@ -53,21 +45,13 @@ public class TokenUtil {
      **/
     public static String verifySignScanToken(String signScanToken) throws BusinessException {
 
-
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(ourServerProperties.getSign())).build();
-        try{
-            jwtVerifier.verify(signScanToken);
-        }catch(JWTVerificationException e){
-            throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_TOKEN_FAILURE);
-        }
-        //从token中解析出signHistoryId
-        String signHistoryId = JWT.decode(signScanToken).getAudience().get(0);
-        String signScanTokenFromRedis =(String) RedisUtil.getValueFromMap("signScanTokens", signHistoryId);
-
-        if (!signScanTokenFromRedis.equals(signScanToken)){
-            throw BusinessException.getInstance(BusinessExceptionEnum.VERIFY_SIGN_SCAN_TOKEN_FAILED);
+        if ("1".equals(RedisUtil.getString("rollcallToken:" + signScanToken))) {
+            String[] tokenArray = signScanToken.split(":");
+            String signHistoryId = tokenArray[1];
+            return signHistoryId;
+        } else {
+            throw BusinessException.notFoundData("signScanToken:"+signScanToken);
         }
 
-        return signHistoryId;
     }
 }

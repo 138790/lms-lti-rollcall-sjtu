@@ -26,7 +26,7 @@ public class DecomposeSignHistoryController {
 
     @UserLoginToken
     @ApiOperation(value="合并记录拆分" ,notes = "合并记录拆分")
-    @ApiImplicitParam(name = "userCode",value = "用户编号", paramType = "path", dataType = "String")
+    @ApiImplicitParam(name = "combinedId",value = "合并的点名编号", paramType = "path", dataType = "String")
     @GetMapping("/signhistory/{combinedId}")
     public ResultInfo<List<SignHistoryDecomposeDto>> doDeDecomposeSignHistory(@PathVariable @NotBlank String combinedId) throws BusinessException {
         List<SignHistoryDecomposeDto> signHistoryDecomposeDtos = decomposeSignHistoryService.DecomposeSignHistory(combinedId);
