@@ -18,6 +18,7 @@
         <java.version>13</java.version>
         <spring-boot-starter-web.version>2.2.0.RELEASE</spring-boot-starter-web.version>
         <spring-boot-starter-data-redis.version>2.2.0.RELEASE</spring-boot-starter-data-redis.version>
+        <spring-boot-starter-amqp.version>2.2.0.RELEASE</spring-boot-starter-amqp.version>
         <spring-boot-starter-websocket.version>2.2.0.RELEASE</spring-boot-starter-websocket.version>
         <spring-boot-starter-quartz.version>2.2.0.RELEASE</spring-boot-starter-quartz.version>
         <spring-boot-starter-test.version>2.2.0.RELEASE</spring-boot-starter-test.version>
@@ -85,6 +86,12 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>${spring-boot-starter-amqp.version}</version>
         </dependency>
 
         <!-- FeignClient远程接口调用 -->
