@@ -43,7 +43,7 @@ rabbitMQ:
     username: wangzhijun
     password: 123456
   test:
-    ip: 172.168.70.227
+    ip: 172.168.70.11
     port: 5672
     username: wangzhijun
     password: 123456

@@ -47,10 +47,10 @@ public class TokenUtil {
 
         if ("1".equals(RedisUtil.getString("rollcallToken:" + signScanToken))) {
             String[] tokenArray = signScanToken.split(":");
-            String signHistoryId = tokenArray[1];
+            String signHistoryId = tokenArray[0];
             return signHistoryId;
         } else {
-            throw BusinessException.notFoundData("signScanToken:"+signScanToken);
+            throw BusinessException.notFoundData("rollcallToken:"+signScanToken);
         }
 
     }
