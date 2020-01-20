@@ -36,6 +36,18 @@ redis:
     port: 56379
     database: 0
 
+rabbitMQ:
+  dev:
+    ip: 172.168.70.11
+    port: 5672
+    username: wangzhijun
+    password: 123456
+  test:
+    ip: 172.168.70.11
+    port: 5672
+    username: wangzhijun
+    password: 123456
+
 
 feign:
   canvas:

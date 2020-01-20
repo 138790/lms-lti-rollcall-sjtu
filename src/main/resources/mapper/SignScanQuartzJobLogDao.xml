@@ -30,19 +30,10 @@
     </insert>
 
     <!--虚拟删除某次点名的定时任务记录-->
-    <update id="updateSignScanQuartzJobLogToInvalid">
-        update sign_scan_quartz_job_log pssqjl
-        <set>
-            is_valid = 0,
-            <if test="updatedBy != null and updatedBy != ''">
-                updated_by = #{updatedBy},
-            </if>
-            <if test="updatedDate != null">
-                updated_date = #{updatedDate},
-            </if>
-        </set>
+    <delete id="deleteSignScanQuartzJobLog">
+        delete from sign_scan_quartz_job_log pssqjl
         where pssqjl.sign_history_id = #{signHistoryId} and pssqjl.is_valid = 1
-    </update>
+    </delete>
 
     <!--查询某次点名的定时任务记录列表（仅查有效的记录）-->
     <select id="querySignScanQuartzJobLogBySignHistoryId" parameterType="java.lang.String" resultType="com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto" >

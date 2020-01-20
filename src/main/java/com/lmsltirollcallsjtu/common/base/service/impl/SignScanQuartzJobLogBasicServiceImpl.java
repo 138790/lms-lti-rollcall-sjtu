@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,12 +40,12 @@ public class SignScanQuartzJobLogBasicServiceImpl implements SignScanQuartzJobLo
      * @return void
      */
     @Override
-    public void updateSignScanQuartzJobLogToInvalid(String signHistoryId, String updatedBy, Date updatedDate) throws BusinessException {
+    public void deleteSignScanQuartzJobLog(String signHistoryId) throws BusinessException {
 
         if(StringUtils.isEmpty(signHistoryId)){
             throw BusinessException.notNull("signHistoryId");
         }
-        signScanQuartzJobLogDao.updateSignScanQuartzJobLogToInvalid(signHistoryId,updatedBy,updatedDate);
+        signScanQuartzJobLogDao.deleteSignScanQuartzJobLog(signHistoryId);
     }
 
     /**
