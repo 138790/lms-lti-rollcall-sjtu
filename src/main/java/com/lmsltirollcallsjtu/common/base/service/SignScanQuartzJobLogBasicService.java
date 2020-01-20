@@ -2,7 +2,7 @@ package com.lmsltirollcallsjtu.common.base.service;
 
 import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
 import com.lmsltirollcallsjtu.common.exception.BusinessException;
-
+import java.util.Date;
 import java.util.List;
 
 public interface SignScanQuartzJobLogBasicService {
@@ -23,7 +23,7 @@ public interface SignScanQuartzJobLogBasicService {
      * @param signHistoryId
      * @return void
      */
-    void deleteSignScanQuartzJobLog(String signHistoryId) throws BusinessException;
+    void updateSignScanQuartzJobLogToInvalid(String signHistoryId, String updatedBy, Date updatedDate) throws BusinessException;
 
     /**
      * @author wangzhijun

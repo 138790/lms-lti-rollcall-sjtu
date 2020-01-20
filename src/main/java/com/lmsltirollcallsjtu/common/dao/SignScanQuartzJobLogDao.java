@@ -2,7 +2,7 @@ package com.lmsltirollcallsjtu.common.dao;
 
 import com.lmsltirollcallsjtu.common.bean.dto.SignScanQuartzJobDto;
 import org.apache.ibatis.annotations.Param;
-
+import java.util.Date;
 import java.util.List;
 
 public interface SignScanQuartzJobLogDao {
@@ -23,7 +23,9 @@ public interface SignScanQuartzJobLogDao {
      * @param signHistoryId、updatedBy、updatedDate
      * @return void
      */
-    void deleteSignScanQuartzJobLog(@Param("signHistoryId") String signHistoryId);
+    void updateSignScanQuartzJobLogToInvalid(@Param("signHistoryId") String signHistoryId,
+                                             @Param("updatedBy") String updatedBy,
+                                             @Param("updatedDate") Date updatedDate);
 
      /**
      * @author wangzhijun

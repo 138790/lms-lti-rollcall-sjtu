@@ -80,7 +80,7 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
                 //延迟一秒首次执行
                 .startAt(new Date(System.currentTimeMillis() + 1000))
                 //每隔2秒重复执行一次
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(60).repeatForever())
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
                 .build();
 
         //6.执行定时job
@@ -109,7 +109,7 @@ public class SignScanQuartzJobServiceImpl implements SignScanQuartzJobService {
                 }
 
                 //2.2 虚拟删除该次点名的定时任务记录
-                signScanQuartzJobLogBasicService.deleteSignScanQuartzJobLog(signHistoryId);
+                signScanQuartzJobLogBasicService.updateSignScanQuartzJobLogToInvalid(signScanQuartzJobDto.getSignHistoryId(),signScanQuartzJobDto.getUpdatedBy(),signScanQuartzJobDto.getUpdatedDate());
 
                 //2.3 停止触发器
                 TriggerKey triggerKey = TriggerKey.triggerKey(signScanQuartzJobDto.getTriggerName(),signScanQuartzJobDto.getTriggerGroup());

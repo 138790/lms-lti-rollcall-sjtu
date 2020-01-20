@@ -35,7 +35,7 @@
 		where id=#{id}
 	</update>
     <!--查询当前已签到总人数-->
-	<select id="queryAttendancesCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<select id="queryAttendancesCount" resultType="java.lang.Integer">
 		select attendances_count
 		from sign_histories
 		where id=#{id}

@@ -86,36 +86,6 @@ spring:
         #当池耗尽时，在抛出异常之前连接分配应该阻塞的最长时间。使用负值表示无限期阻止
         max-wait: -1
 
-  #RabbitMQ配置
-  rabbitmq:
-    host: ${rabbitMQ.test.ip}
-    port: ${rabbitMQ.test.port}
-    username: ${rabbitMQ.test.username}
-    password: ${rabbitMQ.test.password}
-    virtual-host: /
-    #发布者开启消息确认机制（即消息回调）
-    publisher-confirm-type: correlated
-    publisher-returns: true
-    #设置监听器
-    listener:
-      type: simple
-      simple:
-        #重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）
-        default-requeue-rejected: false
-        retry:
-          #监听器开启手动ack（手动签收），rabbitMQ默认模式是自动应答
-          acknowledge-mode: manual
-          #开启消费者进行重试（程序出现异常的情况下才会），这种间隔是单线程的，不存在并发问题。默认是无限循环重试模式。
-          enabled: true
-          #最大重试次数
-          max-attempts: 5
-          #重试间隔时间5秒
-          initial-interval: 5000
-          #重试最大时间间隔（单位毫秒）
-          max-interval: 1200000
-          #应用于前一重试间隔的乘法器
-          multiplier: 5
-
   #文件上传
   servlet:
     multipart:

@@ -12,7 +12,6 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
 import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @PersistJobDataAfterExecution
@@ -32,7 +31,7 @@ public class RefreshSignScanTokenJob extends QuartzJobBean {
 
         //2.生成某次点名的签到token
         String signScanToken = TokenUtil.generateSignScanToken(signHistoryId);
-        RedisUtil.setString("rollcallToken:"+signScanToken,"1",63L, TimeUnit.SECONDS);
+        RedisUtil.putToMap("signScanTokens", signHistoryId, signScanToken);
 
         //3.推送消息到客户端
         if(!StringUtils.isEmpty(signScanToken)){
